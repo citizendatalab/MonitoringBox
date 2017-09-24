@@ -12,10 +12,14 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 
 
 current = 0
+testa = 0
 manager = service.serial.manager.Manager.getInstance()  # type: service.serial.manager.Manager
 def test(a):
     global current
     current = a
+    global testa
+    testa+=1
+
     print("a" + a)
 
 
@@ -33,7 +37,8 @@ def show_entries():
     # cur = db.execute('select title, text from entries order by id desc')
     # entries = cur.fetchall()
     global current
-    return render_template('show_entries.html', current=current)
+    global testa
+    return render_template('show_entries.html', current=current,testa=testa)
 
 
 if __name__ == "__main__":

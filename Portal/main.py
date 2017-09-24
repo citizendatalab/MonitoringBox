@@ -1,23 +1,30 @@
 # all the imports
 import os
+from typing import Dict, List, Callable
 import serial
+import serial.threaded
+import service.serial.manager
+import sys
 import time
-# import sqlite3
 
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash, jsonify
 
 
-# with serial.Serial('/dev/ttyUSB0', 9600, timeout=1) as ser:
-#     a = ser  # type: serial.Serial
-#     i = 10
-#     while i > 0:
-#         line = ser.readline()  # read a '\n' terminated line
-#         print(line.decode("utf-8"))
-#         time.sleep(0.25)
-#         i -= 1
-#     ser.close()
+current = 0
+manager = service.serial.manager.Manager.getInstance()  # type: service.serial.manager.Manager
+def test(a):
+    global current
+    current = a
+    print("a" + a)
 
+
+def test2(a):
+    print("a2" + a)
+
+
+manager.setupConnection('/dev/ttyUSB0', [test])
+# manager.get_listeners('/dev/ttyUSB0').append(test2)
 app = Flask(__name__)  # create the application instance :)
 
 @app.route('/')
@@ -25,7 +32,8 @@ def show_entries():
     # db = get_db()
     # cur = db.execute('select title, text from entries order by id desc')
     # entries = cur.fetchall()
-    return render_template('show_entries.html')
+    global current
+    return render_template('show_entries.html', current=current)
 
 
 if __name__ == "__main__":

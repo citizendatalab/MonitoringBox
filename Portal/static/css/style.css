@@ -1,8 +1,14 @@
+* {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}
+
 main {
-    padding-top:4em;
     background: #FFF;
     display:table;
-    padding: 0 1em ;
+    padding: 4em 1em 0;
+        width: 100vw;
 }
 
 /* Desktop: */
@@ -16,3 +22,12 @@ main {
         margin:0 auto -4em;
     }
 }
+.table-options .results-per-page {
+    float: right;
+    margin: 0 0 0 1em;
+}
+table thead .fa-sort-asc,table thead .fa-sort-desc{
+    position: relative;
+    top: 0.25em;
+    margin-left: 0.5em;
+}}

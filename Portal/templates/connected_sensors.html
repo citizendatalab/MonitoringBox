@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% set current_page = 'connected_sensors' %}
+{% set title = 'Connected sensors' %}
+{% block body %}
+        <!--<div class="dynamicTable" data-classes="table table-hover table-striped table-bordered" data-classes-thead="table-inverse" data-ajax-endpoint="/api/test" data-ajax-refresh-time="1000"></div>-->
+        <div class="dynamicTable" data-classes="table table-hover table-striped table-bordered" data-classes-thead="table-inverse" data-ajax-endpoint="/api/test" data-ajax-refresh-time="300"></div>
+{% endblock %}

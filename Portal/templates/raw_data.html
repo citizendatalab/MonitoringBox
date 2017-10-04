@@ -1,0 +1,11 @@
+{% extends "layout/layout.html" %}
+{% set current_page = 'connected_sensors' %}
+{% set title %}Raw data of "{{sensor.sensor_type.value}}/{{sensor.name}}" ({{device_id}}) {% endset %}
+
+{% block body %}
+<!--<div class="dynamicTable" data-classes="table table-hover table-striped table-bordered" data-classes-thead="table-inverse" data-ajax-endpoint="/api/test" data-ajax-refresh-time="1000"></div>-->
+<div class="dynamicTable"
+     data-classes="table table-hover table-striped table-bordered"
+     data-classes-thead="table-inverse" data-ajax-endpoint="/api/device/{{ device }}/raw_data"
+     data-ajax-refresh-time="300"></div>
+{% endblock %}

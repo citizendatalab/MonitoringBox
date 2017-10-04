@@ -41,3 +41,29 @@ table thead .fa-sort-asc, table thead .fa-sort-desc {
 .descriptions>div{
     padding: 1em;
 }
+.progress-bar{
+    padding: 0.5em 0em 1.8em 0;
+    font-weight: bold;
+}
+.form-group-striped .form-group:nth-child(odd){
+    background-color:rgba(0,0,0,0.05);
+}
+.form-group-list-options .form-group{
+    margin: 0;
+}
+.form-group-list-options .form-group:hover{
+    background-color:rgba(0,0,0,.075)
+}
+
+.mounts label{
+    width: 100%;
+    display: block;
+    padding: 1em;
+    margin:0;
+}
+.mounts .custom-radio .custom-control-indicator{
+    margin: 0.7em 1em;
+}
+.mounts .description{
+    margin: -0.1em 0 0 1.8em;
+}

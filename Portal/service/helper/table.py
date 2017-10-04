@@ -63,6 +63,7 @@ class TableResponse:
         self._default_results_per_page = default_results_per_page
         self.table_headings = []  # type: List[TableHeading]
         self.table_body = []  # type: List[List[any]]
+        self.show_heading = True
 
     def get_heading(self, name: str) -> TableHeading:
         """
@@ -100,6 +101,7 @@ class TableResponse:
                 "current_start": str(self._results_start_at_position),
                 "possible_results_per_page": self._possible_results_per_page,
                 "default_results_per_page": str(self._default_results_per_page),
+                "show_heading": self.show_heading
             },
             "headers": headings,
             "body": self.table_body
@@ -130,7 +132,8 @@ def generate_table(count_total: int, results_per_page: int,
     # Put all headings into the TableHeading list.
     for heading in table_heading:
         if isinstance(heading, str):
-            response.table_headings.append(TableHeading(heading, TableSortOrder.ASC))
+            response.table_headings.append(
+                TableHeading(heading, TableSortOrder.ASC))
         else:
             response.table_headings.append(heading)
 

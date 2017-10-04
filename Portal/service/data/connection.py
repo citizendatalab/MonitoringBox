@@ -65,11 +65,12 @@ class Connection:
         with open(Connection.SETTINGS_FILE, "w") as file:
             json.dump(self._settings, file)
 
-    def get_setting(self, name: str) -> any:
+    def get_setting(self, name: str, default=None) -> any:
         """
         Will get the setting with given name.
 
         :param name: Name of the setting.
+        :param default: The default value, if None was it throws an exception when not found.
         :raises Exception: When it couldn't find the setting.
         :return: The value of the setting.
         """
@@ -85,9 +86,11 @@ class Connection:
         # Will make the object available again.
         self._lock.release()
 
-        # If we didn't find the thing we're looking for, raise an error else
-        # just return it.
+        # If nothing was found throw an exception or set a default value.
         if content is None:
-            raise Exception("Couldn't find setting")
-        else:
-            return content
+            if default is None:
+                raise Exception("Couldn't find setting")
+            else:
+                content = default
+
+        return content

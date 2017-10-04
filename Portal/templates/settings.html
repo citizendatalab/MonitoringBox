@@ -7,21 +7,56 @@
     <div class="form-group">
         <label for="outputFormat">Output format</label>
         <select class="custom-select" id="outputFormat" aria-describedby="description-xml"
-                data-dynamic-description="true">
+                data-dynamic-description="true" name="recording_format">
             <option value="xml" selected>XML</option>
             <option value="csv">CSV</option>
             <option value="newz">New</option>
         </select>
-        <div class="descriptions border">
-            <div data-description-for="xml" id="description-xml">
-                Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo eget malesuada. Curabitur aliquet quam id dui posuere blandit. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec sollicitudin molestie malesuada. Cras ultricies ligula sed magna dictum porta. Vivamus suscipit tortor eget felis porttitor volutpat.
+        <div class="descriptions">
+            <div data-description-for="xml" id="description-xml" class="border">
+                Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo eget
+                malesuada. Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo eget malesuada.
+                Curabitur aliquet quam id dui posuere blandit. Quisque velit nisi, pretium ut lacinia in, elementum id
+                enim. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec sollicitudin molestie
+                malesuada. Cras ultricies ligula sed magna dictum porta. Vivamus suscipit tortor eget felis porttitor
+                volutpat.
 
             </div>
-            <div data-description-for="csv" id="description-xsv">
-                Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Nulla porttitor accumsan tincidunt. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Sed porttitor lectus nibh. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta. Proin eget tortor risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta.
+            <div data-description-for="csv" id="description-xsv" class="border">
+                Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vestibulum ante ipsum primis in
+                faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
+                ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
+                Nulla porttitor accumsan tincidunt. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.
+                Sed porttitor lectus nibh. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum
+                porta. Proin eget tortor risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies
+                ligula sed magna dictum porta.
             </div>
         </div>
     </div>
+
+    <h2>Recording location</h2>
+    <div class="form-group-striped form-group-list-options mounts">
+        {% for mount in settings.options.mounts %}
+        <div class="form-group">
+            <label class="custom-control custom-radio">
+                <input id="recording_location" name="recording_location" type="radio" class="custom-control-input" value="{{ mount.mount }}"{% if mount.mount == settings.current.selected_mount %} checked{% endif %}>
+                <span class="custom-control-indicator"></span>
+                <div class="description">
+                    <span class="custom-control-description">{% if mount.is_local %}<i class="fa fa-usb" aria-hidden="true"></i>{% else %}<i class="fa fa-hdd-o" aria-hidden="true"></i>{% endif%} {{ mount.mount }} {% if mount.is_local %}(External){% else %}(Local){% endif%}</span>
+                    <div class="progress border border-secondary">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                             style="width: {{ mount.percent_usage }}%;"
+                             aria-valuenow="{{ mount.percent_usage }}" aria-valuemin="0" aria-valuemax="100">{{ mount.percent_usage }}%
+                        </div>
+                    </div>
+                </div>
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Save</button>
 
@@ -46,7 +81,6 @@
             </div>
         </div>
     </div>
-
 </form>
 
 {% endblock %}

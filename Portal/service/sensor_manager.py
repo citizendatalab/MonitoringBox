@@ -11,14 +11,14 @@ class SensorType(Enum):
     """
     Defines a sensor type.
     """
-    UNKOWN = -2
-    EXAMPLE_SENSOR = -1
-    PI_CAMERA = 0
-    GPS_SENSOR = 1
-    HUMIDITY_TEMPERATURE_SENSOR = 2
-    CO2_SENSOR = 3
-    HEART_RATE_SENSOR = 4
-    GALVANIC_SKIN_RESPONSE_SENSOR = 5
+    UNKOWN = "unkown sensor"
+    EXAMPLE_SENSOR = "example sensor"
+    PI_CAMERA = "Picam"
+    GPS_SENSOR = "GPS sensor"
+    HUMIDITY_TEMPERATURE_SENSOR = "humidity temperature sensor"
+    CO2_SENSOR = "CO2 sensor"
+    HEART_RATE_SENSOR = "Heart rate sensor"
+    GALVANIC_SKIN_RESPONSE_SENSOR = "Galvanic skin response sensor"
 
 
 class HandlerTrigger:
@@ -282,7 +282,7 @@ class SensorManager:
 
         # Trigger all handlers with line.
         for handler in handlers:
-            handler.handle(line)
+            handler.handle(sensor, line)
 
     def _trigger_type_handler_based_on_params(self, sensor_name: str,
                                               type: SensorType) -> List[

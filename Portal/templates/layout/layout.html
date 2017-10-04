@@ -12,16 +12,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item{% if current_page == "connected_sensors" %} active{% endif %}">
-                <a class="nav-link" href="/connected_sensors">Connected sensors{% if current_page == "connected_sensors" %} <span class="sr-only">(current)</span>{% endif %}</a>
+                <a class="nav-link" href="/connected_sensors"><i class="fa fa-plug" aria-hidden="true"></i> Connected sensors{% if current_page == "connected_sensors" %} <span class="sr-only">(current)</span>{% endif %}</a>
             </li>
             <li class="nav-item{% if current_page == "recordings" %} active{% endif %}">
-                <a class="nav-link" href="/recordings">Recordings{% if current_page == "recordings" %} <span class="sr-only">(current)</span>{% endif %}</a>
+                <a class="nav-link" href="/recordings"><i class="fa fa-file" aria-hidden="true"></i> Recordings{% if current_page == "recordings" %} <span class="sr-only">(current)</span>{% endif %}</a>
             </li>
             <li class="nav-item{% if current_page == "settings" %} active{% endif %}">
-                <a class="nav-link" href="/settings">Settings{% if current_page == "settings" %} <span class="sr-only">(current)</span>{% endif %}</a>
+                <a class="nav-link" href="/settings">
+                    <i class="fa fa-sliders" aria-hidden="true"></i> Settings{% if current_page == "settings" %} <span class="sr-only">(current)</span>{% endif %}</a>
             </li>
             <li class="nav-item{% if current_page == "device_options" %} active{% endif %}">
-                <a class="nav-link" href="/device_options">Device options{% if current_page == "device_options" %} <span class="sr-only">(current)</span>{% endif %}</a>
+                <a class="nav-link" href="/device_options"><i class="fa fa-terminal" aria-hidden="true"></i> Device options{% if current_page == "device_options" %} <span class="sr-only">(current)</span>{% endif %}</a>
             </li>
         </ul>
     </div>

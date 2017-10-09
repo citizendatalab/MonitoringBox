@@ -19,7 +19,6 @@ class SerialConnection(threading.Thread):
         self.listeners = listeners  # type: List[Callable]
 
     def run(self):
-
         try:
             with serial.Serial(self.device, self.baudrate,
                                timeout=1) as connection:
@@ -132,13 +131,22 @@ class Manager:
         return devices
 
     def remove_connection(self, device: str):
+        """
+        Will remove the connection to a device.
+
+        :param device: The device to disconnect with.
+        """
         if device in self._connections:
             del self._connections[device]
 
 
 def _connection_closed_listener(connection: SerialConnection):
+    """
+    Will be called if the connection was closed.
+
+    :param connection: The connection that is being closed.
+    """
+
+    # Unregister the connection in the connection manager.
     manager = Manager.get_instance()  # type: Manager
     manager.remove_connection(connection.device)
-
-# connection.device
-# Manager.

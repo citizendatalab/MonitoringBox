@@ -1,9 +1,9 @@
 from enum import Enum
-from typing import List, Callable
+from typing import List
 import threading
 import service.serial.manager
 import time
-from service.sensor.handler_factory import HandlerFactory
+from service.sensor.handler_watcher import HandlerWatcher
 from service.sensor.handlers.abstract_handler import AbstractHandler
 
 
@@ -173,31 +173,49 @@ class _SensorSearcher(threading.Thread):
             # We don't want to burn the Pi :P.
             time.sleep(0.1)
 
-    def _handle_found_devices(self, found_devices: List[str]):
-        for device in found_devices:
-            manager = SensorManager.get_instance()  # type: SensorManager
-            if manager.get_sensor_by_device(device) is None:
-                self._register_new_device(device)
+        # When the manager was stopped, deregister all sensors.
+        for device in manager.get_available_devices():
+            self._deregister_device(device)
 
     def _deregister_device(self, device: str):
+        """
+        Will be called when a device lost connection.
+
+        :param device: The device that lost connection.
+        """
+
+        # Will deregister the device.
         sensor_manager = SensorManager.get_instance()  # type: SensorManager
         sensor = sensor_manager.get_sensor_by_device(device)
         sensor_manager._deregister_sensor(sensor)
 
     def _register_new_device(self, device: str):
+        """
+        Will be called when a new device was found.
+
+        :param device: The found device.
+        """
         manager = service.serial.manager.Manager.get_instance()  # type: service.serial.manager.Manager
+
+        # Create the serial connection with some listeners.
         on_exit = [_sensor_disconnect_listener]
         listeners = [_sensor_line_listener]
         manager.setup_connection(device, listeners, on_exit=on_exit)
 
+        # Create a sensor for the serial connection.
         connection = manager.connections[device]
-        sensor = Sensor(SensorType.UNKOWN, "", device, connection)
+        sensor = Sensor(SensorType.UNKOWN, "unkown", device, connection)
 
+        # Will register the sensor with the sensor manager.
         sensor_manager = SensorManager.get_instance()  # type: SensorManager
         sensor_manager._register_sensor(sensor)
 
 
 class SensorManager:
+    """
+    Will hold all connected sensors.
+    """
+
     # Will store the singleton here.
     __instance = None
 
@@ -218,52 +236,106 @@ class SensorManager:
             raise Exception("Only one instance of the manager should exist!")
         else:
             SensorManager.__instance = self
-        self._sensors = {}
-        self._handler_factories = []  # type: List[HandlerFactory]
+        self._sensors = {}  # type: Dict[str, Sensor]
+        self._handler_watcher = []  # type: List[HandlerWatcher]
 
-    def register_handler_factory(self, handler_factory: HandlerFactory):
-        if handler_factory not in self._handler_factories:
-            self._handler_factories.append(handler_factory)
+    def register_handler_watcher(self, handler_watcher: HandlerWatcher):
+        """
+        Will register a new handler watcher.
 
-    def get_sensor_devices(self):
+        :param handler_watcher: The handler watcher to register.
+        """
+        if handler_watcher not in self._handler_watcher:
+            self._handler_watcher.append(handler_watcher)
+
+    def get_sensor_devices(self) -> List[str]:
+        """
+        Will get all known sensor devices.
+
+        :return: List of all known sensor devices.
+        """
         return list(self._sensors.keys())
 
-    def get_sensor_by_device(self, device: str):
+    def get_sensor_by_device(self, device: str) -> Sensor:
+        """
+        Will get a sensor by device id.
+
+        :param device: Device id.
+        :return: The sensor found at that device. When not found None is given.
+        """
         sensor = None
         if device in self._sensors:
             sensor = self._sensors[device]
         return sensor
 
     def _trigger_type_handlers(self, device: str, line: str):
+        """
+        Will be called when a new line was received.
+
+        :param device: The device id that triggered that did the triggering.
+        :param line: The received line.
+        """
+        # Get the sensor and all handlers to be triggered.
         sensor = self._sensors[device]  # type: Sensor
         handlers = self._trigger_type_handler_based_on_params(sensor.name,
                                                               sensor.sensor_type)
+
+        # Trigger all handlers with line.
         for handler in handlers:
             handler.handle(line)
 
     def _trigger_type_handler_based_on_params(self, sensor_name: str,
                                               type: SensorType) -> List[
         AbstractHandler]:
+        """
+        Will return all handlers that should be called for given sensor.
+
+        :param sensor_name: The name of the sensor to get the triggers of.
+        :param type: The type of the sensor to get the triggers of.
+        :return: Found handlers.
+        """
         handlers = []
-        for handler_factory in self._handler_factories:
+        for handler_factory in self._handler_watcher:
             for trigger in handler_factory.triggers:
+
+                # If any fields match will trigger the handler.
                 if trigger.any_field_match:
                     if sensor_name in trigger.sensor_names or type in trigger.sensor_types:
                         handlers.append(handler_factory.handler)
-                    elif sensor_name in trigger.sensor_names and type in trigger.sensor_types:
-                        handlers.append(handler_factory.handler)
+
+                # If all fields should match before the handlers can be triggered.
+                elif sensor_name in trigger.sensor_names and type in trigger.sensor_types:
+                    handlers.append(handler_factory.handler)
         return handlers
 
     def _register_sensor(self, sensor: Sensor):
+        """
+        Register a new sensor.
+
+        :param sensor: Sensor to register.
+        """
         self._sensors[sensor.device] = sensor
 
     def _deregister_sensor(self, sensor: Sensor):
+        """
+        Will deregister the sensor.
+
+        :param sensor: The sensor to deregister.
+        """
+
+        # Remove connection and sensors.
         manager = service.serial.manager.Manager.get_instance()  # type: service.serial.manager.Manager
         manager.remove_connection(sensor.device)
         del self._sensors[sensor.device]
 
     def start(self):
+        """
+        Will start the manager and finding new sensors connected.
+        """
         _SensorSearcher().start()
 
     def stop(self):
+        """
+        Will stop the manager.
+        """
         _SensorSearcher._is_running = False

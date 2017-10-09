@@ -16,7 +16,6 @@
       }
 
       function generateHeading(data) {
-        console.log(data);
         if (data["order_setable"]) {
           return "<th>" + data["name"] + "<i class=\"fa fa-sort-" + data["order"] + "\" aria-hidden=\"true\"></i></th>";
         }
@@ -101,41 +100,77 @@
             else {
               $(tableWrapper).find(".table-options").hide(0);
             }
-            var rows = "";
-            for (var i in data["body"]) {
-              rows += generateRow(data["body"][i]);
+
+            $(tableWrapper).find(".dropdown-menu").each(function () {
+              if (data["info"]["possible_results_per_page"].length != $(this).find(".dropdown-item").length) {
+                // regenerate all.
+                var pagination = generatePagination(data["info"]);
+                $(tableWrapper).find(".table-options .results-per-page").each(function (i, v) {
+                  var possibleResultsPerPage = data["info"]["possible_results_per_page"];
+                  var out = possibleResultsPerPage.join("</a><a class=\"dropdown-item\" href=\"#\">");
+
+                  if (out !== "") {
+                    out = "<a class=\"dropdown-item\" href=\"#\">" + out + "</a>";
+                  }
+                  $(v).find(".dropdown-menu").html(out);
+                  $(v).find(".dropdown-item").click(function (e) {
+                    e.preventDefault();
+                    $(tableWrapper).attr("data-ajaxdata-per-page", $(this).text());
+                    updateContent(tableWrapper, url);
+                  });
+
+                });
+
+                $(tableWrapper).find(".ajaxPagination").each(function (i, v) {
+                  $(v).html(pagination);
+                  $(v).find("a").click(function (e) {
+                    e.preventDefault();
+                    $(tableWrapper).attr("data-ajaxdata-start", $(this).attr("data-page"));
+                    updateContent(tableWrapper, url);
+                  });
+                });
+
+              }
+              else {
+                // Check individual ones.
+                for (var i = 0; i < data["info"]["possible_results_per_page"].length; i++) {
+                  if ($($(this).find(".dropdown-item")[i]).html() != data["info"]["possible_results_per_page"][i]) {
+                    $($(this).find(".dropdown-item")[i]).html(data["info"]["possible_results_per_page"][i]);
+                  }
+                }
+              }
+            });
+
+            if ($(tableWrapper).attr("data-ajaxdata-per-page") != data["info"]["per_page"]) {
+              $(tableWrapper).find("button.btn").html(data["info"]["per_page"]);
             }
+
             $(tableWrapper).attr("data-ajaxdata-per-page", data["info"]["per_page"]);
             $(tableWrapper).attr("data-ajaxdata-start", data["info"]["current_start"]);
 
-            var pagination = generatePagination(data["info"]);
-            $(tableWrapper).find(".table-options .results-per-page").each(function (i, v) {
-              var possibleResultsPerPage = data["info"]["possible_results_per_page"];
-              var out = possibleResultsPerPage.join("</a><a class=\"dropdown-item\" href=\"#\">");
-
-              if (out !== "") {
-                out = "<a class=\"dropdown-item\" href=\"#\">" + out + "</a>";
+            // Update table content.
+            var trs = $(tableWrapper).find("table tbody tr");
+            if (trs.length == data["body"].length) {
+              for (var i in data["body"]) {
+                var row = $(trs[i]).find("td");
+                for (var k in data["body"][i]) {
+                  if ($(row[k]).html() != data["body"][i][k]) {
+                    $(row[k]).html(data["body"][i][k]);
+                  }
+                }
               }
-              $(v).find(".dropdown-menu").html(out);
-              $(v).find("button.btn").html(data["info"]["per_page"]);
-              $(v).find(".dropdown-item").click(function (e) {
-                e.preventDefault();
-                $(tableWrapper).attr("data-ajaxdata-per-page", $(this).text());
-                updateContent(tableWrapper, url);
-              });
-
-            });
-            $(tableWrapper).find("table tbody").html(rows);
-            $(tableWrapper).find(".ajaxPagination").each(function (i, v) {
-              $(v).html(pagination);
-              $(v).find("a").click(function (e) {
-                e.preventDefault();
-                $(tableWrapper).attr("data-ajaxdata-start", $(this).attr("data-page"));
-                updateContent(tableWrapper, url);
-              });
-            });
+              $(tableWrapper).find("table tbody").html(rows);
+            }
+            else {
+              var rows = "";
+              for (var i in data["body"]) {
+                rows += generateRow(data["body"][i]);
+              }
+              $(tableWrapper).find("table tbody").html(rows);
+            }
           }
         });
+
       }
 
       updateContent(v, $(v).attr("data-ajax-endpoint"));

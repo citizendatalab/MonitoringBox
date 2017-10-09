@@ -166,6 +166,11 @@ class _SensorSearcher(threading.Thread):
 
                 for device in old_devices:
                     self._deregister_device(device)
+                if new_devices:
+                    # Sleep sometime because the serial connection needs some
+                    # initialization time. (This not a really nice solution but
+                    # it works).
+                    time.sleep(0.1)
                 for device in new_devices:
                     self._register_new_device(device)
             except:

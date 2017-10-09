@@ -16,6 +16,12 @@ import service.data.connection
 import base64
 from urllib.parse import quote
 from service.data.raw_data_log import RawDataLogManager
+import sys
+from PyQt4 import QtGui, QtCore
+import math
+import threading
+import time
+
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
 sensor_manager.start()
@@ -41,7 +47,6 @@ sensor_manager.register_handler_watcher(
         ], [], True),
     ], DataLogHandler())
 )
-
 
 app = Flask(__name__)  # create the application instance :)
 
@@ -85,7 +90,9 @@ def show_settings():
     settings = {"options": {}, "current": {}}
     settings["options"]["mounts"] = []
     for mount in service.data.disk.get_mounts():
-        if mount.mount_point not in ["/bin", "/dev", "/etc", "/lib", "/boot", "/home", "/mnt", "/proc", "/tmp", "/usr", "/var", "/sbin", "/kernel"]:
+        if mount.mount_point not in ["/bin", "/dev", "/etc", "/lib", "/boot",
+                                     "/home", "/mnt", "/proc", "/tmp", "/usr",
+                                     "/var", "/sbin", "/kernel"]:
             mount = mount.get_dict()
             mount["percent_usage"] = round(mount["percent_usage"], 2)
             settings["options"]["mounts"].append(mount)
@@ -132,7 +139,9 @@ def show_api_sensors_list():
 
         device_id = base64.b64encode(bytes(device, "UTF-8"))
         resp_table.table_body.append(
-            [sensor.name, "<i class=\"fa fa-question\" aria-hidden=\"true\"></i> "+ sensor.sensor_type.name, device,
+            [sensor.name,
+             "<i class=\"fa fa-question\" aria-hidden=\"true\"></i> " + sensor.sensor_type.name,
+             device,
              "<a href=\"device/" + quote(
                  device_id) + "/raw_data\">Raw data</a>"])
     return jsonify(resp_table.as_dict())
@@ -146,7 +155,7 @@ def api_device_raw_data(device):
 
     amount = 20
 
-    manager = RawDataLogManager.get_instance() # type: RawDataLogManager
+    manager = RawDataLogManager.get_instance()  # type: RawDataLogManager
 
     log = manager.get_log(device_id)
     resp_table = table.generate_table(amount, amount,
@@ -154,15 +163,172 @@ def api_device_raw_data(device):
                                       [""], [amount], 1)
     resp_table.show_heading = False
 
-
-    for k in log[0:(amount-1)]:
+    for k in log[0:(amount - 1)]:
         resp_table.table_body.append([k])
     return jsonify(resp_table.as_dict())
 
 
-if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+class Example(QtGui.QWidget):
+    def __init__(self):
+        super(Example, self).__init__()
 
+        self.initUI()
+        self.frame = 0
+
+    def initUI(self):
+        self.setGeometry(500, 500, 500, 500)
+        self.setWindowTitle('Pen styles')
+        self.show()
+
+    def paintEvent(self, e):
+        qp = QtGui.QPainter()
+        qp.begin(self)
+        self.drawLines(qp)
+        qp.end()
+        self.frame += 1
+
+    def drawLines(self, qp):
+        pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
+        qp.setPen(pen)
+        slowdown = 20
+        size = 75 + (math.sin(self.frame / slowdown) * 50)
+        qp.drawLine(250 + (math.sin(self.frame / slowdown) * size),
+                    150 + ((math.cos(self.frame / slowdown) * size) * 0.5),
+                    250 + (
+                        math.sin(
+                            (self.frame / slowdown) + (math.pi / 2)) * size),
+                    150 + ((math.cos(
+                        (self.frame / slowdown) + (math.pi / 2)) * size)) * 0.5)
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            150 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+        )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            150 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+        )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
+
+        qp.drawLine(250 + (math.sin(self.frame / slowdown) * size),
+                    250 + ((math.cos(self.frame / slowdown) * size) * 0.5),
+                    250 + (
+                        math.sin(
+                            (self.frame / slowdown) + (math.pi / 2)) * size),
+                    250 + (
+                        (math.cos(
+                            (self.frame / slowdown) + (
+                            math.pi / 2)) * size)) * 0.5)
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            250 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+        )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            250 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+        )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi / 2)) * size)) * 0.5)
+
+        qp.drawLine(250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+                    150 + (
+                        (math.cos(
+                            (self.frame / slowdown) + math.pi) * size) * 0.5),
+                    250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+                    250 + (
+                        (math.cos(
+                            (self.frame / slowdown) + math.pi) * size) * 0.5)
+                    )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            250 + (
+            (math.cos((self.frame / slowdown) - (math.pi / 2)) * size) * 0.5)
+        )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
+
+
+# class Refresher(threading.Thread):
+#     def run(self):
+#
+
+class App(threading.Thread):
+    def run(self):
+        app.run(debug=False, host='0.0.0.0')
+
+if __name__ == "__main__":
+    App().start()
+    # Refresher().start()
+    # mainWindow= QtGui.QApplication(sys.argv)
+    # ex = Example()
+    #
+    # # width = mainWindow.frameGeometry().width()
+    # # height = mainWindow.frameGeometry().height()
+    # # ex.resize(width,height)
+    # a = True
+    # while True:
+    #     ex.repaint()
+    #     time.sleep((1/3)/10)
+    # sys.exit(mainWindow.exec_())
 
 # modules that should be installed.
 # pip install Flask

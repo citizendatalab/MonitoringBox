@@ -16,11 +16,10 @@ import service.data.connection
 import base64
 from urllib.parse import quote
 from service.data.raw_data_log import RawDataLogManager
-import sys
 from PyQt4 import QtGui, QtCore
 import math
 import threading
-import time
+from service.sensor_manager import Sensor
 
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
@@ -49,6 +48,22 @@ sensor_manager.register_handler_watcher(
 )
 
 app = Flask(__name__)  # create the application instance :)
+
+
+def get_sensor_icon(sensor: Sensor) -> str:
+    types = {
+        SensorType.UNKOWN: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
+        SensorType.CO2_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
+        SensorType.EXAMPLE_SENSOR: "<i class=\"fa fa-cogs\" aria-hidden=\"true\"></i>",
+        SensorType.GALVANIC_SKIN_RESPONSE_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
+        SensorType.GPS_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
+        SensorType.HEART_RATE_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
+        SensorType.HUMIDITY_TEMPERATURE_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>"
+    }
+    if sensor.sensor_type in types:
+        return types[sensor.sensor_type]
+    else:
+        return types[SensorType.SensorType.UNKOWN]
 
 
 # Route handlers
@@ -140,7 +155,7 @@ def show_api_sensors_list():
         device_id = base64.b64encode(bytes(device, "UTF-8"))
         resp_table.table_body.append(
             [sensor.name,
-             "<i class=\"fa fa-question\" aria-hidden=\"true\"></i> " + sensor.sensor_type.name,
+             get_sensor_icon(sensor) + " " + sensor.sensor_type.name,
              device,
              "<a href=\"device/" + quote(
                  device_id) + "/raw_data\">Raw data</a>"])
@@ -236,7 +251,7 @@ class Example(QtGui.QWidget):
                     250 + (
                         (math.cos(
                             (self.frame / slowdown) + (
-                            math.pi / 2)) * size)) * 0.5)
+                                math.pi / 2)) * size)) * 0.5)
 
         qp.drawLine(
             250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
@@ -314,6 +329,7 @@ class Example(QtGui.QWidget):
 class App(threading.Thread):
     def run(self):
         app.run(debug=False, host='0.0.0.0')
+
 
 if __name__ == "__main__":
     App().start()

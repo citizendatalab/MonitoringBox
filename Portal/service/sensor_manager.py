@@ -5,6 +5,7 @@ import service.serial.manager
 import time
 from service.sensor.handler_watcher import HandlerWatcher
 from service.sensor.handlers.abstract_handler import AbstractHandler
+import json
 
 
 class SensorType(Enum):
@@ -19,6 +20,23 @@ class SensorType(Enum):
     CO2_SENSOR = "CO2 sensor"
     HEART_RATE_SENSOR = "Heart rate sensor"
     GALVANIC_SKIN_RESPONSE_SENSOR = "Galvanic skin response sensor"
+
+    @staticmethod
+    def from_string(type: str):
+        types = {
+            "UNKOWN": SensorType.UNKOWN,
+            "EXAMPLE_SENSOR": SensorType.EXAMPLE_SENSOR,
+            "PI_CAMERA": SensorType.PI_CAMERA,
+            "GPS_SENSOR": SensorType.GPS_SENSOR,
+            "HUMIDITY_TEMPERATURE_SENSOR": SensorType.HUMIDITY_TEMPERATURE_SENSOR,
+            "CO2_SENSOR": SensorType.CO2_SENSOR,
+            "HEART_RATE_SENSOR": SensorType.HEART_RATE_SENSOR,
+            "GALVANIC_SKIN_RESPONSE_SENSOR": SensorType.GALVANIC_SKIN_RESPONSE_SENSOR
+        }
+        if type in types:
+            return types[type]
+        else:
+            return SensorType.UNKOWN
 
 
 class HandlerTrigger:
@@ -67,6 +85,14 @@ class Sensor:
         self._device = device
         self._sensor_type = sensor_type
         self._name = name
+        self._did_receive_first_packet = False
+
+    def received_first_packet(self):
+        self._did_receive_first_packet = True
+
+    @property
+    def first_packet_received(self) -> bool:
+        return self._did_receive_first_packet
 
     @property
     def connection(self):
@@ -282,12 +308,28 @@ class SensorManager:
         """
         # Get the sensor and all handlers to be triggered.
         sensor = self._sensors[device]  # type: Sensor
+        if not sensor.first_packet_received:
+            self._trigger_first_first_packet_handler(sensor, line)
+
         handlers = self._trigger_type_handler_based_on_params(sensor.name,
                                                               sensor.sensor_type)
 
         # Trigger all handlers with line.
         for handler in handlers:
             handler.handle(sensor, line)
+
+    def _trigger_first_first_packet_handler(self, sensor: Sensor, line: str):
+        """
+        Will be triggered when the sensor receives its first line and set the
+        information of the sensor.
+
+        :param sensor: The sensor that received its first line.
+        :param line: Line that was received.
+        """
+        sensor.received_first_packet()
+        contents = json.loads(line)
+        sensor._name = contents["name"]
+        sensor._sensor_type = SensorType.from_string(contents["sensor"])
 
     def _trigger_type_handler_based_on_params(self, sensor_name: str,
                                               type: SensorType) -> List[

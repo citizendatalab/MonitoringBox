@@ -31,11 +31,19 @@ class SerialConnection(threading.Thread):
                         while connection.inWaiting() == 0:
                             pass
                         # Read data until '\n' was reached.
-                        line = connection.readline()
+                        line = connection.readline()  # type: bytes
 
-                        # Call the listeners with the received string.
-                        self._call_listeners(line.decode("utf-8"))
-                except:
+                        # When receiving data from the Arduino sometimes some
+                        # noise is sended so we need to filter that out.
+                        # 0x7B = '{' in the ASCII table.
+                        while len(line) > 0 and line[0] != 0x7B:
+                            line = line[1:]
+
+                        # Call the listeners with the received string, when
+                        # there is something to report.
+                        if len(line) > 0:
+                            self._call_listeners(line.decode("utf-8"))
+                except Exception:
                     connection.close()
         except:
             # When the loop crashed for some reason (device is not connected

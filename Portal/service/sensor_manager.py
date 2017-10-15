@@ -191,7 +191,8 @@ class _SensorSearcher(threading.Thread):
                 new_devices = set(available_devices - known_devices)
 
                 for device in old_devices:
-                    self._deregister_device(device)
+                    if sensor_manager.get_sensor_by_device(device).sensor_type != SensorType.PI_CAMERA:
+                        self._deregister_device(device)
                 if new_devices:
                     # Sleep sometime because the serial connection needs some
                     # initialization time. (This not a really nice solution but

@@ -20,6 +20,8 @@ from PyQt4 import QtGui, QtCore
 import math
 import threading
 from service.sensor_manager import Sensor
+import time
+import picamera
 
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
@@ -79,6 +81,16 @@ def show_recordings():
     return render_template('recordings.html', current=current)
 
 
+@app.route('/camera')
+def show_camera():
+    camera = picamera.PiCamera()
+    camera.capture('image.png')
+    image = open('image.png', 'rb')
+    image_read = image.read()
+    image_64_encode = base64.encodestring(image_read)
+    return render_template('camera.html', image_64_encode=image_64_encode)
+
+
 @app.route('/device/<device>/raw_data')
 def show_device_raw_data(device):
     device_id = base64.b64decode(device).decode("UTF-8")
@@ -94,7 +106,7 @@ def show_device_raw_data(device):
 def human_readable_size(size):
     n = math.floor(math.log(size, 1024))
     size_names = ["B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-    return str(round(size / math.pow(1024, n), 1)) + size_names[n+1]
+    return str(round(size / math.pow(1024, n), 1)) + size_names[n + 1]
 
 
 @app.route('/settings', methods=['GET', 'POST'])
@@ -116,7 +128,8 @@ def show_settings():
                                      "/var", "/sbin", "/kernel"]:
             mount = mount.get_dict()
             mount["percent_usage"] = round(mount["percent_usage"], 2)
-            mount["free_space_human_readable"] = human_readable_size(mount["size"] - mount["used"])
+            mount["free_space_human_readable"] = human_readable_size(
+                mount["size"] - mount["used"])
             settings["options"]["mounts"].append(mount)
 
     settings["current"]["selected_mount"] = config.get_setting(

@@ -158,7 +158,7 @@ def test():
     return jsonify(resp_table.as_dict())
 
 @app.route('/api/camera/picture')
-def show_camera():
+def show_api_camera():
     camera.capture('image.png')
     image = open('image.png', 'rb')
     image_read = image.read()

@@ -25,7 +25,7 @@ import picamera
 
 camera = picamera.PiCamera()
 camera.resolution = (1024, 768)
-camera.start_preview()
+# camera.start_preview()
 
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
@@ -87,11 +87,7 @@ def show_recordings():
 
 @app.route('/camera')
 def show_camera():
-    camera.capture('image.png')
-    image = open('image.png', 'rb')
-    image_read = image.read()
-    image_64_encode = base64.encodestring(image_read)
-    return render_template('camera.html', image_64_encode=image_64_encode.decode("UTF-8"))
+    return render_template('camera.html')
 
 
 @app.route('/device/<device>/raw_data')
@@ -168,9 +164,7 @@ def show_api_camera():
     # image_64_encode = base64.encodestring(image_read)
     # Create an in-memory stream
     my_stream = io.BytesIO()
-    with picamera.PiCamera() as camera:
-        # Camera warm-up time
-        camera.capture(my_stream, 'jpeg')
+    camera.capture(my_stream, 'jpeg', use_video_port=True)
 
     image_64_encode = base64.b64encode(my_stream.getvalue())
     amount = 1

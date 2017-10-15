@@ -91,6 +91,12 @@ def show_device_raw_data(device):
                                device_id=device_id)
 
 
+def human_readable_size(size):
+    n = math.floor(math.log(size, 1024))
+    size_names = ["B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+    return str(round(size / math.pow(1024, n), 1)) + size_names[n+1]
+
+
 @app.route('/settings', methods=['GET', 'POST'])
 def show_settings():
     if request.method == 'POST':
@@ -110,6 +116,7 @@ def show_settings():
                                      "/var", "/sbin", "/kernel"]:
             mount = mount.get_dict()
             mount["percent_usage"] = round(mount["percent_usage"], 2)
+            mount["free_space_human_readable"] = human_readable_size(mount["size"] - mount["used"])
             settings["options"]["mounts"].append(mount)
 
     settings["current"]["selected_mount"] = config.get_setting(
@@ -308,7 +315,9 @@ class Example(QtGui.QWidget):
                     (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
             250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
             250 + (
-            (math.cos((self.frame / slowdown) - (math.pi / 2)) * size) * 0.5)
+                (
+                    math.cos(
+                        (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5)
         )
 
         qp.drawLine(

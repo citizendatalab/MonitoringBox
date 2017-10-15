@@ -31,10 +31,7 @@ current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
 sensor_manager.start()
 
-camera_sensor = Sensor()
-camera_sensor.sensor_type = SensorType.PI_CAMERA
-camera_sensor.name = "Pi CAM"
-camera_sensor.device = "@PI_CAM"
+camera_sensor = Sensor(SensorType.PI_CAMERA, "Pi CAM", "@PI_CAM", None)
 sensor_manager._register_sensor(camera_sensor)
 
 # sensor_manager.
@@ -223,6 +220,8 @@ def api_device_raw_data(device):
     device_id = base64.b64decode(device).decode("UTF-8")
     sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
     sensor = sensor_manager.get_sensor_by_device(device_id)
+    if sensor.sensor_type == SensorType.PI_CAMERA:
+        return show_api_camera()
 
     amount = 20
 

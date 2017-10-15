@@ -24,6 +24,8 @@ import time
 import picamera
 
 camera = picamera.PiCamera()
+camera.resolution = (1024, 768)
+camera.start_preview()
 
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
@@ -157,12 +159,20 @@ def test():
             ["hoi" + str(i), "test", "dinges" + str(datetime.datetime.now())])
     return jsonify(resp_table.as_dict())
 
+import io
 @app.route('/api/camera/picture')
 def show_api_camera():
-    camera.capture('image.png')
-    image = open('image.png', 'rb')
-    image_read = image.read()
-    image_64_encode = base64.encodestring(image_read)
+    # camera.capture('image.png')
+    # image = open('image.png', 'rb')
+    # image_read = image.read()
+    # image_64_encode = base64.encodestring(image_read)
+    # Create an in-memory stream
+    my_stream = io.BytesIO()
+    with picamera.PiCamera() as camera:
+        # Camera warm-up time
+        camera.capture(my_stream, 'jpeg')
+
+    image_64_encode = base64.b64encode(my_stream.getvalue())
     amount = 1
     resp_table = table.generate_table(amount, amount,
                                       0,

@@ -23,6 +23,8 @@ from service.sensor_manager import Sensor
 import time
 import picamera
 
+camera = picamera.PiCamera()
+
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
 sensor_manager.start()
@@ -83,12 +85,11 @@ def show_recordings():
 
 @app.route('/camera')
 def show_camera():
-    camera = picamera.PiCamera()
     camera.capture('image.png')
     image = open('image.png', 'rb')
     image_read = image.read()
     image_64_encode = base64.encodestring(image_read)
-    return render_template('camera.html', image_64_encode=image_64_encode)
+    return render_template('camera.html', image_64_encode=image_64_encode.decode("UTF-8"))
 
 
 @app.route('/device/<device>/raw_data')
@@ -156,6 +157,23 @@ def test():
             ["hoi" + str(i), "test", "dinges" + str(datetime.datetime.now())])
     return jsonify(resp_table.as_dict())
 
+@app.route('/api/camera/picture')
+def show_camera():
+    camera.capture('image.png')
+    image = open('image.png', 'rb')
+    image_read = image.read()
+    image_64_encode = base64.encodestring(image_read)
+    amount = 1
+    resp_table = table.generate_table(amount, amount,
+                                      0,
+                                      [""], [amount], 1)
+    resp_table.show_heading = False
+
+    # <img src="data:image/png;base64,{{image_64_encode}}"/>
+    resp_table.table_body.append(["<img src=\"data:image/png;base64," + image_64_encode.decode("UTF-8") + "\"/>"])
+    return jsonify(resp_table.as_dict())
+
+    # return render_template('camera.html', image_64_encode=image_64_encode.decode("UTF-8"))
 
 @app.route('/api/sensors/list')
 def show_api_sensors_list():

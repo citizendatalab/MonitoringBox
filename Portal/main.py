@@ -31,6 +31,14 @@ current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
 sensor_manager.start()
 
+camera_sensor = Sensor()
+camera_sensor.sensor_type = SensorType.PI_CAMERA
+camera_sensor.name = "Pi CAM"
+camera_sensor.device = "@PI_CAM"
+sensor_manager._register_sensor(camera_sensor)
+
+# sensor_manager.
+
 # Register all handlers for sensors.
 sensor_manager.register_handler_watcher(
     HandlerWatcher([
@@ -155,7 +163,10 @@ def test():
             ["hoi" + str(i), "test", "dinges" + str(datetime.datetime.now())])
     return jsonify(resp_table.as_dict())
 
+
 import io
+
+
 @app.route('/api/camera/picture')
 def show_api_camera():
     # camera.capture('image.png')
@@ -174,10 +185,13 @@ def show_api_camera():
     resp_table.show_heading = False
 
     # <img src="data:image/png;base64,{{image_64_encode}}"/>
-    resp_table.table_body.append(["<img src=\"data:image/png;base64," + image_64_encode.decode("UTF-8") + "\"/>"])
+    resp_table.table_body.append([
+                                     "<img src=\"data:image/png;base64," + image_64_encode.decode(
+                                         "UTF-8") + "\"/>"])
     return jsonify(resp_table.as_dict())
 
     # return render_template('camera.html', image_64_encode=image_64_encode.decode("UTF-8"))
+
 
 @app.route('/api/sensors/list')
 def show_api_sensors_list():

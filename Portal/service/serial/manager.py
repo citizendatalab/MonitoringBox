@@ -41,15 +41,16 @@ class SerialConnection(threading.Thread):
                         # # When receiving data from the Arduino sometimes some
                         # # noise is sended so we need to filter that out.
                         # # 0x7B = '{' in the ASCII table.
-                        # while len(line) > 0 and line[0] != 0x7B:
-                        #     line = line[1:]
+                        while len(line) > 0 and line[0] != 0x7B:
+                            line = line[1:]
 
                         # Call the listeners with the received string, when
                         # there is something to report.
                         if len(line) > 0:
-                            self._call_listeners(line.decode("utf-8"))
-                except Exception:
+                            self._call_listeners(line.decode("utf-8").replace("'","\""))
+                except Exception as ex:
                     connection.close()
+
         except:
             # When the loop crashed for some reason (device is not connected
             # anymore) close the connection.

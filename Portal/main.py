@@ -25,7 +25,7 @@ import picamera
 
 camera = picamera.PiCamera()
 camera.resolution = (1024, 768)
-# camera.start_preview()
+camera.start_preview()
 
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
@@ -64,12 +64,12 @@ app = Flask(__name__)  # create the application instance :)
 def get_sensor_icon(sensor: Sensor) -> str:
     types = {
         SensorType.UNKOWN: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
-        SensorType.CO2_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
+        SensorType.CO2_SENSOR: "<i class=\"fa fa-cogs\" aria-hidden=\"true\"></i>",
         SensorType.EXAMPLE_SENSOR: "<i class=\"fa fa-cogs\" aria-hidden=\"true\"></i>",
         SensorType.GALVANIC_SKIN_RESPONSE_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
         SensorType.GPS_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
         SensorType.HEART_RATE_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
-        SensorType.HUMIDITY_TEMPERATURE_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>"
+        SensorType.HUMIDITY_TEMPERATURE_SENSOR: "<i class=\"fa fa-cogs\" aria-hidden=\"true\"></i>"
     }
     if sensor.sensor_type in types:
         return types[sensor.sensor_type]
@@ -226,8 +226,8 @@ def api_device_raw_data(device):
     device_id = base64.b64decode(device).decode("UTF-8")
     sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
     sensor = sensor_manager.get_sensor_by_device(device_id)
-    if sensor.sensor_type == SensorType.PI_CAMERA:
-        return show_api_camera()
+    # if sensor.sensor_type == SensorType.PI_CAMERA:
+    #     return show_api_camera()
 
     amount = 20
 

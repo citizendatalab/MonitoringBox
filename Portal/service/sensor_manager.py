@@ -28,8 +28,8 @@ class SensorType(Enum):
             "EXAMPLE_SENSOR": SensorType.EXAMPLE_SENSOR,
             "PI_CAMERA": SensorType.PI_CAMERA,
             "GPS_SENSOR": SensorType.GPS_SENSOR,
-            "HUMIDITY_TEMPERATURE_SENSOR": SensorType.HUMIDITY_TEMPERATURE_SENSOR,
-            "CO2_SENSOR": SensorType.CO2_SENSOR,
+            "Temperature and Humidity": SensorType.HUMIDITY_TEMPERATURE_SENSOR,
+            "CO2": SensorType.CO2_SENSOR,
             "HEART_RATE_SENSOR": SensorType.HEART_RATE_SENSOR,
             "GALVANIC_SKIN_RESPONSE_SENSOR": SensorType.GALVANIC_SKIN_RESPONSE_SENSOR
         }
@@ -329,7 +329,8 @@ class SensorManager:
         """
         sensor.received_first_packet()
         contents = json.loads(line)
-        sensor._name = contents["name"]
+        # if name in contents:
+        #     sensor._name = contents["name"]
         sensor._sensor_type = SensorType.from_string(contents["sensor"])
 
     def _trigger_type_handler_based_on_params(self, sensor_name: str,

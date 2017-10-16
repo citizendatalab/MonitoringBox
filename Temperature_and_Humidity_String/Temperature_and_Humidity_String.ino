@@ -24,7 +24,7 @@ void loop() {
   abc("CO2", CO2(100));
   abc("HeartRate", Heartrate(140));
   abc("Galvanic Skin Response", gsr(1));*/
-  abc("Temperature and Humidity", thsensor(temperature,humidity));
+  abc("'Temperature and Humidity'", thsensor(temperature,humidity));
   //Put the result of sensor in String
   counter++;  
   delay(a);
@@ -43,7 +43,7 @@ void abc(char * sensor, String result){
   out += updateinterval;
   out += ", 'timestamp':";
   out += timestamp;
-  out += "s, 'sensor': ";
+  out += "'s', 'sensor': ";
   out += sensor;
   out += ", 'Data':";
   out += result;
@@ -72,9 +72,9 @@ return gpsr;
 {
  String th = " {'Temperature':";
  th += tem;
- th += "'C, 'Humidity':";
+ th += "'\'C', 'Humidity':";
  th += hum;
- th += "%}";
+ th += "'%'}";
  
  return th;    
   } //make result String

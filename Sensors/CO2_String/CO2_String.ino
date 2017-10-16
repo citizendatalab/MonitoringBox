@@ -89,7 +89,7 @@ void abc(char * sensor, String result){
   out += updateinterval;
   out += ", 'timestamp':";
   out += timestamp;
-  out += "s, 'sensor': ";
+  out += "\\'s', 'sensor': ";
   out += sensor;
   out += ", 'Data':";
   out += result;
@@ -135,9 +135,9 @@ return gpsr;
 
 String CO2(unsigned long ppm)
 {
- String CO2 = " {'CO2':";
+ String CO2 = " {'CO2':'";
  CO2 += ppm;
- CO2 += "ppm}";
+ CO2 += "ppm'}";
  return CO2;  
   }
 

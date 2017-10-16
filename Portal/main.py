@@ -206,9 +206,15 @@ def show_api_sensors_list():
         sensor = sensor_manager.get_sensor_by_device(device)
 
         device_id = base64.b64encode(bytes(device, "UTF-8"))
+        name = ""
+        try:
+            name = get_sensor_icon(sensor) + " " + sensor.sensor_type.name
+        except:
+            pass
+
         resp_table.table_body.append(
             [sensor.name,
-             get_sensor_icon(sensor) + " " + sensor.sensor_type.name,
+             name,
              device,
              "<a href=\"device/" + quote(
                  device_id) + "/raw_data\">Raw data</a>"])

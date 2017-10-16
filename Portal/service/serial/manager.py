@@ -140,7 +140,8 @@ class Manager:
         """
         devices = []
         for device in serial.tools.list_ports.comports():
-            devices.append(device.device)
+            if "/dev/ttyAMA" not in device.device:
+                devices.append(device.device)
         return devices
 
     def remove_connection(self, device: str):

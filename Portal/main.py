@@ -281,6 +281,13 @@ class Example(QtGui.QWidget):
 
         # if self.frame > 200:
         #     b = max(255 - ((self.frame - 200) * 10), 0)
+
+        # Fade in.
+        if self.frame < 50:
+            temp = self.frame / 50
+            r *= temp
+            g *= temp
+            b *= temp
         return QtGui.QColor(r, g, b)
 
     def draw_box(self, qp: QtGui.QPen, pos: float, size: float,
@@ -306,8 +313,8 @@ class Example(QtGui.QWidget):
             pen = QtGui.QPen(self.get_pen_color(i), 2, QtCore.Qt.SolidLine)
             qp.setPen(pen)
             qp.setRenderHint(QPainter.Antialiasing)
-            size = 75 + (math.sin((self.frame + i * 6) / slowdown) * 50)
-            self.draw_box(qp, pos, size, h_squeeze, 150, 100 + i * 6)
+            size = 30 + (math.sin((self.frame + i * 6) / slowdown) * 25)
+            self.draw_box(qp, pos, size, h_squeeze, 60, 100 + i * 6)
 
 
 

@@ -21,11 +21,15 @@ import math
 import threading
 from service.sensor_manager import Sensor
 import time
-import picamera
 
-camera = picamera.PiCamera()
-camera.resolution = (1024, 768)
-camera.start_preview()
+try:
+    import picamera
+
+    camera = picamera.PiCamera()
+    camera.resolution = (1024, 768)
+    camera.start_preview()
+except:
+    pass
 
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
@@ -183,8 +187,8 @@ def show_api_camera():
 
     # <img src="data:image/png;base64,{{image_64_encode}}"/>
     resp_table.table_body.append([
-                                     "<img src=\"data:image/png;base64," + image_64_encode.decode(
-                                         "UTF-8") + "\"/>"])
+        "<img src=\"data:image/png;base64," + image_64_encode.decode(
+            "UTF-8") + "\"/>"])
     return jsonify(resp_table.as_dict())
 
     # return render_template('camera.html', image_64_encode=image_64_encode.decode("UTF-8"))
@@ -245,6 +249,9 @@ def api_device_raw_data(device):
 
 
 class Example(QtGui.QWidget):
+    width = 320
+    height = 240
+
     def __init__(self):
         super(Example, self).__init__()
 
@@ -252,9 +259,10 @@ class Example(QtGui.QWidget):
         self.frame = 0
 
     def initUI(self):
-        self.setGeometry(500, 500, 500, 500)
+        self.setGeometry(0, 0, Example.width, Example.height)
         self.setWindowTitle('Pen styles')
         self.show()
+        self.setStyleSheet("background: #000")
 
     def paintEvent(self, e):
         qp = QtGui.QPainter()
@@ -263,151 +271,186 @@ class Example(QtGui.QWidget):
         qp.end()
         self.frame += 1
 
+    def get_pen_color(self):
+        b = 255
+        if self.frame > 200:
+            b = max(255 - ((self.frame - 200) * 10), 0)
+        r = g = b
+        return QtGui.QColor(r, g, b)
+
+    def draw_box(self, qp: QtGui.QPen, pos: float, size: float,
+                 h_squeeze: float, x: int, y: int):
+        pi_part = math.pi / 2
+        for i in range(0, 4):
+            part_offset = pi_part * i
+            x1 = x + math.sin(pos + part_offset) * size
+            x2 = x + math.sin(pos + part_offset + pi_part) * size
+            y1 = y + math.cos(pos + part_offset) * size * h_squeeze
+            y2 = y + math.cos(pos + part_offset + pi_part) * size * h_squeeze
+            qp.drawLine(x1, y1, x2, y2)
+
     def drawLines(self, qp):
-        pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
+        slowdown = 20
+        pos = self.frame / slowdown
+        h_squeeze = 0.5
+
+        # pen = QtGui.QPen(self.get_pen_color(), 2, QtCore.Qt.SolidLine)
+        pen = QtGui.QPen(QtCore.Qt.red, 2, QtCore.Qt.SolidLine)
         qp.setPen(pen)
         slowdown = 20
-        size = 75 + (math.sin(self.frame / slowdown) * 50)
-        qp.drawLine(250 + (math.sin(self.frame / slowdown) * size),
-                    150 + ((math.cos(self.frame / slowdown) * size) * 0.5),
-                    250 + (
-                        math.sin(
-                            (self.frame / slowdown) + (math.pi / 2)) * size),
-                    150 + ((math.cos(
-                        (self.frame / slowdown) + (math.pi / 2)) * size)) * 0.5)
+        # size = 75 + (math.sin(self.frame / slowdown * 3) * 50)
+        for i in range(0, 20):
+            size = 75 + (math.sin((self.frame + i) / slowdown) * 50)
+            self.draw_box(qp, pos, size, h_squeeze, 150, 100 + i * 6)
 
-        qp.drawLine(
-            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
-            150 + (
-                (math.cos(
-                    (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
-            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
-            150 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
-        )
 
-        qp.drawLine(
-            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
-            150 + (
-                (math.cos(
-                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
-            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
-            150 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
-        )
 
-        qp.drawLine(
-            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
-            150 + (
-                (math.cos(
-                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
-            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
-            150 + (
-                (math.cos(
-                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
+            # qp.drawLine(250 + (math.sin(self.frame / slowdown) * size),
+            #             150 + ((math.cos(self.frame / slowdown) * size) * 0.5),
+            #             250 + (
+            #                 math.sin(
+            #                     (self.frame / slowdown) + (math.pi / 2)) * size),
+            #             150 + ((math.cos(
+            #                 (self.frame / slowdown) + (math.pi / 2)) * size)) * 0.5)
+            #
+            # qp.drawLine(
+            #     250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            #     150 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
+            #     250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            #     150 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+            # )
+            #
+            # qp.drawLine(
+            #     250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            #     150 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            #     250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            #     150 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+            # )
+            #
+            # qp.drawLine(
+            #     250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            #     150 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            #     250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            #     150 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
 
-        qp.drawLine(250 + (math.sin(self.frame / slowdown) * size),
-                    250 + ((math.cos(self.frame / slowdown) * size) * 0.5),
-                    250 + (
-                        math.sin(
-                            (self.frame / slowdown) + (math.pi / 2)) * size),
-                    250 + (
-                        (math.cos(
-                            (self.frame / slowdown) + (
-                                math.pi / 2)) * size)) * 0.5)
 
-        qp.drawLine(
-            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
-            250 + (
-                (math.cos(
-                    (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
-            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
-            250 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
-        )
-
-        qp.drawLine(
-            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
-            250 + (
-                (math.cos(
-                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
-            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
-            250 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
-        )
-
-        qp.drawLine(
-            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
-            250 + (
-                (math.cos(
-                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
-            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
-            250 + (
-                (math.cos(
-                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
-
-        qp.drawLine(
-            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
-            150 + (
-                (math.cos(
-                    (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
-            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
-            250 + (
-                (math.cos(
-                    (self.frame / slowdown) + (math.pi / 2)) * size)) * 0.5)
-
-        qp.drawLine(250 + (math.sin((self.frame / slowdown) + math.pi) * size),
-                    150 + (
-                        (math.cos(
-                            (self.frame / slowdown) + math.pi) * size) * 0.5),
-                    250 + (math.sin((self.frame / slowdown) + math.pi) * size),
-                    250 + (
-                        (math.cos(
-                            (self.frame / slowdown) + math.pi) * size) * 0.5)
-                    )
-
-        qp.drawLine(
-            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
-            150 + (
-                (math.cos(
-                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
-            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
-            250 + (
-                (
-                    math.cos(
-                        (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5)
-        )
-
-        qp.drawLine(
-            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
-            150 + (
-                (math.cos(
-                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5),
-            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
-            250 + (
-                (math.cos(
-                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
+            #
+            # qp.drawLine(250 + (math.sin(self.frame / slowdown) * size),
+            #             250 + ((math.cos(self.frame / slowdown) * size) * 0.5),
+            #             250 + (
+            #                 math.sin(
+            #                     (self.frame / slowdown) + (math.pi / 2)) * size),
+            #             250 + (
+            #                 (math.cos(
+            #                     (self.frame / slowdown) + (
+            #                         math.pi / 2)) * size)) * 0.5)
+            #
+            # qp.drawLine(
+            #     250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            #     250 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
+            #     250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            #     250 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+            # )
+            #
+            # qp.drawLine(
+            #     250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            #     250 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            #     250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            #     250 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+            # )
+            #
+            # qp.drawLine(
+            #     250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            #     250 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            #     250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            #     250 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
+            #
+            # qp.drawLine(
+            #     250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            #     150 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
+            #     250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            #     250 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) + (math.pi / 2)) * size)) * 0.5)
+            #
+            # qp.drawLine(250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            #             150 + (
+            #                 (math.cos(
+            #                     (self.frame / slowdown) + math.pi) * size) * 0.5),
+            #             250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            #             250 + (
+            #                 (math.cos(
+            #                     (self.frame / slowdown) + math.pi) * size) * 0.5)
+            #             )
+            #
+            # qp.drawLine(
+            #     250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            #     150 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            #     250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            #     250 + (
+            #         (
+            #             math.cos(
+            #                 (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5)
+            # )
+            #
+            # qp.drawLine(
+            #     250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            #     150 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5),
+            #     250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            #     250 + (
+            #         (math.cos(
+            #             (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
+            #
 
 
 # class Refresher(threading.Thread):
 #     def run(self):
 #
+import sys
+
 
 class App(threading.Thread):
     def run(self):
-        app.run(debug=False, host='0.0.0.0')
+        app.run(debug=False, host='0.0.0.0', threaded=True)
 
 
 if __name__ == "__main__":
     App().start()
     # Refresher().start()
-    # mainWindow= QtGui.QApplication(sys.argv)
-    # ex = Example()
-    #
-    # # width = mainWindow.frameGeometry().width()
-    # # height = mainWindow.frameGeometry().height()
-    # # ex.resize(width,height)
-    # a = True
-    # while True:
-    #     ex.repaint()
-    #     time.sleep((1/3)/10)
-    # sys.exit(mainWindow.exec_())
+    mainWindow = QtGui.QApplication(sys.argv)
+
+    ex = Example()
+
+    # width = mainWindow.frameGeometry().width()
+    # height = mainWindow.frameGeometry().height()
+    # ex.resize(width,height)
+    a = True
+    while True:
+        ex.repaint()
+        time.sleep((1 / 3) / 10)
+    sys.exit(mainWindow.exec_())
 
 # modules that should be installed.
 # pip install Flask

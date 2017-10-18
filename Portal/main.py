@@ -273,8 +273,10 @@ class Example(QtGui.QWidget):
 
     def get_pen_color(self):
         b = 255
-        if self.frame > 200:
-            b = max(255 - ((self.frame - 200) * 10), 0)
+        var = (math.sin(self.frame) + 1) / 2
+        b = b * var
+        # if self.frame > 200:
+        #     b = max(255 - ((self.frame - 200) * 10), 0)
         r = g = b
         return QtGui.QColor(r, g, b)
 
@@ -294,13 +296,13 @@ class Example(QtGui.QWidget):
         pos = self.frame / slowdown
         h_squeeze = 0.5
 
-        # pen = QtGui.QPen(self.get_pen_color(), 2, QtCore.Qt.SolidLine)
-        pen = QtGui.QPen(QtCore.Qt.red, 2, QtCore.Qt.SolidLine)
+        pen = QtGui.QPen(self.get_pen_color(), 2, QtCore.Qt.SolidLine)
+        # pen = QtGui.QPen(QtCore.Qt.red, 2, QtCore.Qt.SolidLine)
         qp.setPen(pen)
         slowdown = 20
         # size = 75 + (math.sin(self.frame / slowdown * 3) * 50)
-        for i in range(0, 20):
-            size = 75 + (math.sin((self.frame + i) / slowdown) * 50)
+        for i in range(0, 12):
+            size = 75 + (math.sin((self.frame + i * 6) / slowdown) * 50)
             self.draw_box(qp, pos, size, h_squeeze, 150, 100 + i * 6)
 
 

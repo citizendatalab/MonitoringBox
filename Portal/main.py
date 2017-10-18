@@ -269,7 +269,7 @@ class Example(QtGui.QWidget):
     def paintEvent(self, e):
         qp = QtGui.QPainter()
         qp.begin(self)
-        self.drawLines(qp)
+        self.drawLines(qp, e)
         qp.end()
         self.frame += 1
 
@@ -284,11 +284,16 @@ class Example(QtGui.QWidget):
 
         # Fade in.
         if self.frame < 50:
-            temp = self.frame / 50
-            r *= temp
-            g *= temp
-            b *= temp
+            r = self.fade_color(r)
+            g = self.fade_color(g)
+            b = self.fade_color(b)
         return QtGui.QColor(r, g, b)
+
+    def fade_color(self, color):
+        if self.frame < 50:
+            temp = self.frame / 50
+            color *= temp
+        return color
 
     def draw_box(self, qp: QtGui.QPen, pos: float, size: float,
                  h_squeeze: float, x: int, y: int):
@@ -301,10 +306,22 @@ class Example(QtGui.QWidget):
             y2 = y + math.cos(pos + part_offset + pi_part) * size * h_squeeze
             qp.drawLine(x1, y1, x2, y2)
 
-    def drawLines(self, qp):
+    def drawLines(self, qp, event):
         slowdown = 20
         pos = self.frame / slowdown
         h_squeeze = 0.5
+
+        color_temp = self.fade_color(255)
+        color = QtGui.QColor(color_temp, color_temp, color_temp)
+        qp.setPen(color)
+        qp.setFont(QtGui.QFont('Decorative', 20))
+        qp.drawText(125, 110, 320, 240, QtCore.Qt.AlignLeft, "MonitoringBox")
+
+        font = QtGui.QFont('Decorative', 10)
+        font.setItalic(True)
+        qp.setFont(font)
+        qp.drawText(128, 135, 320, 240, QtCore.Qt.AlignLeft,
+                    "Booting" + ("." * (int(self.frame / 10) % 4)))
 
         # pen = QtGui.QPen(QtCore.Qt.red, 2, QtCore.Qt.SolidLine)
         slowdown = 20

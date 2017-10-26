@@ -22,6 +22,8 @@ class RecorderScreen(AbstractScreen):
     def __init__(self):
         super(RecorderScreen, self).__init__("Recording")
         RecorderScreen._instance = self
+        RecorderScreen.sender = gui.manager.GenericSender("refresh_screen")
+        self.connect_slots(RecorderScreen.sender)
 
     def initUI(self):
         super(RecorderScreen, self).initUI()
@@ -48,9 +50,6 @@ class RecorderScreen(AbstractScreen):
         self.setStyleSheet(sheets[int((self.frame % 30) / 15)])
 
     def refresh(self):
-        if RecorderScreen.sender is None:
-            RecorderScreen.sender = gui.manager.GenericSender("refresh_screen")
-            self.connect_slots(RecorderScreen.sender)
-
-        RecorderScreen.sender.start()
+        if RecorderScreen.sender is not None:
+            RecorderScreen.sender.start()
         self.frame += 1

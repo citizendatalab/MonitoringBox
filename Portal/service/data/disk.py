@@ -55,4 +55,8 @@ def get_mounts():
     return out
 
 
-1
+def get_mount(mount_location: str):
+    for mount in get_mounts():
+        if mount.mount_point == mount_location:
+            return mount
+    raise Exception("mount not found")

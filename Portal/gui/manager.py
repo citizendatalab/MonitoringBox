@@ -2,6 +2,8 @@ import threading
 import sys
 import time
 from PyQt4 import QtGui
+from PyQt4 import QtCore
+
 
 from gui.screen.main_menu import MainMenu
 
@@ -58,3 +60,12 @@ class FrameCounter(threading.Thread):
         while True:
             time.sleep(1 / 30)
             GUIManager.get_instance()._refresh()
+
+
+class GenericSender(QtCore.QThread):
+    def __init__(self, signal: str):
+        super(GenericSender, self).__init__()
+        self._signal = signal
+
+    def run(self):
+        self.emit(QtCore.SIGNAL(self._signal))

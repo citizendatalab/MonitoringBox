@@ -1,7 +1,7 @@
 import service.serial.manager
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash, jsonify
-
+import service.device_options
 import service.sensor_manager
 import service.sensor.handler_watcher
 from gui.manager import GUIManager
@@ -15,6 +15,7 @@ import datetime
 import service.helper.table as table
 import service.data.disk
 import service.data.connection
+import io
 import base64
 from urllib.parse import quote
 from service.data.raw_data_log import RawDataLogManager
@@ -22,6 +23,7 @@ from PyQt4 import QtGui
 import math
 import threading
 from service.sensor_manager import Sensor
+import uuid
 
 try:
     import picamera
@@ -80,6 +82,25 @@ def get_sensor_icon(sensor: Sensor) -> str:
         return types[sensor.sensor_type]
     else:
         return types[SensorType.SensorType.UNKOWN]
+
+
+# CSRF protection
+
+@web_app.before_request
+def csrf_protect():
+    if request.method == "POST":
+        token = session.pop('_csrf_token', None)
+        if not token or token != request.form.get('_csrf_token'):
+            abort(400)
+
+
+def generate_csrf_token():
+    if '_csrf_token' not in session:
+        session['_csrf_token'] = uuid.uuid4().hex
+    return session['_csrf_token']
+
+
+web_app.jinja_env.globals['csrf_token'] = generate_csrf_token
 
 
 # Route handlers
@@ -166,7 +187,16 @@ def test():
     return jsonify(resp_table.as_dict())
 
 
-import io
+@web_app.route('/device/action/shutdown', methods=['POST'])
+def show_api_device_action_shutdown():
+    service.device_options.shutdown()
+    return render_template('shutdown_message.html')
+
+
+@web_app.route('/device/action/reboot', methods=['POST'])
+def show_api_device_action_reboot():
+    service.device_options.reboot()
+    return render_template('reboot_waiter.html')
 
 
 @web_app.route('/api/camera/picture')
@@ -268,6 +298,8 @@ class Example2(QtGui.QWidget):
 
 class WebApp(threading.Thread):
     def run(self):
+        web_app.secret_key = uuid.uuid4().hex
+        web_app.config['SESSION_TYPE'] = 'filesystem'
         web_app.run(debug=False, host='0.0.0.0', threaded=True)
 
 

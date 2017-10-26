@@ -3,5 +3,60 @@
 {% set title = 'Device options' %}
 
 {% block body %}
-TODO
+<div class="device-options">
+    <div>Version 1.0</div>
+
+    <form action="/device/action/reboot" method="post">
+        <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+        <button type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#restartModal">Restart device
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="restartModal" tabindex="-1" role="dialog"
+             aria-labelledby="restartModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="restartModalLabel">Are you sure?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">Are you sure to you want to restart?</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I don't want to restart</button>
+                        <button type="submit" class="btn btn-primary">Yes, restart the device</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form action="/device/action/shutdown" method="post">
+        <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+        <button type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#shutdownModal">Shutdown device
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="shutdownModal" tabindex="-1" role="dialog"
+             aria-labelledby="shutdownModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="shutdownModalLabel">Are you sure?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">Are you sure you want to shutdown the device?</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I don't want to shutdown</button>
+                        <button type="submit" class="btn btn-primary">Yes, shutdown the device</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
 {% endblock %}

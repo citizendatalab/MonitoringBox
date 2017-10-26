@@ -4,6 +4,7 @@
 
 {% block body %}
 <form action="/settings" method="post">
+    <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
     <div class="form-group">
         <label for="outputFormat">Output format</label>
         <select class="custom-select" id="outputFormat" aria-describedby="description-xml"

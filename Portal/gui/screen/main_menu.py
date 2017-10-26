@@ -16,10 +16,13 @@ class MainMenu(AbstractScreen):
     btn_recording = None  # type: QPushButton
     _is_recording = False
     _instance = None
+    sender = None
 
     def __init__(self):
         super(MainMenu, self).__init__("Main menu")
         MainMenu._instance = self
+        MainMenu.sender = gui.manager.GenericSender("recording.location_update")
+        self.connect_slots(MainMenu.sender)
 
     def initUI(self):
         super(MainMenu, self).initUI()
@@ -118,21 +121,17 @@ class MainMenu(AbstractScreen):
     def connect_slots(self, sender):
         self.connect(sender, QtCore.SIGNAL('recording.location_update'), self.say_hello)
 
+    @staticmethod
+    def disk_space_update():
+        MainMenu.sender.start()
+
     def say_hello(self):
         MainMenu.update_disk_space()
 
 
-class _Sender(QtCore.QThread):
-    def run(self):
-        self.emit(QtCore.SIGNAL('recording.location_update'))
-
-
 def disk_change_handler(value):
     if MainMenu.initialized:
-        sender = _Sender()
-        main_menu = MainMenu._instance  # type: MainMenu
-        main_menu.connect_slots(sender)
-        sender.start()
+        MainMenu.disk_space_update()
 
 
 service.data.connection.Connection.get_instance().register_on_change_listener(

@@ -1,5 +1,3 @@
-import subprocess
-
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
 
@@ -10,6 +8,7 @@ from PyQt4 import QtCore
 import gui.screen.main_menu
 import gui.screen.wifi_setup
 import gui.screen.sensor_list
+import service.device_options
 
 
 class OptionMenu(AbstractScreen):
@@ -57,7 +56,7 @@ class OptionMenu(AbstractScreen):
 
     @staticmethod
     def shutdown_handler():
-        subprocess.run(["shutdown", "now"])
+        service.device_options.shutdown()
 
     @staticmethod
     def wifi_setup_handler():

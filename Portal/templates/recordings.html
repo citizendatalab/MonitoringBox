@@ -3,5 +3,9 @@
 {% set title = 'Recordings' %}
 
 {% block body %}
-TODO
+<div class="dynamicTable"
+     data-classes="table table-hover table-striped table-bordered"
+     data-classes-thead="table-inverse" data-ajax-endpoint="/api/recordings/list"
+     ></div>
+
 {% endblock %}

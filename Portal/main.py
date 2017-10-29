@@ -6,6 +6,7 @@ import service.sensor_manager
 import service.sensor.handler_watcher
 from gui.manager import GUIManager
 from gui.screen.boot_screen import BootScreen
+from service.recorder.recordings_manager import RecordingManager
 from service.sensor.handler_watcher import HandlerWatcher
 from service.sensor_manager import HandlerTrigger
 from service.sensor_manager import SensorType
@@ -113,7 +114,7 @@ def show_entries():
 
 @web_app.route('/recordings')
 def show_recordings():
-    return render_template('recordings.html', current=current)
+    return render_template('recordings.html')
 
 
 @web_app.route('/camera')
@@ -134,6 +135,8 @@ def show_device_raw_data(device):
 
 
 def human_readable_size(size):
+    if size == 0:
+        return "0B"
     n = math.floor(math.log(size, 1024))
     size_names = ["B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
     return str(round(size / math.pow(1024, n), 1)) + size_names[n + 1]
@@ -223,6 +226,31 @@ def show_api_camera():
     return jsonify(resp_table.as_dict())
 
     # return render_template('camera.html', image_64_encode=image_64_encode.decode("UTF-8"))
+
+
+@web_app.route('/api/recordings/list')
+def show_api_recordings_list():
+    manager = RecordingManager.get_instance()  # type: RecordingManager
+    results_per_page = int(request.args.get('per_page', 10))
+    results_start = int(request.args.get('start', 0))
+    recordings = manager.list_recordings()
+    resp_table = table.generate_table(len(recordings), results_per_page,
+                                      results_start,
+                                      ["Name", "Mount", "Size"])
+
+    def mount_icon(mount: service.data.disk.Mount):
+        return ['<i class="fa fa-usb" aria-hidden="true"></i>',
+                '<i class="fa fa-hdd-o" aria-hidden="true"></i>'][
+            mount.is_local()]
+        # {% if mount.is_local %}<i class="fa fa-usb" aria-hidden="true"></i>{% else %}<i class="fa fa-hdd-o" aria-hidden="true"></i>{% endif%}
+
+    for recording in recordings[
+                     results_start: results_start + results_per_page]:
+        mount = service.data.disk.get_mount(recording.mount)
+        resp_table.table_body.append(
+            [recording.name, mount_icon(mount) + " " + mount.mount_point,
+             human_readable_size(recording.size_in_bytes)])
+    return jsonify(resp_table.as_dict())
 
 
 @web_app.route('/api/sensors/list')

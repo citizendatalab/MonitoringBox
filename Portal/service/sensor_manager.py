@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List
+from typing import List, Dict
 import threading
 import service.serial.manager
 import time
@@ -159,7 +159,7 @@ def _sensor_line_listener(
     manager._trigger_type_handlers(connection.device, line)
 
 
-def _update_information(data, connection: service.serial.manager.SerialConnection):
+def _update_information(data, connection: service.serial.manager.SerialConnection, callback_options):
     sensor_manager = SensorManager.get_instance()  # type: SensorManager
     sensor = sensor_manager.get_sensor_by_device(connection.device)
     sensor.name = data["name"]
@@ -410,3 +410,7 @@ class SensorManager:
         Will stop the manager.
         """
         _SensorSearcher._is_running = False
+
+    @property
+    def sensors(self) -> Dict[str, Sensor]:
+        return self._sensors

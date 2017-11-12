@@ -6,7 +6,8 @@ import service.sensor_manager
 import service.sensor.handler_watcher
 from gui.manager import GUIManager
 from gui.screen.boot_screen import BootScreen
-# from service.recorder.recordings_manager import RecordingManager
+from service.recorder.recordings_manager import RecordingManager
+from service.sensor.communicator.communicators import AbstractCommunicator
 from service.sensor.handler_watcher import HandlerWatcher
 from service.sensor_manager import HandlerTrigger
 from service.sensor_manager import SensorType
@@ -264,8 +265,20 @@ def show_settings():
     return render_template('settings.html', settings=settings)
 
 
+def meuk(data, connection: service.serial.manager.SerialConnection, options):
+    for cmd in data["data"]["command"]:
+        print(cmd)
+    pass
+
+
 @web_app.route('/device_options')
 def show_device_options():
+    sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
+    sensor = sensor_manager.get_sensor_by_device("/dev/ttyUSB0")
+
+    a = AbstractCommunicator()
+    b = a.synchronous_call(a.get_help, sensor, {})
+
     return render_template('device_options.html', current=current)
 
 

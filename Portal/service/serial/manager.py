@@ -78,7 +78,7 @@ class SerialConnection(threading.Thread):
                         if len(line) > 0:
                             self._call_listeners(
                                 line.decode("utf-8").replace("'", "\""))
-                        command["callback"](json.loads(line.decode("utf-8").replace("'", "\"")), self)
+                        command["callback"](json.loads(line.decode("utf-8").replace("'", "\"")), self, command["callback_options"])
 
                 except Exception as ex:
                     connection.close()

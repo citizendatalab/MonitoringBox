@@ -1,9 +1,11 @@
+from queue import Queue
 from typing import Dict, List, Callable
 import serial
 import serial.threaded
 import threading
 import serial.tools.list_ports
-
+import time
+import json
 
 import io
 
@@ -20,6 +22,25 @@ class SerialConnection(threading.Thread):
         self.baudrate = baudrate  # type: int
         self.device = device  # type: str
         self.listeners = listeners  # type: List[Callable]
+        self._lock = threading.Lock()  # type: threading.Lock
+        self._command_queue = Queue()
+
+    def get_command(self):
+        if not self._lock.acquire(False):
+            return None
+        command = None
+        if not self._command_queue.empty():
+            command = self._command_queue.get()
+        self._lock.release()
+
+        return command
+
+    def handle_command_sending(self, connection: serial.Serial):
+        command = self.get_command()
+        if command:
+            connection.write((command["command"] + ":" +
+                             command["options"]).encode())
+        return command
 
     def run(self):
         try:
@@ -27,14 +48,22 @@ class SerialConnection(threading.Thread):
                                timeout=1) as connection:
                 connection = connection  # type: serial.Serial
 
+                # Give it one second of initialization time.
+                time.sleep(1)
                 try:
+
                     connection.flushInput()
                     connection.flushOutput()
                     # Keep looping until time the end of the universe.
                     while True:
+                        command = self.handle_command_sending(connection)
+
                         # If there is no data in the buffer, wait.
                         while connection.inWaiting() == 0:
-                            pass
+                            if command is None:
+                                command = self.handle_command_sending(connection)
+                            time.sleep(0.00000001)
+
                         # Read data until '\n' was reached.
                         line = connection.readline()  # type: bytes
                         #
@@ -47,7 +76,10 @@ class SerialConnection(threading.Thread):
                         # Call the listeners with the received string, when
                         # there is something to report.
                         if len(line) > 0:
-                            self._call_listeners(line.decode("utf-8").replace("'","\""))
+                            self._call_listeners(
+                                line.decode("utf-8").replace("'", "\""))
+                        command["callback"](json.loads(line.decode("utf-8").replace("'", "\"")), self)
+
                 except Exception as ex:
                     connection.close()
 
@@ -70,7 +102,22 @@ class SerialConnection(threading.Thread):
         :param line: Received line.
         """
         for listener in self.listeners:
-            listener(self, line)
+            try:
+                listener(self, line)
+            except:
+                pass
+
+    def send_command(self, command: str, options=None, callback=None, callback_options=None):
+        # Will lock the object.
+        self._lock.acquire()
+        self._command_queue.put({
+            "command": command,
+            "options": options,
+            "callback": callback,
+            "callback_options": callback_options
+        })
+        # Will make the object available again.
+        self._lock.release()
 
 
 class Manager:

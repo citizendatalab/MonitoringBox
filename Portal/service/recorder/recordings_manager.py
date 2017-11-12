@@ -29,6 +29,7 @@ class Recording:
     def record_details(self) -> RecordDetails:
         if self._record_details is None:
             #Load
+            pass
         return self._record_details
 
 

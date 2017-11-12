@@ -37,6 +37,14 @@
         </div>
     </div>
 
+    <div class="form-group">
+        <label for="outputFormat">Sensor record interval</label>
+        <select class="custom-select" aria-describedby="description-xml" name="recording_format">
+            {% for speed in settings.speeds %}
+                <option value="{{ speed.value }}" {% if speed.is_selected %}selected{% else %}{% endif %}>{{ speed.label }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <h2>Recording location</h2>
     <div class="form-group-striped form-group-list-options mounts">
         {% for mount in settings.options.mounts %}

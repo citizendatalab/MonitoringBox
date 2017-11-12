@@ -6,7 +6,7 @@ import service.sensor_manager
 import service.sensor.handler_watcher
 from gui.manager import GUIManager
 from gui.screen.boot_screen import BootScreen
-from service.recorder.recordings_manager import RecordingManager
+# from service.recorder.recordings_manager import RecordingManager
 from service.sensor.handler_watcher import HandlerWatcher
 from service.sensor_manager import HandlerTrigger
 from service.sensor_manager import SensorType
@@ -167,6 +167,99 @@ def show_settings():
 
     settings["current"]["selected_mount"] = config.get_setting(
         "recording.location", "/")
+    settings["speeds"] = [
+        {
+            "value": 300,
+            "is_selected": False,
+            "label": "300ms (Fast)"
+        },
+        {
+            "value": 500,
+            "is_selected": False,
+            "label": "500ms (Fast)"
+        },
+        {
+            "value": 750,
+            "is_selected": False,
+            "label": "750ms (Normal)"
+        },
+        {
+            "value": 1000,
+            "is_selected": False,
+            "label": "1s (Normal)"
+        },
+        {
+            "value": 1250,
+            "is_selected": False,
+            "label": "1.25s (Normal)"
+        },
+        {
+            "value": 1500,
+            "is_selected": False,
+            "label": "1.5s (Normal)"
+        },
+        {
+            "value": 1750,
+            "is_selected": False,
+            "label": "1.75s (Slow)"
+        },
+        {
+            "value": 2000,
+            "is_selected": False,
+            "label": "2s (Slow)"
+        },
+        {
+            "value": 2500,
+            "is_selected": False,
+            "label": "2.5ms (Slow)"
+        },
+        {
+            "value": 5000,
+            "is_selected": False,
+            "label": "5s (Slow)"
+        },
+        {
+            "value": 10000,
+            "is_selected": False,
+            "label": "10s (Slow)"
+        },
+        {
+            "value": 15000,
+            "is_selected": False,
+            "label": "15s (Slow)"
+        },
+        {
+            "value": 20000,
+            "is_selected": False,
+            "label": "20s (Sleepy)"
+        },
+        {
+            "value": 25000,
+            "is_selected": False,
+            "label": "25s (Sleepy)"
+        },
+        {
+            "value": 30000,
+            "is_selected": False,
+            "label": "30s (Sleepy)"
+        },
+        {
+            "value": 45000,
+            "is_selected": False,
+            "label": "45s (Sleepy)"
+        },
+        {
+            "value": 60000,
+            "is_selected": False,
+            "label": "1m (Sleepy)"
+        }
+    ]
+
+    currrent_speed = config.get_setting("recording.speed", 300)
+    for setting in settings["speeds"]:
+        if setting["value"] == currrent_speed:
+            setting["is_selected"] = True
+            break
 
     return render_template('settings.html', settings=settings)
 

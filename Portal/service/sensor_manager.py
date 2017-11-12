@@ -115,12 +115,20 @@ class Sensor:
         """
         return self._sensor_type
 
+    @sensor_type.setter
+    def sensor_type(self, value: SensorType):
+        self._sensor_type = value
+
     @property
     def name(self):
         """
         :return: The name of the sensor.
         """
         return self._name
+
+    @name.setter
+    def name(self, value: str):
+        self._name = value
 
 
 def _sensor_disconnect_listener(
@@ -149,6 +157,13 @@ def _sensor_line_listener(
     """
     manager = SensorManager.get_instance()  # type: SensorManager
     manager._trigger_type_handlers(connection.device, line)
+
+
+def _update_information(data, connection: service.serial.manager.SerialConnection):
+    sensor_manager = SensorManager.get_instance()  # type: SensorManager
+    sensor = sensor_manager.get_sensor_by_device(connection.device)
+    sensor.name = data["name"]
+    sensor.sensor_type = SensorType.from_string(data["sensor"])
 
 
 class _SensorSearcher(threading.Thread):
@@ -191,7 +206,8 @@ class _SensorSearcher(threading.Thread):
                 new_devices = set(available_devices - known_devices)
 
                 for device in old_devices:
-                    if sensor_manager.get_sensor_by_device(device).sensor_type != SensorType.PI_CAMERA:
+                    if sensor_manager.get_sensor_by_device(
+                            device).sensor_type != SensorType.PI_CAMERA:
                         self._deregister_device(device)
                 if new_devices:
                     # Sleep sometime because the serial connection needs some
@@ -232,15 +248,21 @@ class _SensorSearcher(threading.Thread):
         # Create the serial connection with some listeners.
         on_exit = [_sensor_disconnect_listener]
         listeners = [_sensor_line_listener]
-        manager.setup_connection(device, listeners, on_exit=on_exit)
+        try:
+            manager.setup_connection(device, listeners, on_exit=on_exit)
+        except:
+            pass
 
         # Create a sensor for the serial connection.
-        connection = manager.connections[device]
+        connection = manager.connections[device]  # type: SerialConnection
+
         sensor = Sensor(SensorType.UNKOWN, "unkown", device, connection)
 
         # Will register the sensor with the sensor manager.
         sensor_manager = SensorManager.get_instance()  # type: SensorManager
         sensor_manager._register_sensor(sensor)
+
+        connection.send_command("ping", "", _update_information)
 
 
 class SensorManager:

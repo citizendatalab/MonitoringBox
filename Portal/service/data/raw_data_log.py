@@ -31,8 +31,8 @@ class RawDataLogManager:
         if device not in self._log:
             self._log[device] = []
         if len(self._log[device]) == RawDataLogManager.MAX_LOG_ENTRIES:
-            self._log[device].pop(0)
-        self._log[device].append(line)
+            self._log[device].pop(len(self._log[device]) - 1)
+        self._log[device].insert(0, line)
 
     def get_log(self, device: str) -> List[str]:
         if device not in self._log:

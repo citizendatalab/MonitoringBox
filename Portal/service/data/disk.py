@@ -29,7 +29,7 @@ class Mount:
         return (self.used / self.size) * 100
 
     def is_local(self):
-        return self.mount_point.startswith(("/mnt", "/media", "/run/media"))
+        return not self.mount_point.startswith(("/mnt", "/media", "/run/media"))
 
     def get_dict(self):
         return {

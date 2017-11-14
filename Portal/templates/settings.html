@@ -4,6 +4,7 @@
 
 {% block body %}
 <form action="/settings" method="post">
+    <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
     <div class="form-group">
         <label for="outputFormat">Output format</label>
         <select class="custom-select" id="outputFormat" aria-describedby="description-xml"
@@ -44,7 +45,7 @@
                 <input id="recording_location" name="recording_location" type="radio" class="custom-control-input" value="{{ mount.mount }}"{% if mount.mount == settings.current.selected_mount %} checked{% endif %}>
                 <span class="custom-control-indicator"></span>
                 <div class="description">
-                    <span class="custom-control-description">{% if mount.is_local %}<i class="fa fa-usb" aria-hidden="true"></i>{% else %}<i class="fa fa-hdd-o" aria-hidden="true"></i>{% endif%} {{ mount.mount }} {% if mount.is_local %}(External){% else %}(Local){% endif%}</span>
+                    <span class="custom-control-description">{% if mount.is_local %}<i class="fa fa-hdd-o" aria-hidden="true"></i>{% else %}<i class="fa fa-usb" aria-hidden="true"></i>{% endif%} {{ mount.mount }} {% if mount.is_local %}(External){% else %}(Local){% endif%}<span class="right">{{mount.free_space_human_readable}}</span></span>
                     <div class="progress border border-secondary">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                              style="width: {{ mount.percent_usage }}%;"

@@ -67,3 +67,14 @@ table thead .fa-sort-asc, table thead .fa-sort-desc {
 .mounts .description{
     margin: -0.1em 0 0 1.8em;
 }
+.device-options > * {
+    margin:1em 0 0;
+}
+.shutdown {
+    margin: 0 auto;
+    text-align: center;
+    padding:0 1em 1em;
+}
+.shutdown h1 {
+    margin: 1em 0
+}

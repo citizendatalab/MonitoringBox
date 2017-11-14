@@ -21,7 +21,8 @@ import io
 import base64
 from urllib.parse import quote
 from service.data.raw_data_log import RawDataLogManager
-from PyQt4 import QtGui
+import sys
+from PyQt4 import QtGui, QtCore
 import math
 import threading
 from service.sensor_manager import Sensor
@@ -35,15 +36,11 @@ try:
     camera.start_preview()
 except:
     pass
+import time
 
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
 sensor_manager.start()
-
-camera_sensor = Sensor(SensorType.PI_CAMERA, "Pi CAM", "@PI_CAM", None)
-sensor_manager._register_sensor(camera_sensor)
-
-# sensor_manager.
 
 # Register all handlers for sensors.
 sensor_manager.register_handler_watcher(
@@ -70,22 +67,6 @@ sensor_manager.register_handler_watcher(
 web_app = Flask(__name__)  # create the application instance :)
 
 
-def get_sensor_icon(sensor: Sensor) -> str:
-    types = {
-        SensorType.UNKOWN: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
-        SensorType.CO2_SENSOR: "<i class=\"fa fa-cogs\" aria-hidden=\"true\"></i>",
-        SensorType.EXAMPLE_SENSOR: "<i class=\"fa fa-cogs\" aria-hidden=\"true\"></i>",
-        SensorType.GALVANIC_SKIN_RESPONSE_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
-        SensorType.GPS_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
-        SensorType.HEART_RATE_SENSOR: "<i class=\"fa fa-question\" aria-hidden=\"true\"></i>",
-        SensorType.HUMIDITY_TEMPERATURE_SENSOR: "<i class=\"fa fa-cogs\" aria-hidden=\"true\"></i>"
-    }
-    if sensor.sensor_type in types:
-        return types[sensor.sensor_type]
-    else:
-        return types[SensorType.SensorType.UNKOWN]
-
-
 # CSRF protection
 
 @web_app.before_request
@@ -107,23 +88,18 @@ web_app.jinja_env.globals['csrf_token'] = generate_csrf_token
 
 # Route handlers
 
-@web_app.route('/')
-@web_app.route('/connected_sensors')
+@app.route('/')
+@app.route('/connected_sensors')
 def show_entries():
     return render_template('connected_sensors.html', current=current)
 
 
-@web_app.route('/recordings')
+@app.route('/recordings')
 def show_recordings():
     return render_template('recordings.html')
 
 
-@web_app.route('/camera')
-def show_camera():
-    return render_template('camera.html')
-
-
-@web_app.route('/device/<device>/raw_data')
+@app.route('/device/<device>/raw_data')
 def show_device_raw_data(device):
     device_id = base64.b64decode(device).decode("UTF-8")
     sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
@@ -162,8 +138,6 @@ def show_settings():
                                      "/var", "/sbin", "/kernel"]:
             mount = mount.get_dict()
             mount["percent_usage"] = round(mount["percent_usage"], 2)
-            mount["free_space_human_readable"] = human_readable_size(
-                mount["size"] - mount["used"])
             settings["options"]["mounts"].append(mount)
 
     settings["current"]["selected_mount"] = config.get_setting(
@@ -265,18 +239,12 @@ def show_settings():
     return render_template('settings.html', settings=settings)
 
 
-def meuk(data, connection: service.serial.manager.SerialConnection, options):
-    for cmd in data["data"]["command"]:
-        print(cmd)
-    pass
-
-
 @web_app.route('/device_options')
 def show_device_options():
     return render_template('device_options.html', current=current)
 
 
-@web_app.route('/api/test')
+@app.route('/api/test')
 def test():
     results_per_page = int(request.args.get('per_page', 10))
     results_start = int(request.args.get('start', 0))
@@ -369,28 +337,20 @@ def show_api_sensors_list():
         sensor = sensor_manager.get_sensor_by_device(device)
 
         device_id = base64.b64encode(bytes(device, "UTF-8"))
-        name = ""
-        try:
-            name = get_sensor_icon(sensor) + " " + sensor.sensor_type.name
-        except:
-            pass
-
         resp_table.table_body.append(
             [sensor.name,
-             name,
+             "<i class=\"fa fa-question\" aria-hidden=\"true\"></i> " + sensor.sensor_type.name,
              device,
              "<a href=\"device/" + quote(
                  device_id) + "/raw_data\">Raw data</a>"])
     return jsonify(resp_table.as_dict())
 
 
-@web_app.route('/api/device/<device>/raw_data')
+@app.route('/api/device/<device>/raw_data')
 def api_device_raw_data(device):
     device_id = base64.b64decode(device).decode("UTF-8")
     sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
     sensor = sensor_manager.get_sensor_by_device(device_id)
-    if sensor.sensor_type == SensorType.PI_CAMERA:
-        return show_api_camera()
 
     amount = 20
 
@@ -407,24 +367,150 @@ def api_device_raw_data(device):
     return jsonify(resp_table.as_dict())
 
 
-class Example2(QtGui.QWidget):
-    width = 320
-    height = 240
-
+class Example(QtGui.QWidget):
     def __init__(self):
-        super(Example2, self).__init__()
+        super(Example, self).__init__()
 
         self.initUI()
         self.frame = 0
 
     def initUI(self):
-        self.setGeometry(0, 0, Example2.width, Example2.height)
+        self.setGeometry(500, 500, 500, 500)
         self.setWindowTitle('Pen styles')
         self.show()
-        self.setStyleSheet("background: #EEE")
+
+    def paintEvent(self, e):
+        qp = QtGui.QPainter()
+        qp.begin(self)
+        self.drawLines(qp)
+        qp.end()
+        self.frame += 1
+
+    def drawLines(self, qp):
+        pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
+        qp.setPen(pen)
+        slowdown = 20
+        size = 75 + (math.sin(self.frame / slowdown) * 50)
+        qp.drawLine(250 + (math.sin(self.frame / slowdown) * size),
+                    150 + ((math.cos(self.frame / slowdown) * size) * 0.5),
+                    250 + (
+                        math.sin(
+                            (self.frame / slowdown) + (math.pi / 2)) * size),
+                    150 + ((math.cos(
+                        (self.frame / slowdown) + (math.pi / 2)) * size)) * 0.5)
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            150 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+        )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            150 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+        )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
+
+        qp.drawLine(250 + (math.sin(self.frame / slowdown) * size),
+                    250 + ((math.cos(self.frame / slowdown) * size) * 0.5),
+                    250 + (
+                        math.sin(
+                            (self.frame / slowdown) + (math.pi / 2)) * size),
+                    250 + (
+                        (math.cos(
+                            (self.frame / slowdown) + (
+                            math.pi / 2)) * size)) * 0.5)
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            250 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+        )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+            250 + ((math.cos((self.frame / slowdown) + math.pi) * size) * 0.5)
+        )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + (math.pi / 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi / 2)) * size)) * 0.5)
+
+        qp.drawLine(250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+                    150 + (
+                        (math.cos(
+                            (self.frame / slowdown) + math.pi) * size) * 0.5),
+                    250 + (math.sin((self.frame / slowdown) + math.pi) * size),
+                    250 + (
+                        (math.cos(
+                            (self.frame / slowdown) + math.pi) * size) * 0.5)
+                    )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) - (math.pi / 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) - (math.pi / 2)) * size),
+            250 + (
+            (math.cos((self.frame / slowdown) - (math.pi / 2)) * size) * 0.5)
+        )
+
+        qp.drawLine(
+            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            150 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5),
+            250 + (math.sin((self.frame / slowdown) + (math.pi * 2)) * size),
+            250 + (
+                (math.cos(
+                    (self.frame / slowdown) + (math.pi * 2)) * size) * 0.5))
 
 
-class WebApp(threading.Thread):
+# class Refresher(threading.Thread):
+#     def run(self):
+#
+
+class App(threading.Thread):
     def run(self):
         web_app.secret_key = uuid.uuid4().hex
         web_app.config['SESSION_TYPE'] = 'filesystem'
@@ -432,10 +518,19 @@ class WebApp(threading.Thread):
 
 
 if __name__ == "__main__":
-    WebApp().start()
-    GUIManager.get_instance().current_window = BootScreen()
-    GUIManager.get_instance().current_window.show()
-    GUIManager.get_instance().start()
+    App().start()
+    # Refresher().start()
+    # mainWindow= QtGui.QApplication(sys.argv)
+    # ex = Example()
+    #
+    # # width = mainWindow.frameGeometry().width()
+    # # height = mainWindow.frameGeometry().height()
+    # # ex.resize(width,height)
+    # a = True
+    # while True:
+    #     ex.repaint()
+    #     time.sleep((1/3)/10)
+    # sys.exit(mainWindow.exec_())
 
 # modules that should be installed.
 # pip install Flask

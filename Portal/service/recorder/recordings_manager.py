@@ -1,8 +1,14 @@
+ import json
+import threading
 from typing import List
+
+import time
+from  service.sensor.communicator import communicators
 import service.data.disk
 import os
 import service.data.connection
-from service.sensor_manager import SensorType, SensorManager
+from service.sensor.communicator.communicators import AbstractCommunicator
+from service.sensor_manager import SensorType, SensorManager, Sensor
 from typing import Dict
 
 
@@ -39,6 +45,14 @@ class SensorDetails:
     def settings(self):
         return self._settings
 
+    def as_dict(self):
+        return {
+            "name": self.name,
+            "device": self.device,
+            "sensor_type": self.sensor_type,
+            "settings": self.settings
+        }
+
 
 class RecordDetails:
     def __init__(self, sensor_details: List[SensorDetails]):
@@ -47,6 +61,14 @@ class RecordDetails:
     @property
     def sensor_details(self):
         return self._sensor_details
+
+    def as_dict(self):
+        details = []
+        for sensor in self._sensor_details:
+            details.append(sensor.as_dict())
+        return {
+            "sensor_details": details
+        }
 
 
 class Recording:
@@ -74,6 +96,76 @@ class Recording:
     def record_details(self) -> RecordDetails:
         return self._record_details
 
+    @property
+    def path(self):
+        return self._path
+
+    def as_dict(self):
+        details = None
+        if self.record_details is not None:
+            details = self.record_details.as_dict()
+        return {
+            "size_in_bytes": self.size_in_bytes,
+            "name": self.name,
+            "mount": self.mount,
+            "record_details": details,
+            "path": self.path
+        }
+
+
+# callback_options["callback"](data, connection, callback_options["options"])
+def _sensor_value_callback(data, connection, callback_options):
+    cycle = callback_options["cycle"]
+    sensor = callback_options["sensor"]
+    recording = callback_options["recording"]
+    manager = RecordingManager.get_instance()  # type: RecordingManager
+    value = data
+    manager._register_record(recording, cycle, sensor, value)
+
+
+class Recorder(threading.Thread):
+    def __init__(self, recording: Recording):
+        super(Recorder, self).__init__()
+        self.keep_running = True
+        self._cycle = 0
+        self._recording = recording
+
+    def _get_sensors(self):
+        manager = SensorManager()
+        sensors = []
+        for device in manager.get_sensor_devices():
+            sensors.append(manager.get_sensor_by_device(device))
+        return sensors
+
+    def _get_sensor_communicators(self) -> List[
+        Dict[str, AbstractCommunicator]]:
+        sensors = self._get_sensors()
+        communicators = []
+        for sensor in sensors:
+            communicators.append({
+                "sensor": sensor,
+                "communicator": communicators.get_communicator_instance(sensor),
+                "recording": self._recording
+            })
+        return communicators
+
+    def run(self):
+        config = service.data.connection.Connection.get_instance()  # type: service.data.connection.Connection
+        delay = config.get_setting("recording.speed", 300)
+
+        communicator_list = self._get_sensor_communicators()
+
+        while self.keep_running:
+            for communicator in communicator_list:
+                sensor = communicator["sensor"]
+                communicator = communicator["communicator"]
+                communicator.get_sensor_values(sensor, _sensor_value_callback, {
+                    "cycle": self._cycle,
+                    "sensor": sensor
+                })
+            self._cycle += 1
+            time.sleep(delay)
+
 
 class RecordingManager:
     # Will store the singleton here.
@@ -96,6 +188,8 @@ class RecordingManager:
             raise Exception("Only one instance of the manager should exist!")
         else:
             RecordingManager.__instance = self
+        self._lock = threading.Lock()  # type: threading.Lock
+        self._recording_lock = {}  # type: Dict[str, threading.Lock]
 
     def list_recordings(self) -> List[Recording]:
 
@@ -134,8 +228,51 @@ class RecordingManager:
 
         return Recording(mount, name, size_in_bytes, path, recording_details)
 
-    def start_recording(self, recording: Recording):
-        pass
+    def _lock(self, sensor: Sensor):
+        self._lock.acquire()
+        if sensor.device not in self._recording_lock:
+            self._recording_lock[sensor.device] = threading.Lock()
+        self._lock.release()
+        self._recording_lock[sensor.device].acquire()
+
+    def _release(self, sensor: Sensor):
+        self._recording_lock[sensor.device].release()
+
+    def _setup_recording_information(self, recording: Recording):
+        if not os.path.exists(recording.path):
+            os.mkdir(recording.path)
+
+        info_path = recording.path + "/recording.json"
+
+        if not os.path.exists(info_path):
+            with open(info_path, "w") as file:
+                json.dump(file, recording.as_dict())
+
+        for key in recording.record_details.sensor_details:
+            detail = recording.record_details.sensor_details[
+                key]  # type: RecordDetail
+            if not os.path.exists(
+                                    recording.path + "/" + detail.sensor_type.name):
+                os.mkdir(recording.path + "/" + detail.sensor_type.name)
+
+    def _register_record(self, recording: Recording, cycle: int, sensor: Sensor,
+                         value: any):
+        self._lock(sensor)
+        self._setup_recording_information(recording)
+
+        with open(recording.path + "/" + sensor.sensor_type.name + "/" + sensor.device.replace(
+                            "/", "_") + ".dat", "a+") as file:
+            file.write(json.dumps({"cycle": cycle, "data": value}) + "\n")
+            file.close()
+        self._release(sensor)
+
+    def start_recording(self, recording: Recording) -> Recorder:
+        recorder = Recorder(recording)
+        recorder.start()
+        return recorder
+
+    def stop_recording(self, recorder: Recorder):
+        recorder.keep_running = False
 
 
 import os

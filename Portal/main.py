@@ -273,12 +273,6 @@ def meuk(data, connection: service.serial.manager.SerialConnection, options):
 
 @web_app.route('/device_options')
 def show_device_options():
-    sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
-    sensor = sensor_manager.get_sensor_by_device("/dev/ttyUSB0")
-
-    a = AbstractCommunicator()
-    b = a.synchronous_call(a.get_help, sensor, {})
-
     return render_template('device_options.html', current=current)
 
 

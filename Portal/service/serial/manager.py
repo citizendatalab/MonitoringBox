@@ -7,9 +7,6 @@ import serial.tools.list_ports
 import time
 import json
 
-import io
-
-
 class SerialConnection(threading.Thread):
     """
     Will hold a serial connection and inform the listeners when data arrives.
@@ -65,13 +62,7 @@ class SerialConnection(threading.Thread):
                             time.sleep(0.00000001)
 
                         # Read data until '\n' was reached.
-                        line = connection.readline()  # type: bytes
-                        #
-                        # # When receiving data from the Arduino sometimes some
-                        # # noise is sended so we need to filter that out.
-                        # # 0x7B = '{' in the ASCII table.
-                        while len(line) > 0 and line[0] != 0x7B:
-                            line = line[1:]
+                        line = connection.readline()
 
                         # Call the listeners with the received string, when
                         # there is something to report.
@@ -82,7 +73,6 @@ class SerialConnection(threading.Thread):
 
                 except Exception as ex:
                     connection.close()
-
         except:
             # When the loop crashed for some reason (device is not connected
             # anymore) close the connection.
@@ -188,8 +178,7 @@ class Manager:
         """
         devices = []
         for device in serial.tools.list_ports.comports():
-            if "/dev/ttyAMA" not in device.device:
-                devices.append(device.device)
+            devices.append(device.device)
         return devices
 
     def remove_connection(self, device: str):

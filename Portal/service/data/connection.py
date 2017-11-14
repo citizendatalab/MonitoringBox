@@ -31,12 +31,6 @@ class Connection:
             Connection.__instance = self
         self._settings = {}  # type: Dict[str,any]
         self._lock = threading.Lock()  # type: threading.Lock
-        self._listeners = {}
-
-    def register_on_change_listener(self, setting_name: str, listener):
-        if setting_name not in self._listeners:
-            self._listeners[setting_name] = []
-        self._listeners[setting_name].append(listener)
 
     def _load_settings_from_disk(self):
         """
@@ -63,10 +57,6 @@ class Connection:
 
         # Will make the object available again.
         self._lock.release()
-
-        if name in self._listeners:
-            for listener in self._listeners[name]:
-                listener(value)
 
     def _write_settings_to_disk(self):
         """

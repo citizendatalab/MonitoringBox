@@ -10,6 +10,8 @@ import service.data.connection
 import service.data.disk
 
 from gui.screen.option_menu import OptionMenu
+from service.recorder.recordings_manager import Recording
+from service.recorder.recordings_manager import RecordingManager
 
 
 class RecorderScreen(AbstractScreen):
@@ -24,6 +26,9 @@ class RecorderScreen(AbstractScreen):
         RecorderScreen._instance = self
         RecorderScreen.sender = gui.manager.GenericSender("refresh_screen")
         self.connect_slots(RecorderScreen.sender)
+        manager = RecordingManager.get_instance()  # type: RecordingManager
+        self._recording = manager.new_recording()  # type: Recording
+        manager.start_recording(self._recording)
 
     def initUI(self):
         super(RecorderScreen, self).initUI()
@@ -33,10 +38,13 @@ class RecorderScreen(AbstractScreen):
 
     @staticmethod
     def options_handler():
-        manager = gui.manager.GUIManager.get_instance()  # type: gui.manager.GUIManager
-        manager.current_window.hide()
-        manager.current_window = gui.screen.main_menu.MainMenu()
-        manager.current_window.show()
+        record_manager = RecordingManager.get_instance()  # type: RecordingManager
+        record_manager.stop_recording(RecorderScreen._instance._recording)
+
+        gui_manager = gui.manager.GUIManager.get_instance()  # type: gui.manager.GUIManager
+        gui_manager.current_window.hide()
+        gui_manager.current_window = gui.screen.main_menu.MainMenu()
+        gui_manager.current_window.show()
 
     def connect_slots(self, sender):
         self.connect(sender, QtCore.SIGNAL('refresh_screen'),

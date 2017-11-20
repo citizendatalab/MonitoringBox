@@ -1,3 +1,7 @@
+import os
+
+from orcus import json
+
 import service.serial.manager
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash, jsonify
@@ -6,6 +10,7 @@ import service.sensor_manager
 import service.sensor.handler_watcher
 from gui.manager import GUIManager
 from gui.screen.boot_screen import BootScreen
+from service.recorder.post_recording import FormatEnum
 from service.recorder.recordings_manager import RecordingManager
 from service.sensor.communicator.communicators import AbstractCommunicator
 from service.sensor.handler_watcher import HandlerWatcher
@@ -117,6 +122,27 @@ def show_entries():
 @web_app.route('/recordings')
 def show_recordings():
     return render_template('recordings.html')
+
+
+@web_app.route('/recordings/<recording_raw>/<format>')
+def show_recording_specific_download(recording_raw, format):
+    abort(404)
+
+@web_app.route('/recordings/<recording_raw>')
+def show_recording_specific(recording_raw):
+    recording = base64.b64decode(recording_raw).decode("UTF-8")
+    info_path = recording + "/recording.json"
+    if not os.path.exists(info_path):
+        abort(404)
+    info = {}
+
+    formats = []
+    for item in FormatEnum:
+        formats.append(str(item)[11:])
+    with open(info_path, "r") as file:
+        info = json.loads("".join(file.readlines()))
+    return render_template('recording_specific.html', info=info,
+                           formats=formats,id=recording_raw)
 
 
 @web_app.route('/camera')
@@ -343,8 +369,12 @@ def show_api_recordings_list():
                      results_start: results_start + results_per_page]:
         mount = service.data.disk.get_mount(recording.mount)
         resp_table.table_body.append(
-            [recording.name, mount_icon(mount) + " " + mount.mount_point,
-             human_readable_size(recording.size_in_bytes)])
+            [
+                "<a href=\"/recordings/" + quote(base64.b64encode(
+                    bytes(recording.path,
+                          "UTF-8"))) + "\">" + recording.name + "</a>",
+                mount_icon(mount) + " " + mount.mount_point,
+                human_readable_size(recording.size_in_bytes)])
     return jsonify(resp_table.as_dict())
 
 

@@ -51,7 +51,7 @@ class SensorDetails:
         return {
             "name": self.name,
             "device": self.device,
-            "sensor_type": self.sensor_type,
+            "sensor_type": self.sensor_type.name,
             "settings": self.settings
         }
 
@@ -251,11 +251,10 @@ class RecordingManager:
 
         if not os.path.exists(info_path):
             with open(info_path, "w") as file:
-                json.dump(file, recording.as_dict())
+                temp = json.dumps(recording.as_dict())
+                file.write(temp)
 
         for detail in recording.record_details.sensor_details:
-            # detail = recording.record_details.sensor_details[
-            #     key]  # type: RecordDetail
             if not os.path.exists(
                                     recording.path + "/" + detail.sensor_type.name):
                 os.mkdir(recording.path + "/" + detail.sensor_type.name)
@@ -267,7 +266,7 @@ class RecordingManager:
 
         with open(
                                                         recording.path + "/" + sensor.sensor_type.name + "/" + sensor.device.replace(
-                                "/", "_") + ".dat", "a+") as file:
+                            "/", "_") + ".dat", "a+") as file:
             file.write(json.dumps({"cycle": cycle, "data": value}) + "\n")
             file.close()
         self._release(sensor)

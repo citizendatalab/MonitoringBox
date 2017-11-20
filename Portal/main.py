@@ -27,22 +27,22 @@ import threading
 from service.sensor_manager import Sensor
 import uuid
 
+current = 0
+sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
+sensor_manager.start()
+
 try:
     import picamera
 
     camera = picamera.PiCamera()
     camera.resolution = (1024, 768)
     camera.start_preview()
+    camera_sensor = Sensor(SensorType.PI_CAMERA, "Pi CAM", "@PI_CAM", None)
+    sensor_manager._register_sensor(camera_sensor)
+
 except:
     pass
 import time
-
-current = 0
-sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
-sensor_manager.start()
-
-camera_sensor = Sensor(SensorType.PI_CAMERA, "Pi CAM", "@PI_CAM", None)
-sensor_manager._register_sensor(camera_sensor)
 
 # sensor_manager.
 
@@ -139,7 +139,7 @@ def show_device_raw_data(device):
 def human_readable_size(size):
     if size == 0:
         return "0B"
-    n = math.floor(math.log(size, 1024))
+    n = math.floor(math.log(size, 1024) - 1)
     size_names = ["B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
     return str(round(size / math.pow(1024, n), 1)) + size_names[n + 1]
 

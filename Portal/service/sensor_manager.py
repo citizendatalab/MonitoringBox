@@ -20,6 +20,23 @@ class SensorType(Enum):
     HEART_RATE_SENSOR = "Heart rate sensor"
     GALVANIC_SKIN_RESPONSE_SENSOR = "Galvanic skin response sensor"
 
+    @staticmethod
+    def from_string(type: str):
+        types = {
+            "UNKOWN": SensorType.UNKOWN,
+            "EXAMPLE_SENSOR": SensorType.EXAMPLE_SENSOR,
+            "PI_CAMERA": SensorType.PI_CAMERA,
+            "GPS_SENSOR": SensorType.GPS_SENSOR,
+            "Temperature and Humidity": SensorType.HUMIDITY_TEMPERATURE_SENSOR,
+            "CO2": SensorType.CO2_SENSOR,
+            "HEART_RATE_SENSOR": SensorType.HEART_RATE_SENSOR,
+            "GALVANIC_SKIN_RESPONSE_SENSOR": SensorType.GALVANIC_SKIN_RESPONSE_SENSOR
+        }
+        if type in types:
+            return types[type]
+        else:
+            return SensorType.UNKOWN
+
 
 class HandlerTrigger:
     """
@@ -133,7 +150,9 @@ def _sensor_line_listener(
     manager._trigger_type_handlers(connection.device, line)
 
 
-def _update_information(data, connection: service.serial.manager.SerialConnection, callback_options):
+def _update_information(data,
+                        connection: service.serial.manager.SerialConnection,
+                        callback_options):
     sensor_manager = SensorManager.get_instance()  # type: SensorManager
     sensor = sensor_manager.get_sensor_by_device(connection.device)
     sensor.name = data["name"]

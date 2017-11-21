@@ -165,9 +165,9 @@ def show_device_raw_data(device):
 def human_readable_size(size):
     if size == 0:
         return "0B"
-    n = math.floor(math.log(size, 1024) - 1)
+    n = math.floor(math.log(size, 1024))
     size_names = ["B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-    return str(round(size / math.pow(1024, n), 1)) + size_names[n + 1]
+    return str(round(size / math.pow(1024, n), 1)) + " " + size_names[n + 1]
 
 
 @web_app.route('/settings', methods=['GET', 'POST'])

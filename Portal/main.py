@@ -220,11 +220,13 @@ def human_readable_size(size):
 @web_app.route('/settings', methods=['GET', 'POST'])
 def show_settings():
     if request.method == 'POST':
-        recording_format = request.form["recording_format"]
+        wifiapname = request.form["wifiapname"]
+        wifiappassword = request.form["wifiappassword"]
         recording_location = request.form["recording_location"]
         connection = service.data.connection.Connection.get_instance()
-        connection.put_setting("recording.format", recording_format)
         connection.put_setting("recording.location", recording_location)
+        connection.put_setting("ap.name", wifiapname)
+        connection.put_setting("ap.password", wifiappassword)
 
     config = service.data.connection.Connection.get_instance()  # type: service.data.connection.Connection
 
@@ -335,6 +337,11 @@ def show_settings():
         if setting["value"] == currrent_speed:
             setting["is_selected"] = True
             break
+
+    settings["ap"] = {
+        "name": config.get_setting("ap.name", "pi"),
+        "password": config.get_setting("ap.password", "raspberry"),
+    }
 
     return render_template('settings.html', settings=settings)
 

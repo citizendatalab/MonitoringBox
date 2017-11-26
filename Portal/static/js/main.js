@@ -201,15 +201,17 @@
   $('.modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var modalContentId = button.data('modal-content') // Extract info from data-* attributes
+    if (modalContentId !== undefined) {
+      var content = $(modalContentId);
 
-    var content = $(modalContentId);
+      var modal = $(this)
 
-    var modal = $(this)
+      var modalContent = modal.find('.modal-content');
+      modalContent.html(content);
+      modalContent.trigger("modal.show",[{'button':button, 'modal':modal, 'event': event}]);
+      modalContent.find("#modalRemoveRecordingVerification").show("fast");
+    }
 
-    var modalContent = modal.find('.modal-content');
-    modalContent.html(content);
-    modalContent.trigger("modal.show",[{'button':button, 'modal':modal, 'event': event}]);
-    modalContent.find("#modalRemoveRecordingVerification").show("fast");
   });
   $('.modal-content').on('modal.show',function(event, params){
     var button = $(params.button);
@@ -221,6 +223,11 @@
     $(params.modal).find('.data-mount').html(mount);
     $(params.modal).find('.data-size').html(size);
     $(params.modal).find('#submitter').attr('href', button.attr('data-action-url'));
+  });
+
+  $('.show-password').change(function(){
+    var inputType = ['password', 'text'][1*this.checked];
+    $($(this).attr('data-password-to-show')).attr('type', inputType);
   });
 
 })(jQuery);

@@ -198,4 +198,29 @@
     });
 
   });
+  $('.modal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var modalContentId = button.data('modal-content') // Extract info from data-* attributes
+
+    var content = $(modalContentId);
+
+    var modal = $(this)
+
+    var modalContent = modal.find('.modal-content');
+    modalContent.html(content);
+    modalContent.trigger("modal.show",[{'button':button, 'modal':modal, 'event': event}]);
+    modalContent.find("#modalRemoveRecordingVerification").show("fast");
+  });
+  $('.modal-content').on('modal.show',function(event, params){
+    var button = $(params.button);
+    var row = button.parent().parent().find("td")
+    var name = $(row[0]).text();
+    var mount = $(row[1]).text()
+    var size = $(row[2]).text();
+    $(params.modal).find('.data-name').html(name);
+    $(params.modal).find('.data-mount').html(mount);
+    $(params.modal).find('.data-size').html(size);
+    $(params.modal).find('#submitter').attr('href', button.attr('data-action-url'));
+  });
+
 })(jQuery);

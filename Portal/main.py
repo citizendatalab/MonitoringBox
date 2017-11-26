@@ -1,4 +1,5 @@
 import os
+import shutil
 
 from orcus import json
 from werkzeug.wrappers import Response
@@ -131,6 +132,13 @@ class NoProgressInformer(ProgressInformer):
         pass
 
 
+@web_app.route('/recordings/<recording_raw>/delete/yes')
+def show_recording_specific_download2(recording_raw):
+    recording = base64.b64decode(recording_raw).decode("UTF-8")
+    shutil.rmtree(recording)
+    return redirect('/recordings', code=302)
+
+
 @web_app.route('/recordings/<recording_raw>/<format_converter>')
 def show_recording_specific_download(recording_raw, format_converter: str):
     recording = base64.b64decode(recording_raw).decode("UTF-8")
@@ -141,7 +149,8 @@ def show_recording_specific_download(recording_raw, format_converter: str):
 
     manager = RecordingManager.get_instance()  # type: RecordingManager
     recording = manager.get_recording(recording)
-    path = maker.create_format(recording, FormatEnum.from_string(format_converter),
+    path = maker.create_format(recording,
+                               FormatEnum.from_string(format_converter),
                                NoProgressInformer())
 
     mime_types = {
@@ -395,7 +404,7 @@ def show_api_recordings_list():
     recordings = manager.list_recordings()
     resp_table = table.generate_table(len(recordings), results_per_page,
                                       results_start,
-                                      ["Name", "Mount", "Size"])
+                                      ["Name", "Mount", "Size", ""])
 
     def mount_icon(mount: service.data.disk.Mount):
         return ['<i class="fa fa-usb" aria-hidden="true"></i>',
@@ -412,7 +421,11 @@ def show_api_recordings_list():
                     bytes(recording.path,
                           "UTF-8"))) + "\">" + recording.name + "</a>",
                 mount_icon(mount) + " " + mount.mount_point,
-                human_readable_size(recording.size_in_bytes)])
+                human_readable_size(recording.size_in_bytes),
+                '<a href="#" data-action-url="/recordings/' + quote(
+                    base64.b64encode(
+                        bytes(recording.path,
+                              "UTF-8"))) + '/delete/yes" data-toggle="modal" data-target="#exampleModal" data-modal-content="#modalRemoveRecordingVerification" class="btn btn-danger row-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>'])
     return jsonify(resp_table.as_dict())
 
 

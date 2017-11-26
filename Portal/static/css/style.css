@@ -78,3 +78,8 @@ table thead .fa-sort-asc, table thead .fa-sort-desc {
 .shutdown h1 {
     margin: 1em 0
 }
+
+.row-btn {
+    margin: -1em 0;
+    padding: 0.4em 0.7em;
+}

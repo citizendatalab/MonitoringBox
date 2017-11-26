@@ -1,6 +1,7 @@
 import os
 
 from orcus import json
+from werkzeug.wrappers import Response
 
 import service.serial.manager
 from flask import Flask, request, session, g, redirect, url_for, abort, \
@@ -10,7 +11,8 @@ import service.sensor_manager
 import service.sensor.handler_watcher
 from gui.manager import GUIManager
 from gui.screen.boot_screen import BootScreen
-from service.recorder.post_recording import FormatEnum
+from service.recorder.post_recording import FormatEnum, FormatMaker, \
+    ProgressInformer
 from service.recorder.recordings_manager import RecordingManager
 from service.sensor.communicator.communicators import AbstractCommunicator
 from service.sensor.handler_watcher import HandlerWatcher
@@ -124,9 +126,34 @@ def show_recordings():
     return render_template('recordings.html')
 
 
+class NoProgressInformer(ProgressInformer):
+    def status_update(self, value: int, max: int):
+        pass
+
+
 @web_app.route('/recordings/<recording_raw>/<format>')
-def show_recording_specific_download(recording_raw, format):
-    abort(404)
+def show_recording_specific_download(recording_raw, format: str):
+    recording = base64.b64decode(recording_raw).decode("UTF-8")
+    info_path = recording + "/recording.json"
+    if not os.path.exists(info_path):
+        abort(404)
+    maker = FormatMaker()
+
+    manager = RecordingManager.get_instance()  # type: RecordingManager
+    recording = manager.get_recording(recording)
+    path = maker.create_format(recording, FormatEnum.from_string(format),
+                               NoProgressInformer())
+    content = ""
+    with open(path, "r") as file:
+        has_next = True
+        while has_next:
+            line = file.readline()
+            content += line
+            has_next = line != "\n"
+    return Response(content, mimetype="text/csv",
+                    headers={"Content-disposition":
+                                 "attachment; filename=" + recording.name + ".csv"})
+
 
 @web_app.route('/recordings/<recording_raw>')
 def show_recording_specific(recording_raw):
@@ -142,7 +169,7 @@ def show_recording_specific(recording_raw):
     with open(info_path, "r") as file:
         info = json.loads("".join(file.readlines()))
     return render_template('recording_specific.html', info=info,
-                           formats=formats,id=recording_raw)
+                           formats=formats, id=recording_raw)
 
 
 @web_app.route('/camera')

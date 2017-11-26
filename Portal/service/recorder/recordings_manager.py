@@ -55,6 +55,15 @@ class SensorDetails:
             "settings": self.settings
         }
 
+    @staticmethod
+    def from_dict(data: dict):
+        return SensorDetails(
+            SensorType.from_string(data["sensor_type"]),
+            data["name"],
+            data["device"],
+            data["settings"]
+        )
+
 
 class RecordDetails:
     def __init__(self, sensor_details: List[SensorDetails]):
@@ -71,6 +80,13 @@ class RecordDetails:
         return {
             "sensor_details": details
         }
+
+    @staticmethod
+    def from_dict(data: dict):
+        details = []
+        for sensor in data["sensor_details"]:
+            details.append(SensorDetails.from_dict(sensor))
+        return RecordDetails(details)
 
 
 class Recording:
@@ -113,6 +129,14 @@ class Recording:
             "record_details": details,
             "path": self.path
         }
+
+    @staticmethod
+    def from_dict(data: Dict):
+        details = None
+        if data["record_details"] is not None:
+            details = RecordDetails.from_dict(data["record_details"])
+        return Recording(data["mount"], data["name"], data["size_in_bytes"],
+                         data["path"], details)
 
 
 # callback_options["callback"](data, connection, callback_options["options"])
@@ -258,6 +282,17 @@ class RecordingManager:
             if not os.path.exists(
                                     recording.path + "/" + detail.sensor_type.name):
                 os.mkdir(recording.path + "/" + detail.sensor_type.name)
+
+    def get_recording(self, path: str) -> Recording:
+        info_path = path + "/recording.json"
+        if os.path.exists(info_path):
+            data = {}
+            with open(info_path, "r") as file:
+                raw = "\n".join(file.readlines())
+                data = json.loads(raw)
+            return Recording.from_dict(data)
+        else:
+            raise FileNotFoundError()
 
     def _register_record(self, recording: Recording, cycle: int, sensor: Sensor,
                          value: any):

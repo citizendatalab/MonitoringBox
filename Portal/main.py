@@ -131,8 +131,8 @@ class NoProgressInformer(ProgressInformer):
         pass
 
 
-@web_app.route('/recordings/<recording_raw>/<format>')
-def show_recording_specific_download(recording_raw, format: str):
+@web_app.route('/recordings/<recording_raw>/<format_converter>')
+def show_recording_specific_download(recording_raw, format_converter: str):
     recording = base64.b64decode(recording_raw).decode("UTF-8")
     info_path = recording + "/recording.json"
     if not os.path.exists(info_path):
@@ -141,18 +141,29 @@ def show_recording_specific_download(recording_raw, format: str):
 
     manager = RecordingManager.get_instance()  # type: RecordingManager
     recording = manager.get_recording(recording)
-    path = maker.create_format(recording, FormatEnum.from_string(format),
+    path = maker.create_format(recording, FormatEnum.from_string(format_converter),
                                NoProgressInformer())
-    content = ""
-    with open(path, "r") as file:
-        has_next = True
-        while has_next:
-            line = file.readline()
-            content += line
-            has_next = line != "\n"
-    return Response(content, mimetype="text/csv",
+
+    mime_types = {
+        "CSV": "text/csv",
+        "RAW": ""
+    }
+    ext = {
+        "CSV": ".csv",
+        "RAW": ".zip"
+    }
+
+    out = b''
+    with open(path, "rb") as file:
+        while True:
+            buffer = file.read(1024)
+            if not buffer: break
+            out += buffer
+
+    return Response(out, mimetype=mime_types[format_converter],
                     headers={"Content-disposition":
-                                 "attachment; filename=" + recording.name + ".csv"})
+                                 "attachment; filename=" + recording.name + ext[
+                                     format_converter]})
 
 
 @web_app.route('/recordings/<recording_raw>')

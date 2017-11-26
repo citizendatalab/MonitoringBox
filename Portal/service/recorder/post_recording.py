@@ -8,7 +8,7 @@ from io import TextIOWrapper
 import csv
 
 import _csv
-
+import zipfile
 from service.recorder.recordings_manager import Recording
 from service.sensor_manager import Sensor, SensorType
 
@@ -137,7 +137,8 @@ class CSVFormatConverter(AbstractFormatConverter):
                 line = handler.readline()
                 has_data[
                     self._get_sensor_file_handler_key(sensor)] = line != ""
-                if has_data[self._get_sensor_file_handler_key(sensor)] and current_cycle == self._get_cycle(line):
+                if has_data[self._get_sensor_file_handler_key(
+                        sensor)] and current_cycle == self._get_cycle(line):
                     values = sensor_writer.get_values(line)
 
                 for value in values:
@@ -155,10 +156,40 @@ class CSVFormatConverter(AbstractFormatConverter):
         return json.loads(line)["cycle"]
 
 
+class RAWFormatConverter(AbstractFormatConverter):
+    def _get_sensor_path(self, recording: Recording, sensor: Sensor) -> str:
+        return os.path.join(recording.path, sensor.sensor_type.name,
+                            sensor.device.replace("/", "_")) + ".dat"
+
+    def _archive_get_sensor_path(self, sensor: Sensor) -> str:
+        return os.path.join(sensor.sensor_type.name,
+                            sensor.device.replace("/", "_")) + ".dat"
+
+    def create_format(self, recording: Recording,
+                      progress_informer: ProgressInformer) -> str:
+
+        folder = os.path.join(self.get_export_folder(recording), "RAW")
+        if not os.path.exists(folder):
+            os.mkdir(folder)
+        path = os.path.join(folder, "raw.zip")
+        if os.path.exists(path):
+            return path
+
+        zf = zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED)
+
+        for sensor in recording.record_details.sensor_details:
+            file_path = self._get_sensor_path(recording, sensor)
+            archive_path = self._archive_get_sensor_path(sensor)
+            zf.write(file_path, archive_path)
+
+        zf.close()
+        return path
+
+
 class FormatMaker:
     _format_converters = {
         FormatEnum.CSV: CSVFormatConverter(),
-        FormatEnum.RAW: AbstractFormatConverter()  # @todo implement this
+        FormatEnum.RAW: RAWFormatConverter()  # @todo implement this
     }
 
     def _get_format_converter(self,

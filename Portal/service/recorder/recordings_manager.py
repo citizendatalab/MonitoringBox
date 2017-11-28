@@ -180,6 +180,7 @@ class Recorder(threading.Thread):
         delay = config.get_setting("recording.speed", 300)
 
         communicator_list = self._get_sensor_communicators()
+        last_run = datetime.datetime.now()
 
         while self.keep_running:
             for communicator in communicator_list:
@@ -191,7 +192,10 @@ class Recorder(threading.Thread):
                     "recording": self._recording
                 })
             self._cycle += 1
-            time.sleep(delay / 1000)
+            last_run_temp = datetime.datetime.now()
+            wait_time = delay - ((last_run_temp - last_run).microseconds / 1000)
+            last_run = last_run_temp
+            time.sleep(wait_time / 1000)
 
 
 class RecordingManager:

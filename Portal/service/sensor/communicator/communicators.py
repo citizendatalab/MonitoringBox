@@ -115,6 +115,8 @@ class PiCamCommunicator(AbstractCommunicator):
     def get_sensor_values(self, sensor: Sensor, callback: Callable,
                           callback_options):
         recording = callback_options["recording"]  # type: Recording
+        if not os.path.exists(recording.path):
+            os.mkdir(recording.path)
         photo_folder = os.path.join(recording.path, "CAMERA")
         if not os.path.exists(photo_folder):
             os.mkdir(photo_folder)

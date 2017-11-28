@@ -1,10 +1,11 @@
+import os
 import threading
 from typing import Callable
+import io
 
-import time
-
+import datetime
 import service.serial.manager
-
+import service.sensor.camera
 from service.sensor_manager import Sensor, SensorType
 
 
@@ -99,8 +100,8 @@ class AbstractCommunicator:
 
 
 class ExampleCommunicator(AbstractCommunicator):
-
-    def get_sensor_values(self, sensor: Sensor, callback: Callable, callback_options):
+    def get_sensor_values(self, sensor: Sensor, callback: Callable,
+                          callback_options):
         command = "getCurrentCount"
         options = ""
         callback_options_wrapper = {"options": callback_options,
@@ -111,9 +112,24 @@ class ExampleCommunicator(AbstractCommunicator):
 
 
 class PiCamCommunicator(AbstractCommunicator):
-    def get_sensor_values(self, sensor: Sensor, callback: Callable, callback_options):
-        # getCurrentCount
-        pass
+    def get_sensor_values(self, sensor: Sensor, callback: Callable,
+                          callback_options):
+        recording = callback_options["recording"]  # type: Recording
+        if not os.path.exists(recording.path):
+            os.mkdir(recording.path)
+        photo_folder = os.path.join(recording.path, "CAMERA")
+        if not os.path.exists(photo_folder):
+            os.mkdir(photo_folder)
+        now = datetime.datetime.now()
+        photo_path = os.path.join(photo_folder,
+                                  now.strftime("%y.%m.%d@%H.%M.%S.%f.jpg"))
+        service.sensor.camera.camera.capture(photo_path)
+
+        callback({
+            "location": photo_path,
+            "date": now.strftime("%y-%m-%d"),
+            "time": now.strftime("%H-%M-%S")
+        }, None, callback_options)
 
 
 def get_communicator_instance(sensor: Sensor):

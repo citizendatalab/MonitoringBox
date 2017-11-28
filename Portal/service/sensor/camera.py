@@ -1,19 +1,19 @@
-import threading
-import picamera
+import service.sensor_manager
+from service.sensor_manager import Sensor, SensorType
 
-class CameraManager:
-    def start(self):
-        if self.camera is None:
-            self.camera = CameraThread()
-            self.camera.start()
+camera = None
 
-class CameraThread(threading.Thread):
 
-    def run(self):
+def setup_camera(sensor_manager: service.sensor_manager.SensorManager):
+    try:
+        import picamera
+        global camera
+
         camera = picamera.PiCamera()
-        with picamera.PiCamera() as camera:
+        camera.resolution = (1024, 768)
+        camera.start_preview()
+        camera_sensor = Sensor(SensorType.PI_CAMERA, "Pi CAM", "@PI_CAM", None)
+        sensor_manager._register_sensor(camera_sensor)
 
-#
-# camera = picamera.PiCamera()
-# camera.resolution = (1024, 768)
-# # camera.start_preview()
+    except:
+        pass

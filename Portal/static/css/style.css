@@ -88,3 +88,6 @@ table thead .fa-sort-asc, table thead .fa-sort-desc {
     border-color: #F00;
     background: #FEE;
 }
+.custom-control-description span {
+    float: right;
+}

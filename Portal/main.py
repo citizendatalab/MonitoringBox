@@ -34,22 +34,13 @@ import math
 import threading
 from service.sensor_manager import Sensor
 import uuid
-
+import service.sensor.camera
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
 sensor_manager.start()
 
-try:
-    import picamera
+service.sensor.camera.setup_camera(sensor_manager)
 
-    camera = picamera.PiCamera()
-    camera.resolution = (1024, 768)
-    camera.start_preview()
-    camera_sensor = Sensor(SensorType.PI_CAMERA, "Pi CAM", "@PI_CAM", None)
-    sensor_manager._register_sensor(camera_sensor)
-
-except:
-    pass
 import time
 
 # sensor_manager.
@@ -223,11 +214,13 @@ def show_settings():
         wifiapname = request.form["wifiapname"]
         wifiappassword = request.form["wifiappassword"]
         recording_location = request.form["recording_location"]
+        recording_speed = request.form["recording_speed"]
         connection = service.data.connection.Connection.get_instance()
         connection.put_setting("recording.location", recording_location)
         connection.put_setting("ap.name", wifiapname)
         connection.put_setting("ap.password", wifiappassword)
         service.data.wifi.write_wifi_config(wifiapname, wifiappassword)
+        connection.put_setting("recording.speed", recording_speed)
 
     config = service.data.connection.Connection.get_instance()  # type: service.data.connection.Connection
 
@@ -251,12 +244,14 @@ def show_settings():
                   10000, 15000, 20000, 25000, 30000, 45000, 60000]:
         human_speed = speed
         unit = "ms"
-        if human_speed >= 1000:
-            human_speed /= 1000
-            unit = "s"
-        if human_speed >= 60:
-            human_speed /= 60
+        if speed >= 60000:
+            human_speed = speed / 60000
             unit = "m"
+        elif speed >= 1000:
+            human_speed = speed / 1000
+            unit = "s"
+        if human_speed == int(human_speed):
+            human_speed = int(human_speed)
         human_speed = str(human_speed) + unit
         speed_text = "sleepy"
         tests = {750: "fast", 1500: "normal", 15000: "slow"}

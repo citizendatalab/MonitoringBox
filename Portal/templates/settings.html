@@ -6,44 +6,17 @@
 <form action="/settings" method="post">
     <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
     <div class="form-group">
-        <label for="outputFormat">Output format</label>
-        <select class="custom-select" id="outputFormat" aria-describedby="description-xml"
-                data-dynamic-description="true" name="recording_format">
-            <option value="xml" selected>XML</option>
-            <option value="csv">CSV</option>
-            <option value="newz">New</option>
-        </select>
-        <div class="descriptions">
-            <div data-description-for="xml" id="description-xml" class="border">
-                Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo eget
-                malesuada. Nulla quis lorem ut libero malesuada feugiat. Donec rutrum congue leo eget malesuada.
-                Curabitur aliquet quam id dui posuere blandit. Quisque velit nisi, pretium ut lacinia in, elementum id
-                enim. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec sollicitudin molestie
-                malesuada. Cras ultricies ligula sed magna dictum porta. Vivamus suscipit tortor eget felis porttitor
-                volutpat.
-
-            </div>
-            <div data-description-for="csv" id="description-xsv" class="border">
-                Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vestibulum ante ipsum primis in
-                faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel,
-                ullamcorper sit amet ligula. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.
-                Nulla porttitor accumsan tincidunt. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.
-                Sed porttitor lectus nibh. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum
-                porta. Proin eget tortor risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies
-                ligula sed magna dictum porta.
-            </div>
-        </div>
+        <label for="wifi-ap-name">Wifi accesspoint name</label>
+        <input type="text" id="wifi-ap-name" name="wifiapname" class="form-control" value="{{ settings.ap.name }}" required="true" pattern="^[A-Za-z]{1}[A-Za-z0-9 _\-]*$">
     </div>
-
     <div class="form-group">
-        <label for="outputFormat">Sensor record interval</label>
-        <select class="custom-select" aria-describedby="description-xml" name="recording_format">
-            {% for speed in settings.speeds %}
-                <option value="{{ speed.value }}" {% if speed.is_selected %}selected{% else %}{% endif %}>{{ speed.label }}</option>
-            {% endfor %}
-        </select>
+        <label for="wifi-ap-password">Wifi accesspoint password</label>
+        <input type="password" id="wifi-ap-password" name="wifiappassword" class="form-control" value="{{ settings.ap.password }}" required="true" pattern="^.{6,}$">
+        <label class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input show-password" data-password-to-show="#wifi-ap-password">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Show password</span>
+        </label>
     </div>
     <h2>Recording location</h2>
     <div class="form-group-striped form-group-list-options mounts">

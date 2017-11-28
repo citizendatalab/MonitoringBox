@@ -7,6 +7,7 @@ import serial.tools.list_ports
 import time
 import json
 
+
 class SerialConnection(threading.Thread):
     """
     Will hold a serial connection and inform the listeners when data arrives.
@@ -36,7 +37,7 @@ class SerialConnection(threading.Thread):
         command = self.get_command()
         if command:
             connection.write((command["command"] + ":" +
-                             command["options"]).encode())
+                              command["options"]).encode())
         return command
 
     def run(self):
@@ -58,7 +59,8 @@ class SerialConnection(threading.Thread):
                         # If there is no data in the buffer, wait.
                         while connection.inWaiting() == 0:
                             if command is None:
-                                command = self.handle_command_sending(connection)
+                                command = self.handle_command_sending(
+                                    connection)
                             time.sleep(0.00000001)
 
                         # Read data until '\n' was reached.
@@ -69,7 +71,9 @@ class SerialConnection(threading.Thread):
                         if len(line) > 0:
                             self._call_listeners(
                                 line.decode("utf-8").replace("'", "\""))
-                        command["callback"](json.loads(line.decode("utf-8").replace("'", "\"")), self, command["callback_options"])
+                        command["callback"](
+                            json.loads(line.decode("utf-8").replace("'", "\"")),
+                            self, command["callback_options"])
 
                 except Exception as ex:
                     connection.close()
@@ -97,7 +101,8 @@ class SerialConnection(threading.Thread):
             except:
                 pass
 
-    def send_command(self, command: str, options=None, callback=None, callback_options=None):
+    def send_command(self, command: str, options=None, callback=None,
+                     callback_options=None):
         # Will lock the object.
         self._lock.acquire()
         self._command_queue.put({
@@ -177,8 +182,10 @@ class Manager:
         :return: List of connected comport devices.
         """
         devices = []
+        excluded_devices = ["/dev/ttyAMA0"]
         for device in serial.tools.list_ports.comports():
-            devices.append(device.device)
+            if not device in excluded_devices:
+                devices.append(device.device)
         return devices
 
     def remove_connection(self, device: str):

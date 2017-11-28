@@ -2,7 +2,8 @@ import subprocess
 
 from PyQt4 import QtGui
 from PyQt4.QtGui import *
-
+# import service.data.connection.
+from service.data.connection import Connection
 import gui.manager
 from gui.screen.abstract_screen import AbstractScreen
 from PyQt4 import QtCore
@@ -34,12 +35,23 @@ class WifiMenu(AbstractScreen):
         font = QtGui.QFont('Decorative', 10)
         font.setItalic(True)
 
-        label = QLabel("W.I.P.")
+        config = Connection.get_instance()
+        name = config.get_setting("ap.name", "pi")
+        password = config.get_setting("ap.password", "raspberry")
+
+        label = QLabel("AP name: " + name)
         label.setAlignment(QtCore.Qt.AlignCenter)
         label.setFont(font)
         label.setStyleSheet("color:#FFF")
+
         vbox.addWidget(label, 1)
 
+        label = QLabel("AP password: " + password)
+        label.setAlignment(QtCore.Qt.AlignCenter)
+        label.setFont(font)
+        label.setStyleSheet("color:#FFF")
+
+        vbox.addWidget(label, 1)
 
     @staticmethod
     def main_menu_handler():

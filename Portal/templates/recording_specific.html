@@ -1,0 +1,33 @@
+{% extends "layout/layout.html" %}
+{% set current_page = 'recording' %}
+{% set title = 'Recordings' %}
+
+{% block body %}
+<strong>Stored on:</strong> {{info.mount}}<br>
+<strong>Name:</strong> {{info.name}}<br>
+<strong>Path:</strong> {{info.path}}<br>
+
+<h2>Recording details</h2>
+<table class="table table-hover table-striped table-bordered">
+    <thead class="table-inverse">
+    <th>Name sensor</th>
+    <th>Type</th>
+    <th>Path</th>
+    <th>Settings</th>
+    </thead>
+    <tbody>
+    {% for sensor in info.record_details.sensor_details %}
+    <tr>
+        <td>{{sensor.name}}</td>
+        <td>{{sensor.sensor_type}}</td>
+        <td>{{sensor.device}}</td>
+        <td>{{sensor.settings}}</td>
+    </tr>
+    {% endfor%}
+    </tbody>
+</table>
+<h2>Download</h2>
+{% for format in formats %}
+    <a href="/recordings/{{id}}/{{format}}" class="btn btn-primary">Download {{format}}</a>
+{% endfor %}
+{% endblock %}

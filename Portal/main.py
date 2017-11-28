@@ -1,3 +1,8 @@
+import os
+import shutil
+import json
+from werkzeug.wrappers import Response
+
 import service.serial.manager
 from flask import Flask, request, session, g, redirect, url_for, abort, \
     render_template, flash, jsonify
@@ -6,8 +11,11 @@ import service.sensor_manager
 import service.sensor.handler_watcher
 from gui.manager import GUIManager
 from gui.screen.boot_screen import BootScreen
+from service.recorder.post_recording import FormatEnum, FormatMaker, \
+    ProgressInformer
 from service.recorder.recordings_manager import RecordingManager
 from service.sensor.communicator.communicators import AbstractCommunicator
+import service.data.wifi
 from service.sensor.handler_watcher import HandlerWatcher
 from service.sensor_manager import HandlerTrigger
 from service.sensor_manager import SensorType
@@ -27,22 +35,22 @@ import threading
 from service.sensor_manager import Sensor
 import uuid
 
+current = 0
+sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
+sensor_manager.start()
+
 try:
     import picamera
 
     camera = picamera.PiCamera()
     camera.resolution = (1024, 768)
     camera.start_preview()
+    camera_sensor = Sensor(SensorType.PI_CAMERA, "Pi CAM", "@PI_CAM", None)
+    sensor_manager._register_sensor(camera_sensor)
+
 except:
     pass
 import time
-
-current = 0
-sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
-sensor_manager.start()
-
-camera_sensor = Sensor(SensorType.PI_CAMERA, "Pi CAM", "@PI_CAM", None)
-sensor_manager._register_sensor(camera_sensor)
 
 # sensor_manager.
 
@@ -119,6 +127,71 @@ def show_recordings():
     return render_template('recordings.html')
 
 
+class NoProgressInformer(ProgressInformer):
+    def status_update(self, value: int, max: int):
+        pass
+
+
+@web_app.route('/recordings/<recording_raw>/delete/yes')
+def show_recording_specific_download2(recording_raw):
+    recording = base64.b64decode(recording_raw).decode("UTF-8")
+    shutil.rmtree(recording)
+    return redirect('/recordings', code=302)
+
+
+@web_app.route('/recordings/<recording_raw>/<format_converter>')
+def show_recording_specific_download(recording_raw, format_converter: str):
+    recording = base64.b64decode(recording_raw).decode("UTF-8")
+    info_path = recording + "/recording.json"
+    if not os.path.exists(info_path):
+        abort(404)
+    maker = FormatMaker()
+
+    manager = RecordingManager.get_instance()  # type: RecordingManager
+    recording = manager.get_recording(recording)
+    path = maker.create_format(recording,
+                               FormatEnum.from_string(format_converter),
+                               NoProgressInformer())
+
+    mime_types = {
+        "CSV": "text/csv",
+        "RAW": ""
+    }
+    ext = {
+        "CSV": ".csv",
+        "RAW": ".zip"
+    }
+
+    out = b''
+    with open(path, "rb") as file:
+        while True:
+            buffer = file.read(1024)
+            if not buffer: break
+            out += buffer
+
+    return Response(out, mimetype=mime_types[format_converter],
+                    headers={"Content-disposition":
+                                 "attachment; filename=" + recording.name + ext[
+                                     format_converter]})
+
+
+@web_app.route('/recordings/<recording_raw>')
+def show_recording_specific(recording_raw):
+    recording = base64.b64decode(recording_raw).decode("UTF-8")
+    info_path = recording + "/recording.json"
+    if not os.path.exists(info_path):
+        abort(404)
+    info = {}
+
+    formats = []
+    for item in FormatEnum:
+        formats.append(str(item)[11:])
+    with open(info_path, "r") as file:
+        info = json.loads("".join(file.readlines()))
+    return render_template('recording_specific.html', info=info,
+                           formats=formats, id=recording_raw)
+
+
 @web_app.route('/camera')
 def show_camera():
     return render_template('camera.html')
@@ -141,17 +214,20 @@ def human_readable_size(size):
         return "0B"
     n = math.floor(math.log(size, 1024))
     size_names = ["B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-    return str(round(size / math.pow(1024, n), 1)) + size_names[n + 1]
+    return str(round(size / math.pow(1024, n), 1)) + " " + size_names[n + 1]
 
 
 @web_app.route('/settings', methods=['GET', 'POST'])
 def show_settings():
     if request.method == 'POST':
-        recording_format = request.form["recording_format"]
+        wifiapname = request.form["wifiapname"]
+        wifiappassword = request.form["wifiappassword"]
         recording_location = request.form["recording_location"]
         connection = service.data.connection.Connection.get_instance()
-        connection.put_setting("recording.format", recording_format)
         connection.put_setting("recording.location", recording_location)
+        connection.put_setting("ap.name", wifiapname)
+        connection.put_setting("ap.password", wifiappassword)
+        service.data.wifi.write_wifi_config(wifiapname, wifiappassword)
 
     config = service.data.connection.Connection.get_instance()  # type: service.data.connection.Connection
 
@@ -169,99 +245,42 @@ def show_settings():
 
     settings["current"]["selected_mount"] = config.get_setting(
         "recording.location", "/")
-    settings["speeds"] = [
-        {
-            "value": 300,
+
+    settings["speeds"] = []
+    for speed in [300, 500, 750, 1000, 1250, 1500, 1750, 2000, 2500, 5000,
+                  10000, 15000, 20000, 25000, 30000, 45000, 60000]:
+        human_speed = speed
+        unit = "ms"
+        if human_speed >= 1000:
+            human_speed /= 1000
+            unit = "s"
+        if human_speed >= 60:
+            human_speed /= 60
+            unit = "m"
+        human_speed = str(human_speed) + unit
+        speed_text = "sleepy"
+        tests = {750: "fast", 1500: "normal", 15000: "slow"}
+        for speed_test in tests:
+            if speed < speed_test:
+                speed_text = tests[speed_test]
+                break
+
+        settings["speeds"].append({
+            "value": speed,
             "is_selected": False,
-            "label": "300ms (Fast)"
-        },
-        {
-            "value": 500,
-            "is_selected": False,
-            "label": "500ms (Fast)"
-        },
-        {
-            "value": 750,
-            "is_selected": False,
-            "label": "750ms (Normal)"
-        },
-        {
-            "value": 1000,
-            "is_selected": False,
-            "label": "1s (Normal)"
-        },
-        {
-            "value": 1250,
-            "is_selected": False,
-            "label": "1.25s (Normal)"
-        },
-        {
-            "value": 1500,
-            "is_selected": False,
-            "label": "1.5s (Normal)"
-        },
-        {
-            "value": 1750,
-            "is_selected": False,
-            "label": "1.75s (Slow)"
-        },
-        {
-            "value": 2000,
-            "is_selected": False,
-            "label": "2s (Slow)"
-        },
-        {
-            "value": 2500,
-            "is_selected": False,
-            "label": "2.5ms (Slow)"
-        },
-        {
-            "value": 5000,
-            "is_selected": False,
-            "label": "5s (Slow)"
-        },
-        {
-            "value": 10000,
-            "is_selected": False,
-            "label": "10s (Slow)"
-        },
-        {
-            "value": 15000,
-            "is_selected": False,
-            "label": "15s (Slow)"
-        },
-        {
-            "value": 20000,
-            "is_selected": False,
-            "label": "20s (Sleepy)"
-        },
-        {
-            "value": 25000,
-            "is_selected": False,
-            "label": "25s (Sleepy)"
-        },
-        {
-            "value": 30000,
-            "is_selected": False,
-            "label": "30s (Sleepy)"
-        },
-        {
-            "value": 45000,
-            "is_selected": False,
-            "label": "45s (Sleepy)"
-        },
-        {
-            "value": 60000,
-            "is_selected": False,
-            "label": "1m (Sleepy)"
-        }
-    ]
+            "label": str(human_speed) + " (" + speed_text + ")"
+        })
 
     currrent_speed = config.get_setting("recording.speed", 300)
     for setting in settings["speeds"]:
         if setting["value"] == currrent_speed:
             setting["is_selected"] = True
             break
+
+    settings["ap"] = {
+        "name": config.get_setting("ap.name", "pi"),
+        "password": config.get_setting("ap.password", "raspberry"),
+    }
 
     return render_template('settings.html', settings=settings)
 
@@ -331,7 +350,7 @@ def show_api_recordings_list():
     recordings = manager.list_recordings()
     resp_table = table.generate_table(len(recordings), results_per_page,
                                       results_start,
-                                      ["Name", "Mount", "Size"])
+                                      ["Name", "Mount", "Size", ""])
 
     def mount_icon(mount: service.data.disk.Mount):
         return ['<i class="fa fa-usb" aria-hidden="true"></i>',
@@ -343,8 +362,16 @@ def show_api_recordings_list():
                      results_start: results_start + results_per_page]:
         mount = service.data.disk.get_mount(recording.mount)
         resp_table.table_body.append(
-            [recording.name, mount_icon(mount) + " " + mount.mount_point,
-             human_readable_size(recording.size_in_bytes)])
+            [
+                "<a href=\"/recordings/" + quote(base64.b64encode(
+                    bytes(recording.path,
+                          "UTF-8"))) + "\">" + recording.name + "</a>",
+                mount_icon(mount) + " " + mount.mount_point,
+                human_readable_size(recording.size_in_bytes),
+                '<a href="#" data-action-url="/recordings/' + quote(
+                    base64.b64encode(
+                        bytes(recording.path,
+                              "UTF-8"))) + '/delete/yes" data-toggle="modal" data-target="#exampleModal" data-modal-content="#modalRemoveRecordingVerification" class="btn btn-danger row-btn"><i class="fa fa-trash-o" aria-hidden="true"></i></a>'])
     return jsonify(resp_table.as_dict())
 
 

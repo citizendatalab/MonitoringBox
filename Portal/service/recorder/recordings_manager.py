@@ -1,6 +1,7 @@
 import json
 import threading
 from typing import List
+import datetime
 
 import time
 from  service.sensor.communicator import communicators
@@ -8,6 +9,7 @@ import service.data.disk
 import os
 import service.data.connection
 from service.sensor.communicator.communicators import AbstractCommunicator
+from service.sensor.communicator.communicators import get_communicator_instance
 from service.sensor_manager import SensorType, SensorManager, Sensor
 from typing import Dict
 
@@ -49,9 +51,18 @@ class SensorDetails:
         return {
             "name": self.name,
             "device": self.device,
-            "sensor_type": self.sensor_type,
+            "sensor_type": self.sensor_type.name,
             "settings": self.settings
         }
+
+    @staticmethod
+    def from_dict(data: dict):
+        return SensorDetails(
+            SensorType.from_string(data["sensor_type"]),
+            data["name"],
+            data["device"],
+            data["settings"]
+        )
 
 
 class RecordDetails:
@@ -69,6 +80,13 @@ class RecordDetails:
         return {
             "sensor_details": details
         }
+
+    @staticmethod
+    def from_dict(data: dict):
+        details = []
+        for sensor in data["sensor_details"]:
+            details.append(SensorDetails.from_dict(sensor))
+        return RecordDetails(details)
 
 
 class Recording:
@@ -112,6 +130,14 @@ class Recording:
             "path": self.path
         }
 
+    @staticmethod
+    def from_dict(data: Dict):
+        details = None
+        if data["record_details"] is not None:
+            details = RecordDetails.from_dict(data["record_details"])
+        return Recording(data["mount"], data["name"], data["size_in_bytes"],
+                         data["path"], details)
+
 
 # callback_options["callback"](data, connection, callback_options["options"])
 def _sensor_value_callback(data, connection, callback_options):
@@ -131,7 +157,7 @@ class Recorder(threading.Thread):
         self._recording = recording
 
     def _get_sensors(self):
-        manager = SensorManager()
+        manager = SensorManager.get_instance()
         sensors = []
         for device in manager.get_sensor_devices():
             sensors.append(manager.get_sensor_by_device(device))
@@ -144,7 +170,7 @@ class Recorder(threading.Thread):
         for sensor in sensors:
             communicators.append({
                 "sensor": sensor,
-                "communicator": communicators.get_communicator_instance(sensor),
+                "communicator": get_communicator_instance(sensor),
                 "recording": self._recording
             })
         return communicators
@@ -161,10 +187,11 @@ class Recorder(threading.Thread):
                 communicator = communicator["communicator"]
                 communicator.get_sensor_values(sensor, _sensor_value_callback, {
                     "cycle": self._cycle,
-                    "sensor": sensor
+                    "sensor": sensor,
+                    "recording": self._recording
                 })
             self._cycle += 1
-            time.sleep(delay)
+            time.sleep(delay / 1000)
 
 
 class RecordingManager:
@@ -210,16 +237,18 @@ class RecordingManager:
     def new_recording(self):
         config = service.data.connection.Connection.get_instance()  # type: service.data.connection.Connection
         mount = config.get_setting("recording.location", "/")
-        name = "NOT IMPLEMENTED"
+        now = datetime.datetime.now()
+
+        name = str(now.year) + "-" + str(now.month) + "-" + str(
+            now.day) + " " + str(now.hour) + "." + str(now.minute)
         size_in_bytes = 0
         path = mount + "/MonitoringBox_recordings/" + name
         sensor_details = []
         manager = SensorManager.get_instance()
-        manager.get_available_devices()
-        for sensor in SensorManager.sensors:
-            sensor_type = sensor.sensor_type
-            name = sensor.name
-            device = sensor.device
+        for sensor in manager.sensors:
+            sensor_type = manager.sensors[sensor].sensor_type
+            name = manager.sensors[sensor].name
+            device = manager.sensors[sensor].device
             settings = {}
 
             detail = SensorDetails(sensor_type, name, device, settings)
@@ -228,7 +257,7 @@ class RecordingManager:
 
         return Recording(mount, name, size_in_bytes, path, recording_details)
 
-    def _lock(self, sensor: Sensor):
+    def _lock_writer(self, sensor: Sensor):
         self._lock.acquire()
         if sensor.device not in self._recording_lock:
             self._recording_lock[sensor.device] = threading.Lock()
@@ -246,21 +275,32 @@ class RecordingManager:
 
         if not os.path.exists(info_path):
             with open(info_path, "w") as file:
-                json.dump(file, recording.as_dict())
+                temp = json.dumps(recording.as_dict())
+                file.write(temp)
 
-        for key in recording.record_details.sensor_details:
-            detail = recording.record_details.sensor_details[
-                key]  # type: RecordDetail
+        for detail in recording.record_details.sensor_details:
             if not os.path.exists(
                                     recording.path + "/" + detail.sensor_type.name):
                 os.mkdir(recording.path + "/" + detail.sensor_type.name)
 
+    def get_recording(self, path: str) -> Recording:
+        info_path = path + "/recording.json"
+        if os.path.exists(info_path):
+            data = {}
+            with open(info_path, "r") as file:
+                raw = "\n".join(file.readlines())
+                data = json.loads(raw)
+            return Recording.from_dict(data)
+        else:
+            raise FileNotFoundError()
+
     def _register_record(self, recording: Recording, cycle: int, sensor: Sensor,
                          value: any):
-        self._lock(sensor)
+        self._lock_writer(sensor)
         self._setup_recording_information(recording)
 
-        with open(recording.path + "/" + sensor.sensor_type.name + "/" + sensor.device.replace(
+        with open(
+                                                        recording.path + "/" + sensor.sensor_type.name + "/" + sensor.device.replace(
                             "/", "_") + ".dat", "a+") as file:
             file.write(json.dumps({"cycle": cycle, "data": value}) + "\n")
             file.close()

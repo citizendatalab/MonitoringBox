@@ -121,4 +121,4 @@ def get_communicator_instance(sensor: Sensor):
         return ExampleCommunicator()
     elif sensor.sensor_type == SensorType.PI_CAMERA:
         return PiCamCommunicator()
-    raise NotImplemented()
+    raise Exception("Unkown sensor")

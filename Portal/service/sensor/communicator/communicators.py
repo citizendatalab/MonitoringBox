@@ -4,9 +4,8 @@ from typing import Callable
 import io
 
 import datetime
-import main
 import service.serial.manager
-
+import service.sensor.camera
 from service.sensor_manager import Sensor, SensorType
 
 
@@ -122,7 +121,7 @@ class PiCamCommunicator(AbstractCommunicator):
         now = datetime.datetime.now()
         photo_path = os.path.join(photo_folder,
                                   now.strftime("%y.%m.%d@%H.%M.%S.%f.jpg"))
-        main.camera.capture(photo_path)
+        service.sensor.camera.camera.capture(photo_path)
 
         callback({
             "location": photo_path,

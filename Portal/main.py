@@ -1,7 +1,6 @@
 import os
 import shutil
-
-from orcus import json
+import json
 from werkzeug.wrappers import Response
 
 import service.serial.manager

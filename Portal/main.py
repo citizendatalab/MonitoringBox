@@ -16,6 +16,7 @@ from service.recorder.post_recording import FormatEnum, FormatMaker, \
     ProgressInformer
 from service.recorder.recordings_manager import RecordingManager
 from service.sensor.communicator.communicators import AbstractCommunicator
+import service.data.wifi
 from service.sensor.handler_watcher import HandlerWatcher
 from service.sensor_manager import HandlerTrigger
 from service.sensor_manager import SensorType
@@ -227,6 +228,7 @@ def show_settings():
         connection.put_setting("recording.location", recording_location)
         connection.put_setting("ap.name", wifiapname)
         connection.put_setting("ap.password", wifiappassword)
+        service.data.wifi.write_wifi_config(wifiapname, wifiappassword)
 
     config = service.data.connection.Connection.get_instance()  # type: service.data.connection.Connection
 
@@ -244,93 +246,31 @@ def show_settings():
 
     settings["current"]["selected_mount"] = config.get_setting(
         "recording.location", "/")
-    settings["speeds"] = [
-        {
-            "value": 300,
+
+    settings["speeds"] = []
+    for speed in [300, 500, 750, 1000, 1250, 1500, 1750, 2000, 2500, 5000,
+                  10000, 15000, 20000, 25000, 30000, 45000, 60000]:
+        human_speed = speed
+        unit = "ms"
+        if human_speed >= 1000:
+            human_speed /= 1000
+            unit = "s"
+        if human_speed >= 60:
+            human_speed /= 60
+            unit = "m"
+        human_speed = str(human_speed) + unit
+        speed_text = "sleepy"
+        tests = {750: "fast", 1500: "normal", 15000: "slow"}
+        for speed_test in tests:
+            if speed < speed_test:
+                speed_text = tests[speed_test]
+                break
+
+        settings["speeds"].append({
+            "value": speed,
             "is_selected": False,
-            "label": "300ms (Fast)"
-        },
-        {
-            "value": 500,
-            "is_selected": False,
-            "label": "500ms (Fast)"
-        },
-        {
-            "value": 750,
-            "is_selected": False,
-            "label": "750ms (Normal)"
-        },
-        {
-            "value": 1000,
-            "is_selected": False,
-            "label": "1s (Normal)"
-        },
-        {
-            "value": 1250,
-            "is_selected": False,
-            "label": "1.25s (Normal)"
-        },
-        {
-            "value": 1500,
-            "is_selected": False,
-            "label": "1.5s (Normal)"
-        },
-        {
-            "value": 1750,
-            "is_selected": False,
-            "label": "1.75s (Slow)"
-        },
-        {
-            "value": 2000,
-            "is_selected": False,
-            "label": "2s (Slow)"
-        },
-        {
-            "value": 2500,
-            "is_selected": False,
-            "label": "2.5ms (Slow)"
-        },
-        {
-            "value": 5000,
-            "is_selected": False,
-            "label": "5s (Slow)"
-        },
-        {
-            "value": 10000,
-            "is_selected": False,
-            "label": "10s (Slow)"
-        },
-        {
-            "value": 15000,
-            "is_selected": False,
-            "label": "15s (Slow)"
-        },
-        {
-            "value": 20000,
-            "is_selected": False,
-            "label": "20s (Sleepy)"
-        },
-        {
-            "value": 25000,
-            "is_selected": False,
-            "label": "25s (Sleepy)"
-        },
-        {
-            "value": 30000,
-            "is_selected": False,
-            "label": "30s (Sleepy)"
-        },
-        {
-            "value": 45000,
-            "is_selected": False,
-            "label": "45s (Sleepy)"
-        },
-        {
-            "value": 60000,
-            "is_selected": False,
-            "label": "1m (Sleepy)"
-        }
-    ]
+            "label": str(human_speed) + " (" + speed_text + ")"
+        })
 
     currrent_speed = config.get_setting("recording.speed", 300)
     for setting in settings["speeds"]:

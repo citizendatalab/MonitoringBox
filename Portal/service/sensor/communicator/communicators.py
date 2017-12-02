@@ -99,16 +99,42 @@ class AbstractCommunicator:
         return callback_options["results"]
 
 
-class ExampleCommunicator(AbstractCommunicator):
+class AbstractArduinoCommunicator(AbstractCommunicator):
     def get_sensor_values(self, sensor: Sensor, callback: Callable,
                           callback_options):
-        command = "getCurrentCount"
-        options = ""
+        command = self.get_command()
+        options = self.get_options()
         callback_options_wrapper = {"options": callback_options,
                                     "callback": callback}
         sensor.connection.send_command(command, options,
                                        _generic_callback_handler,
                                        callback_options_wrapper)
+
+    def get_command(self) -> str:
+        return ""
+
+    def get_options(self) -> str:
+        return ""
+
+
+class ExampleCommunicator(AbstractArduinoCommunicator):
+    def get_command(self) -> str:
+        return "getCurrentCount"
+
+
+class HumidityTemperatureSensorCommunicator(AbstractArduinoCommunicator):
+    def get_command(self) -> str:
+        return "getCurrentCount"
+
+
+class CO2SensorCommunicator(AbstractArduinoCommunicator):
+    def get_command(self) -> str:
+        return "getValue"
+
+
+class HeartRateSensorCommunicator(AbstractArduinoCommunicator):
+    def get_command(self) -> str:
+        return "getCurrentCount"
 
 
 class PiCamCommunicator(AbstractCommunicator):
@@ -137,4 +163,10 @@ def get_communicator_instance(sensor: Sensor):
         return ExampleCommunicator()
     elif sensor.sensor_type == SensorType.PI_CAMERA:
         return PiCamCommunicator()
+    elif sensor.sensor_type == SensorType.HUMIDITY_TEMPERATURE_SENSOR:
+        return HumidityTemperatureSensorCommunicator()
+    elif sensor.sensor_type == SensorType.CO2_SENSOR:
+        return CO2SensorCommunicator()
+    elif sensor.sensor_type == SensorType.HEART_RATE_SENSOR:
+        return HeartRateSensorCommunicator()
     raise Exception("Unkown sensor")

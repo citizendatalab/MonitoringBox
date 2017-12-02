@@ -76,9 +76,41 @@ class ExampleSensorWriter(AbstractSensorWriter):
         return [count]
 
 
+class HumidityTemperatureSensorWriter(AbstractSensorWriter):
+    def get_headers(self):
+        return ["Temperature", "Humidity"]
+
+    def get_values(self, record: str):
+        a = json.loads(record)
+        data = a["data"]["data"]
+        return [data["Temperature"], data["Humidity"]]
+
+
+class CO2SensorWriter(AbstractSensorWriter):
+    def get_headers(self):
+        return ["CO2 value"]
+
+    def get_values(self, record: str):
+        temp = json.loads(record)
+        data = temp["data"]["data"]
+        return [data["Value"]]
+class HeartRateSensorWriter(AbstractSensorWriter):
+    def get_headers(self):
+        return ["Heart rate - ir value", "Heart rate - bpm"]
+    def get_values(self, record: str):
+        a = json.loads(record)
+        data = a["data"]["data"]
+        return [data["irValue"], data["beatsPerMinute"]]
+
 def get_sensor_writer(sensor: Sensor):
     if sensor.sensor_type == SensorType.EXAMPLE_SENSOR:
         return ExampleSensorWriter()
+    elif sensor.sensor_type == SensorType.HUMIDITY_TEMPERATURE_SENSOR:
+        return HumidityTemperatureSensorWriter()
+    elif sensor.sensor_type == SensorType.CO2_SENSOR:
+        return CO2SensorWriter()
+    elif sensor.sensor_type == SensorType.HEART_RATE_SENSOR:
+        return HeartRateSensorWriter()
     raise NotImplemented()
 
 

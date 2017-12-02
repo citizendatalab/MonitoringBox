@@ -184,7 +184,7 @@ class Manager:
         devices = []
         excluded_devices = ["/dev/ttyAMA0"]
         for device in serial.tools.list_ports.comports():
-            if not device in excluded_devices:
+            if not device.device in excluded_devices:
                 devices.append(device.device)
         return devices
 

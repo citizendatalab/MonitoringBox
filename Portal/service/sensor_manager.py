@@ -27,9 +27,12 @@ class SensorType(Enum):
             "EXAMPLE_SENSOR": SensorType.EXAMPLE_SENSOR,
             "PI_CAMERA": SensorType.PI_CAMERA,
             "GPS_SENSOR": SensorType.GPS_SENSOR,
-            "Temperature and Humidity": SensorType.HUMIDITY_TEMPERATURE_SENSOR,
+            "TEM_AND_HUM_SENSOR": SensorType.HUMIDITY_TEMPERATURE_SENSOR,
+            "HUMIDITY_TEMPERATURE_SENSOR": SensorType.HUMIDITY_TEMPERATURE_SENSOR,
             "CO2": SensorType.CO2_SENSOR,
+            "CO2_SENSOR": SensorType.CO2_SENSOR,
             "HEART_RATE_SENSOR": SensorType.HEART_RATE_SENSOR,
+            "HEARTRATE_SENSOR": SensorType.HEART_RATE_SENSOR,
             "GALVANIC_SKIN_RESPONSE_SENSOR": SensorType.GALVANIC_SKIN_RESPONSE_SENSOR
         }
         if type in types:

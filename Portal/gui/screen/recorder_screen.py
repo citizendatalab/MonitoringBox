@@ -28,7 +28,7 @@ class RecorderScreen(AbstractScreen):
         self.connect_slots(RecorderScreen.sender)
         manager = RecordingManager.get_instance()  # type: RecordingManager
         self._recording = manager.new_recording()  # type: Recording
-        manager.start_recording(self._recording)
+        self._recorder = manager.start_recording(self._recording)
 
     def initUI(self):
         super(RecorderScreen, self).initUI()
@@ -39,7 +39,7 @@ class RecorderScreen(AbstractScreen):
     @staticmethod
     def options_handler():
         record_manager = RecordingManager.get_instance()  # type: RecordingManager
-        record_manager.stop_recording(RecorderScreen._instance._recording)
+        record_manager.stop_recording(RecorderScreen._instance._recorder)
 
         gui_manager = gui.manager.GUIManager.get_instance()  # type: gui.manager.GUIManager
         gui_manager.current_window.hide()

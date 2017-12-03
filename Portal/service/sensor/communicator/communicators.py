@@ -143,7 +143,7 @@ class PiCamCommunicator(AbstractCommunicator):
         recording = callback_options["recording"]  # type: Recording
         if not os.path.exists(recording.path):
             os.mkdir(recording.path)
-        photo_folder = os.path.join(recording.path, "CAMERA")
+        photo_folder = os.path.join(recording.path, "PI_CAMERA")
         if not os.path.exists(photo_folder):
             os.mkdir(photo_folder)
         now = datetime.datetime.now()

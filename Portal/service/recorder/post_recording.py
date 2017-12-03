@@ -209,17 +209,16 @@ class RAWFormatConverter(AbstractFormatConverter):
         return os.path.join(recording.path, sensor.sensor_type.name,
                             sensor.device.replace("/", "_")) + ".dat"
 
-    def _archive_get_sensor_paths(self, sensor: Sensor) -> str:
+    def _archive_get_sensor_paths(self, sensor: Sensor,
+                                  recording: Recording) -> str:
         out = [os.path.join(sensor.sensor_type.name,
                             sensor.device.replace("/", "_")) + ".dat"]
         if sensor.sensor_type == SensorType.PI_CAMERA:
-            path = os.path.join(sensor.sensor_type.name,
-                            sensor.device.replace("/", "_"))
+            path = os.path.join(recording.path, sensor.sensor_type.name)
             items = os.listdir(path)
             for name in items:
                 out.append(os.path.join(path, name))
         return out
-
 
     def create_format(self, recording: Recording,
                       progress_informer: ProgressInformer) -> str:
@@ -235,7 +234,7 @@ class RAWFormatConverter(AbstractFormatConverter):
 
         for sensor in recording.record_details.sensor_details:
             file_path = self._get_sensor_path(recording, sensor)
-            archive_path = self._archive_get_sensor_paths(sensor)
+            archive_path = self._archive_get_sensor_paths(sensor, recording)
             zf.write(file_path, archive_path)
 
         zf.close()

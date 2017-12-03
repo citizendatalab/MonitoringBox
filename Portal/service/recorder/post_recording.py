@@ -217,7 +217,7 @@ class RAWFormatConverter(AbstractFormatConverter):
         return out
 
 
-def _archive_get_sensor_paths(self, sensor: Sensor) -> str:
+    def _archive_get_sensor_paths(self, sensor: Sensor) -> str:
         out = [os.path.join(sensor.sensor_type.name,
                             sensor.device.replace("/", "_")) + ".dat"]
         if sensor.sensor_type == SensorType.PI_CAMERA:

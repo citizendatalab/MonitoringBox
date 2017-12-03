@@ -94,13 +94,25 @@ class CO2SensorWriter(AbstractSensorWriter):
         temp = json.loads(record)
         data = temp["data"]["data"]
         return [data["Value"]]
+
+
 class HeartRateSensorWriter(AbstractSensorWriter):
     def get_headers(self):
         return ["Heart rate - ir value", "Heart rate - bpm"]
+
     def get_values(self, record: str):
         a = json.loads(record)
         data = a["data"]["data"]
         return [data["irValue"], data["beatsPerMinute"]]
+
+
+class PiCamWriter(AbstractSensorWriter):
+    def get_headers(self):
+        return ["Pi cam picture"]
+
+    def get_values(self, record: str):
+        return [record]
+
 
 def get_sensor_writer(sensor: Sensor):
     if sensor.sensor_type == SensorType.EXAMPLE_SENSOR:
@@ -111,6 +123,8 @@ def get_sensor_writer(sensor: Sensor):
         return CO2SensorWriter()
     elif sensor.sensor_type == SensorType.HEART_RATE_SENSOR:
         return HeartRateSensorWriter()
+    elif sensor.sensor_type == SensorType.PI_CAMERA:
+        return PiCamWriter()
     raise NotImplemented()
 
 

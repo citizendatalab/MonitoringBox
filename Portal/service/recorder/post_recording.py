@@ -206,24 +206,29 @@ class CSVFormatConverter(AbstractFormatConverter):
 
 class RAWFormatConverter(AbstractFormatConverter):
     def _get_sensor_paths(self, recording: Recording, sensor: Sensor) -> str:
-        out = [os.path.join(recording.path, sensor.sensor_type.name,
-                            sensor.device.replace("/", "_")) + ".dat"]
+        out = []
 
         if sensor.sensor_type == SensorType.PI_CAMERA:
             path = os.path.join(recording.path, sensor.sensor_type.name)
             items = os.listdir(path)
             for name in items:
                 out.append(os.path.join(path, name))
+        else:
+            out.append(os.path.join(sensor.sensor_type.name,
+                                    sensor.device.replace("/", "_")) + ".dat")
         return out
 
-    def _archive_get_sensor_paths(self, recording: Recording, sensor: Sensor) -> str:
-        out = [os.path.join(sensor.sensor_type.name,
-                            sensor.device.replace("/", "_")) + ".dat"]
+    def _archive_get_sensor_paths(self, recording: Recording,
+                                  sensor: Sensor) -> str:
+        out = []
         if sensor.sensor_type == SensorType.PI_CAMERA:
             path = os.path.join(recording.path, sensor.sensor_type.name)
             items = os.listdir(path)
             for name in items:
                 out.append(os.path.join(sensor.sensor_type.name, name))
+        else:
+            out.append(os.path.join(sensor.sensor_type.name,
+                                    sensor.device.replace("/", "_")) + ".dat")
         return out
 
     def create_format(self, recording: Recording,

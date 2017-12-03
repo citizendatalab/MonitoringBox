@@ -216,7 +216,6 @@ class RAWFormatConverter(AbstractFormatConverter):
                 out.append(os.path.join(path, name))
         return out
 
-
     def _archive_get_sensor_paths(self, sensor: Sensor) -> str:
         out = [os.path.join(sensor.sensor_type.name,
                             sensor.device.replace("/", "_")) + ".dat"]
@@ -241,7 +240,7 @@ class RAWFormatConverter(AbstractFormatConverter):
 
         for sensor in recording.record_details.sensor_details:
             file_paths = self._get_sensor_paths(recording, sensor)
-            archive_paths = self._archive_get_sensor_paths(sensor, recording)
+            archive_paths = self._archive_get_sensor_paths(sensor)
             i = 0
             for file_path in file_paths:
                 archive_path = archive_paths[i]

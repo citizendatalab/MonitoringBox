@@ -108,10 +108,12 @@ class HeartRateSensorWriter(AbstractSensorWriter):
 
 class PiCamWriter(AbstractSensorWriter):
     def get_headers(self):
-        return ["Pi cam picture"]
+        return ["Pi cam - picture", "Pi cam - date", "Pi cam - time"]
 
     def get_values(self, record: str):
-        return [record]
+        data = json.loads(record)
+        data = data["data"]
+        return [data["location"], data["date"], data["time"]]
 
 
 def get_sensor_writer(sensor: Sensor):

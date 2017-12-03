@@ -205,16 +205,23 @@ class CSVFormatConverter(AbstractFormatConverter):
 
 
 class RAWFormatConverter(AbstractFormatConverter):
-    def _get_sensor_path(self, recording: Recording, sensor: Sensor) -> str:
-        return os.path.join(recording.path, sensor.sensor_type.name,
-                            sensor.device.replace("/", "_")) + ".dat"
+    def _get_sensor_paths(self, recording: Recording, sensor: Sensor) -> str:
+        out = [os.path.join(recording.path, sensor.sensor_type.name,
+                            sensor.device.replace("/", "_")) + ".dat"]
 
-    def _archive_get_sensor_paths(self, sensor: Sensor,
-                                  recording: Recording) -> str:
+        if sensor.sensor_type == SensorType.PI_CAMERA:
+            path = os.path.join(recording.path, sensor.sensor_type.name)
+            items = os.listdir(path)
+            for name in items:
+                out.append(os.path.join(path, name))
+        return out
+
+
+def _archive_get_sensor_paths(self, sensor: Sensor) -> str:
         out = [os.path.join(sensor.sensor_type.name,
                             sensor.device.replace("/", "_")) + ".dat"]
         if sensor.sensor_type == SensorType.PI_CAMERA:
-            path = os.path.join(recording.path, sensor.sensor_type.name)
+            path = os.path.join(sensor.sensor_type.name)
             items = os.listdir(path)
             for name in items:
                 out.append(os.path.join(path, name))
@@ -233,10 +240,13 @@ class RAWFormatConverter(AbstractFormatConverter):
         zf = zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED)
 
         for sensor in recording.record_details.sensor_details:
-            file_path = self._get_sensor_path(recording, sensor)
-            archive_path = self._archive_get_sensor_paths(sensor, recording)
-            zf.write(file_path, archive_path)
-
+            file_paths = self._get_sensor_paths(recording, sensor)
+            archive_paths = self._archive_get_sensor_paths(sensor, recording)
+            i = 0
+            for file_path in file_paths:
+                archive_path = archive_paths[i]
+                zf.write(file_path, archive_path)
+                i += 1
         zf.close()
         return path
 

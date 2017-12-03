@@ -319,7 +319,7 @@ def show_api_camera():
     # image_64_encode = base64.encodestring(image_read)
     # Create an in-memory stream
     my_stream = io.BytesIO()
-    camera.capture(my_stream, 'jpeg', use_video_port=True)
+    service.sensor.camera.camera.capture(my_stream, 'jpeg', use_video_port=True)
 
     image_64_encode = base64.b64encode(my_stream.getvalue())
     amount = 1

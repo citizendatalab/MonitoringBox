@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.27)  5 DEC 2017 11:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.27)  5 DEC 2017 12:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -294,9 +294,16 @@ Sensor$
 
 [10 <./images/air-quality-click-breakout.jpg>]
 Chapter 8.
+<images/K30-gas-sensor-schematic.jpg, id=50, 395.076pt x 212.795pt>
+File: images/K30-gas-sensor-schematic.jpg Graphic file (type jpg)
+<use images/K30-gas-sensor-schematic.jpg>
+Package pdftex.def Info: images/K30-gas-sensor-schematic.jpg  used on input lin
+e 80. on input line 80.
+Package pdftex.def Info: Requested size: 258.75pt x 139.37036pt on input line 8
+0.
 [11
 
-]
+ <./images/K30-gas-sensor-schematic.jpg>]
 Chapter 9.
 [12
 
@@ -314,13 +321,13 @@ Chapter 12.
 
 ] (./Manual_setup_sensory_setup_Monitoring_Box.aux) ) 
 Here is how much of TeX's memory you used:
- 2625 strings out of 492985
- 42051 string characters out of 6136283
+ 2630 strings out of 492985
+ 42238 string characters out of 6136283
  99328 words of memory out of 5000000
- 6178 multiletter control sequences out of 15000+600000
+ 6182 multiletter control sequences out of 15000+600000
  10040 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,6n,39p,434b,263s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,6n,39p,434b,275s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2017/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/publ
@@ -329,11 +336,11 @@ ts/cm/cmmi7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 0.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/
 texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/20
 17/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-Output written on Manual_setup_sensory_setup_Monitoring_Box.pdf (17 pages, 4497
-33 bytes).
+Output written on Manual_setup_sensory_setup_Monitoring_Box.pdf (17 pages, 8309
+74 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
+ 94 PDF objects out of 1000 (max. 8388607)
  63 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

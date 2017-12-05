@@ -1,4 +1,4 @@
-#include "boxdriver/driver.h"
+#include "driver.h"
 
 const double Rl      = 1.0;               // Rl (Ohm) - Load resistance
 const double Vadc_5  = 0.0048828125;         // ADC step 5V/1024 4,88mV (10bit ADC)

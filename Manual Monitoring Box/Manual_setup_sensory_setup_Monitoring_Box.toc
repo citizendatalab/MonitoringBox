@@ -5,8 +5,8 @@
 \contentsline {chapter}{\numberline {5}Temperature and humidity sensor}{7}
 \contentsline {chapter}{\numberline {6}Heartrate sensor}{8}
 \contentsline {chapter}{\numberline {7}Regular carbon dioxide (CO$_2$) sensor}{9}
-\contentsline {chapter}{\numberline {8}Advanced carbon dioxide (CO$_2$) sensor}{12}
-\contentsline {chapter}{\numberline {9}Raspberry Pi Camera}{13}
-\contentsline {chapter}{\numberline {10}Galvanic skin response sensor}{14}
-\contentsline {chapter}{\numberline {11}Development issued example sensor}{15}
-\contentsline {chapter}{\numberline {12}Development issued unknown sensor}{16}
+\contentsline {chapter}{\numberline {8}Advanced carbon dioxide (CO$_2$) sensor}{11}
+\contentsline {chapter}{\numberline {9}Raspberry Pi Camera}{12}
+\contentsline {chapter}{\numberline {10}Galvanic skin response sensor}{13}
+\contentsline {chapter}{\numberline {11}Development issued example sensor}{14}
+\contentsline {chapter}{\numberline {12}Development issued unknown sensor}{15}

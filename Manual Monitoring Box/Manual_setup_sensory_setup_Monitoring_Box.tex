@@ -1,6 +1,8 @@
 \documentclass{report}
 \usepackage{inputenc} 
 \usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float}
 
 \title{Manual for setting up the sensors of the Monitoring Box}
 \author{Mick Nieman \\ Amsterdam University of Applied Sciences \and Pjotr Scholtze \\ Amsterdam University of Applied Sciences \and Heeyeon Joung \\ Seoul National University of Science and Technolgy}
@@ -51,13 +53,20 @@ A1 pin - Analog pin 1
 \chapter{Regular carbon dioxide (CO$_2$) sensor}
 The regular carbon dioxide (CO$_2$) sensor, from now on called the regular (CO$_2$) sensor, is a sensor developed by mikroelectronics, and the schematics for the assembly of the sensor are as follows. \\
 
-\includegraphics[scale=1]{images/Mikroe-Gas-sensor-schematic.jpg}
+\begin{figure}[H]
+	\centering
+\includegraphics[width=0.75\textwidth]{images/Mikroe-Gas-sensor-schematic.jpg}
+	\caption{Air Quality Click Schematic}
+\end{figure}
 
 Note that the actual sensor looks slightly different, though the pinout is the same, the 5.5V pin of the Air-quility-click goes onto the 5.5V pin on the Arduino, the GND pin on the Air-quility-click  goes onto the GND pin on the Arduino and the OUT pin on the Air-quility-click goes onto the A1 pin of the Arduino. \\
 The actual sensor looks like the following:\\
 
-\includegraphics[scale=1]{images/air-quality-click-breakout.jpg} 
-
+\begin{figure}[H]
+	\centering
+\includegraphics[width=0.75\textwidth]{images/air-quality-click-breakout.jpg} 
+	\caption{The Mikroe Gas Detector}
+\end{figure}
 
 The code coming with this sensor can be downloaded with the following link: $ https://github.com/pjotrscholtze/MonitoringBox/tree/develop/Sensors/CO2\_Sensor $
 

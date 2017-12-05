@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.28)  5 DEC 2017 14:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.27)  5 DEC 2017 13:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -53,35 +53,59 @@ File: pdftex.def 2017/06/24 v1.0g Graphics/color driver for pdftex
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
+(c:/texlive/2017/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(c:/texlive/2017/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen105
+\captionmargin@=\dimen106
+\captionwidth=\dimen107
+\caption@tempdima=\dimen108
+\caption@indent=\dimen109
+\caption@parindent=\dimen110
+\caption@hangindent=\dimen111
+)
+\c@ContinuedFloat=\count88
+)
+(c:/texlive/2017/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count89
+\float@exts=\toks17
+\float@box=\box26
+\@float@everytoks=\toks18
+\@floatcapt=\box27
+)
 (./Manual_setup_sensory_setup_Monitoring_Box.aux)
 \openout1 = `Manual_setup_sensory_setup_Monitoring_Box.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
 
 (c:/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count88
-\scratchdimen=\dimen105
-\scratchbox=\box26
-\nofMPsegments=\count89
-\nofMParguments=\count90
-\everyMPshowfont=\toks17
-\MPscratchCnt=\count91
-\MPscratchDim=\dimen106
-\MPnumerator=\count92
-\makeMPintoPDFobject=\count93
-\everyMPtoPDFconversion=\toks18
+\scratchcounter=\count90
+\scratchdimen=\dimen112
+\scratchbox=\box28
+\nofMPsegments=\count91
+\nofMParguments=\count92
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count93
+\MPscratchDim=\dimen113
+\MPnumerator=\count94
+\makeMPintoPDFobject=\count95
+\everyMPtoPDFconversion=\toks20
 ) (c:/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -138,20 +162,23 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 10.
+(Font)              <12> on input line 12.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 10.
+(Font)              <8> on input line 12.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 10.
+(Font)              <6> on input line 12.
  [1
 
 {c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [1]
 (./Manual_setup_sensory_setup_Monitoring_Box.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 7.
+(Font)              <7> on input line 8.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 7.
+(Font)              <5> on input line 8.
 )
 \tf@toc=\write3
 \openout3 = `Manual_setup_sensory_setup_Monitoring_Box.toc'.
@@ -164,11 +191,6 @@ Chapter 1.
 
 ]
 Chapter 2.
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--21
-
- []
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 22--23
 
@@ -185,24 +207,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 26--27
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--31
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--33
+Underfull \hbox (badness 10000) in paragraph at lines 30--33
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--35
 
  []
 
 [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 34--35
+Underfull \hbox (badness 10000) in paragraph at lines 36--37
 
  []
 
 
-Overfull \hbox (58.52863pt too wide) in paragraph at lines 36--37
+Overfull \hbox (58.52863pt too wide) in paragraph at lines 38--39
 \OT1/cmr/m/n/10 ning on the sen-sor can be down-loaded from https://github.com/
 pjotrscholtze/MonitoringBox,
  []
@@ -217,95 +244,82 @@ Chapter 4.
 
 ]
 Chapter 5.
-
-Underfull \hbox (badness 10000) in paragraph at lines 48--49
-
- []
-
-<images/Humi.jpg, id=35, 469.755pt x 187.099pt>
-File: images/Humi.jpg Graphic file (type jpg)
-<use images/Humi.jpg>
-Package pdftex.def Info: images/Humi.jpg  used on input line 50. on input line 
-50.
-Package pdftex.def Info: Requested size: 234.87692pt x 93.54926pt on input line
- 50.
-
-Underfull \hbox (badness 10000) in paragraph at lines 52--54
-
- []
-
-<images/DHT22.jpg, id=36, 425.59pt x 353.32pt>
-File: images/DHT22.jpg Graphic file (type jpg)
-<use images/DHT22.jpg>
-Package pdftex.def Info: images/DHT22.jpg  used on input line 55. on input line
- 55.
-Package pdftex.def Info: Requested size: 106.39723pt x 88.32977pt on input line
- 55.
 [7
 
- <./images/Humi.jpg> <./images/DHT22.jpg>]
+]
 Chapter 6.
 [8
 
 ]
 Chapter 7.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <24.88> on input line 60.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <20.74> on input line 60.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <17.28> on input line 60.
+[9
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--62
+]
+Chapter 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <24.88> on input line 54.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <20.74> on input line 54.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 54.
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--56
 
  []
 
-<images/Mikroe-Gas-sensor-schematic.jpg, id=43, 179.069pt x 168.63pt>
+<images/Mikroe-Gas-sensor-schematic.jpg, id=44, 179.069pt x 168.63pt>
 File: images/Mikroe-Gas-sensor-schematic.jpg Graphic file (type jpg)
 <use images/Mikroe-Gas-sensor-schematic.jpg>
 Package pdftex.def Info: images/Mikroe-Gas-sensor-schematic.jpg  used on input 
-line 63. on input line 63.
-Package pdftex.def Info: Requested size: 179.06856pt x 168.62958pt on input lin
-e 63.
+line 59. on input line 59.
+Package pdftex.def Info: Requested size: 258.75pt x 243.67354pt on input line 5
+9.
 
-Underfull \hbox (badness 10000) in paragraph at lines 65--67
+Underfull \hbox (badness 10000) in paragraph at lines 63--65
 
  []
 
-<images/air-quality-click-breakout.jpg, id=44, 1606.0pt x 1606.0pt>
+[10
+
+ <./images/Mikroe-Gas-sensor-schematic.jpg>]
+<images/air-quality-click-breakout.jpg, id=48, 1606.0pt x 1606.0pt>
 File: images/air-quality-click-breakout.jpg Graphic file (type jpg)
 <use images/air-quality-click-breakout.jpg>
 Package pdftex.def Info: images/air-quality-click-breakout.jpg  used on input l
 ine 68. on input line 68.
-Package pdftex.def Info: Requested size: 1605.99611pt x 1605.99611pt on input l
-ine 68.
+Package pdftex.def Info: Requested size: 258.75pt x 258.75415pt on input line 6
+8.
 
-Overfull \hbox (1275.99611pt too wide) in paragraph at lines 68--69
-[][] 
- []
-
-[9
-
- <./images/Mikroe-Gas-sensor-schematic.jpg>]
-Overfull \vbox (1055.99611pt too high) has occurred while \output is active []
-
-
-[10 <./images/air-quality-click-breakout.jpg>]
-Overfull \hbox (47.79955pt too wide) in paragraph at lines 71--72
+Overfull \hbox (47.79955pt too wide) in paragraph at lines 72--73
 \OML/cmm/m/it/10 https \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 ==github:com=pjotrsch
 oltze=MonitoringBox=tree=develop=Sensors=CO\OT1/cmr/m/n/10 2[]\OML/cmm/m/it/10 
 Sensor$ 
  []
 
-[11]
-Chapter 8.
-[12
-
-]
+[11 <./images/air-quality-click-breakout.jpg>]
 Chapter 9.
-[13
+<images/K30-gas-sensor-schematic.jpg, id=54, 395.076pt x 212.795pt>
+File: images/K30-gas-sensor-schematic.jpg Graphic file (type jpg)
+<use images/K30-gas-sensor-schematic.jpg>
+Package pdftex.def Info: images/K30-gas-sensor-schematic.jpg  used on input lin
+e 83. on input line 83.
+Package pdftex.def Info: Requested size: 258.75pt x 139.37036pt on input line 8
+3.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 89.
+(c:/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 89.
+ [12
 
-]
+ <./images/K30-gas-sensor-schematic.jpg>]
+Overfull \hbox (15.473pt too wide) in paragraph at lines 94--95
+[]\OT1/cmr/m/n/10 Downloading the code from https://github.com/pjotrscholtze/Mo
+nitoringBox
+ []
+
+[13]
 Chapter 10.
 [14
 
@@ -317,15 +331,19 @@ Chapter 11.
 Chapter 12.
 [16
 
+]
+Chapter 13.
+[17
+
 ] (./Manual_setup_sensory_setup_Monitoring_Box.aux) ) 
 Here is how much of TeX's memory you used:
- 1516 strings out of 492985
- 22227 string characters out of 6136283
- 77976 words of memory out of 5000000
- 5077 multiletter control sequences out of 15000+600000
+ 2647 strings out of 492985
+ 42524 string characters out of 6136283
+ 99328 words of memory out of 5000000
+ 6196 multiletter control sequences out of 15000+600000
  10040 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,6n,25p,434b,191s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,6n,39p,434b,267s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2017/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/publ
@@ -333,12 +351,13 @@ ic/amsfonts/cm/cmmi10.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmmi7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 0.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/
 texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/20
-17/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-Output written on Manual_setup_sensory_setup_Monitoring_Box.pdf (18 pages, 1034
-408 bytes).
+17/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2017/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on Manual_setup_sensory_setup_Monitoring_Box.pdf (19 pages, 8403
+57 bytes).
 PDF statistics:
- 98 PDF objects out of 1000 (max. 8388607)
- 65 compressed objects within 1 object stream
+ 105 PDF objects out of 1000 (max. 8388607)
+ 71 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

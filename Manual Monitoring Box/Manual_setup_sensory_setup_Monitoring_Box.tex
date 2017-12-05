@@ -1,6 +1,8 @@
 \documentclass{report}
 \usepackage{inputenc} 
 \usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float}
 
 \title{Manual for setting up the sensors of the Monitoring Box}
 \author{Mick Nieman \\ Amsterdam University of Applied Sciences \and Pjotr Scholtze \\ Amsterdam University of Applied Sciences \and Heeyeon Joung \\ Seoul National University of Science and Technolgy}
@@ -41,6 +43,7 @@ Every sensor has it's own schematics for assembling the sensors, the code runnin
 GND pin - Ground pin \\
 A1 pin - Analog pin 1
 
+\chapter{Pushing code to an Arduino Nano}
 
 \chapter{Global Positioning System (GPS) sensor}
 
@@ -60,13 +63,20 @@ Below is the picture of explaining pin on the DHT22 \\
 \chapter{Regular carbon dioxide (CO$_2$) sensor}
 The regular carbon dioxide (CO$_2$) sensor, from now on called the regular (CO$_2$) sensor, is a sensor developed by mikroelectronics, and the schematics for the assembly of the sensor are as follows. \\
 
-\includegraphics[scale=1]{images/Mikroe-Gas-sensor-schematic.jpg}
+\begin{figure}[H]
+	\centering
+\includegraphics[width=0.75\textwidth]{images/Mikroe-Gas-sensor-schematic.jpg}
+	\caption{Air Quality Click Schematic}
+\end{figure}
 
 Note that the actual sensor looks slightly different, though the pinout is the same, the 5.5V pin of the Air-quility-click goes onto the 5.5V pin on the Arduino, the GND pin on the Air-quility-click  goes onto the GND pin on the Arduino and the OUT pin on the Air-quility-click goes onto the A1 pin of the Arduino. \\
 The actual sensor looks like the following:\\
 
-\includegraphics[scale=1]{images/air-quality-click-breakout.jpg} 
-
+\begin{figure}[H]
+	\centering
+\includegraphics[width=0.75\textwidth]{images/air-quality-click-breakout.jpg} 
+	\caption{The Mikroe Gas Detector}
+\end{figure}
 
 The code coming with this sensor can be downloaded with the following link: $ https://github.com/pjotrscholtze/MonitoringBox/tree/develop/Sensors/CO2\_Sensor $
 
@@ -74,7 +84,24 @@ The code coming with this sensor can be downloaded with the following link: $ ht
 Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor. 
 
 \chapter{Advanced carbon dioxide (CO$_2$) sensor}
+For starters, this CO$_2$ sensor is a little bit more complex than the other CO$_2$ sensor from the previous chapter. This sensor is more accurate but also works in a different way and not only the accuracy is higher, so is the price. 
+The CO$_2$ sensor is developed by CO2meter.com and currently we're using the K30 model. During our testing phase we discovered that the K30 model is not compatible with the Arduino Nano nor with the Arduino Pro Mini but it is compatible with the Arduino UNO. 
 
+\begin{figure}[H]
+	\centering
+\includegraphics[width=0.75\textwidth]{images/K30-gas-sensor-schematic.jpg} 
+	\caption{The K30 CO$_2$ sensor from  CO2meter.com}
+\end{figure}
+
+After assembling the pins the right way, note that the pins on the K30 aren't labeled, but you will have to attach them to the inner (second) row, skipping the first pin, so using pin 2, 3, 4 and 5 from right to left. 
+\begin{itemize}
+\item 'pin 2' of the K30 goes to the GND of the Arduino, 
+\item 'pin 3' of the K30 goes to the 5V (or VCC) of the Arduino,
+\item 'pin 4' (the RXD pin) of the K30 goes to pin 12 (TXD)of the Arduino 
+\item 'pin 5' of the K30 (TXD) goes to pin 13 (RXD) of the Arduino. 
+
+Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino UNO (this works the same way as with the Arduino Nano) should result in a functional CO$_2$ sensor. 
+\end{itemize}
 \chapter{Raspberry Pi Camera}
 
 \chapter{Galvanic skin response sensor}

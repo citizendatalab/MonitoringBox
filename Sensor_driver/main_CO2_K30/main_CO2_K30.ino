@@ -27,20 +27,21 @@ void handlerGetValue(String *command, String *data) {
 
 void setup() 
 {
-  BoxDriver::getInstance()->init("Advanced CO2 Sensor", "CO2_SENSOR+", 9600, registerListeners);
+  BoxDriver::getInstance()->init("Advanced CO2 Sensor", "CO2_SENSOR", 9600, registerListeners);
   
   // put your setup code here, to run once:
-  Serial.begin(9600);         //Opens the main serial port to communicate with the computer
+  //Serial.begin(9600);         //Opens the main serial port to communicate with the computer
   K_30_Serial.begin(9600);    //Opens the virtual serial port with a baud of 9600
 }
 
 void loop() 
 {
-  unsigned long valCO2 = getValue(response);
-  sendRequest(readCO2);
-  Serial.print("Co2 ppm = ");
-  Serial.println(valCO2);
-  delay(2000);
+  if (millis() % 2000) {
+    valCO2 = getValue(response);
+    sendRequest(readCO2);
+    //Serial.print("Co2 ppm = ");
+    //Serial.println(valCO2);
+  }
 
   BoxDriver::getInstance()->tick();
 }

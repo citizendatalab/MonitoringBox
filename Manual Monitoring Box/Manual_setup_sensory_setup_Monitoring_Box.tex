@@ -43,6 +43,7 @@ Every sensor has it's own schematics for assembling the sensors, the code runnin
 GND pin - Ground pin \\
 A1 pin - Analog pin 1
 
+\chapter{Pushing code to an Arduino Nano}
 
 \chapter{Global Positioning System (GPS) sensor}
 
@@ -74,6 +75,8 @@ The code coming with this sensor can be downloaded with the following link: $ ht
 Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor. 
 
 \chapter{Advanced carbon dioxide (CO$_2$) sensor}
+For starters, this CO$_2$ sensor is a little bit more complex than the other CO$_2$ sensor from the previous chapter. This sensor is more accurate but also works in a different way and not only the accuracy is higher, so is the price. 
+The CO$_2$ sensor is developed by CO2meter.com and currently we're using the K30 model. During our testing phase we discovered that the K30 model is not compatible with the Arduino Nano nor with the Arduino Pro Mini but it is compatible with the Arduino UNO. 
 
 \begin{figure}[H]
 	\centering
@@ -81,6 +84,15 @@ Downloading the code and uploading this to the Arduino Nano and having it assemb
 	\caption{The K30 CO$_2$ sensor from  CO2meter.com}
 \end{figure}
 
+After assembling the pins the right way, note that the pins on the K30 aren't labeled, but you will have to attach them to the inner (second) row, skipping the first pin, so using pin 2, 3, 4 and 5 from right to left. 
+\begin{itemize}
+\item 'pin 2' of the K30 goes to the GND of the Arduino, 
+\item 'pin 3' of the K30 goes to the 5V (or VCC) of the Arduino,
+\item 'pin 4' (the RXD pin) of the K30 goes to pin 12 (TXD)of the Arduino 
+\item 'pin 5' of the K30 (TXD) goes to pin 13 (RXD) of the Arduino. 
+
+Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino UNO (this works the same way as with the Arduino Nano) should result in a functional CO$_2$ sensor. 
+\end{itemize}
 \chapter{Raspberry Pi Camera}
 
 \chapter{Galvanic skin response sensor}

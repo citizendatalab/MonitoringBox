@@ -23,19 +23,45 @@ For every sensor added there is need for an Arduino Nano. The Arduino Nano is a 
 
 The first item needed for the GPS sensor is the Global Positioning System (GPS) module. We have used the Digilent 410-237 GPS-receiver board. \\
 
-For the temperature and humidity sensor we have used the DHT22 module, this is a digital temperature- and humidty sensor. the DHT22 is more accurate (0,5$^o$ accuracy) than the previous, DHT11. It has a temperature reach from -40 to +80 $^o$C. and has a humidity reach from 10\% to 90\% with an accuracy of 2,0 \%.  \\
+For the temperature and humidity sensor we have used the DHT22 module, this is a digital temperature- and humidity sensor. the DHT22 is more accurate (0,5$^o$ accuracy) than the previous, DHT11. It has a temperature reach from -40 to +80 $^o$C. and has a humidity reach from 10\% to 90\% with an accuracy of 2,0 \%.  \\
 
 The heart rate sensor consists of the MAXREFDES117\# Reference Design Board with optical heart rate and pulse-oximetry monitor. It has integrated Red and Infrared LEDs. This works best on a person's fingertip or earlobe. \\
 
 The CO$_2$ sensor comes in two varieties, the regular sensor which is affordable but less accurate and the advanced which has a higher costs and comes with higher accuracy. \\
 The 'Regular CO$_2$ sensor' uses the MIKROE-1630 Daughter Board from Air Quality Click. It's an MQ-135 High sensitivity air quality sensor and potentiometer. \\
-The 'Advanced CO$_2$ sensor' uses CO2meter.com its K-30 sensor. The K-30 sensor is an accurate gas sensor sensing up to 5000ppm (CO$_2$) with an accuracy of 3\%. Note that the advanced CO$_2$ meter does not work on the Arduino Nano and is only tested on the Arduino Uno. \\
+The 'Advanced CO$_2$ sensor' uses the K-30 CO$_2$ Engine from SenseAir. The K-30 sensor is an accurate gas sensor sensing up to 5000ppm (CO$_2$) with an accuracy of 3\%. Note that the advanced CO$_2$ meter does not work on the Arduino Nano and is only tested on the Arduino Uno. \\
 
 The raspberry Pi Cam doesn't require to be connected to an Arduino and can be plugged directly in to the Raspberry Pi its camera-port. For this project we used Sony's IMX219 8-Megapixel Pi Camera Board. It is able for taking photographs of 3280x2464 pixels or video's at 1080p at 30 frames per second. \\
 
 The galvanic skin response sensor, or short GSR, measures the galvanic skin response based on the electrical conductance of the skin. For the Monitoring Box we have used the Grove-GSR sensor from seeed studio.\\
 
-Every sensor has it's own schematics for assembling the sensors, the code running on the sensor can be downloaded from https://github.com/pjotrscholtze/MonitoringBox, for the exact link for a particular sensor see further into this document.  
+Every sensor has it's own schematics for assembling the sensors, the code running on the sensor can be downloaded from https://github.com/pjotrscholtze/MonitoringBox, for the exact link for a particular sensor see further into this document.  \\
+
+For the sake of easy searching there's all of the used materials listed below.\\
+
+Always needed:
+
+\begin{itemize}
+
+\item Arduino Nano (ATMega 328 or better)
+\item USB A to Mini-USB B cable
+\item Raspberry Pi 3 model b
+\item Micro SD card (4GB minimum, 16GB or more advised)
+\item Micro USB power supply (2.1A)
+\item Digilent 410-237 GPS-receiver Board as the Global Positioning System module
+\end{itemize}
+Depending on your wishes you can use one or more of the following sensors: 
+\begin{itemize}
+\item The DHT22 module for temperature and humidity
+\item The MAXREFDES117\# Reference Design Board with optical heart rate and pulse-oximetry as a heart rate sensor
+\item Regular CO2 sensor: MIKROE-1630 Daughter board from Air Quality Click. 
+\item Advanced CO2 sensor: Senseair K-30 CO2 Engine.
+\begin{itemize}
+\item When using the Advanced CO2 sensor also an Arduino UNO board (ATMega328 or better) is needed along with an USB A to USB B cable 
+\end{itemize} 
+\item Raspberry Pi camera-module Camera V2 8MP (Sony IMX219) with CSI-interface cable
+\item Grove-GSR from seeed studio for Galvanic Skin Response measurements
+\end{itemize}
 
 
 \chapter{Glossary}
@@ -69,7 +95,7 @@ The regular carbon dioxide (CO$_2$) sensor, from now on called the regular (CO$_
 	\caption{Air Quality Click Schematic}
 \end{figure}
 
-Note that the actual sensor looks slightly different, though the pinout is the same, the 5.5V pin of the Air-quility-click goes onto the 5.5V pin on the Arduino, the GND pin on the Air-quility-click  goes onto the GND pin on the Arduino and the OUT pin on the Air-quility-click goes onto the A1 pin of the Arduino. \\
+Note that the actual sensor looks slightly different, though the pinout is the same, the 5.5V pin of the Air-quality-click goes onto the 5.5V pin on the Arduino, the GND pin on the Air-quality-click  goes onto the GND pin on the Arduino and the OUT pin on the Air-quality-click goes onto the A1 pin of the Arduino. \\
 The actual sensor looks like the following:\\
 
 \begin{figure}[H]
@@ -103,6 +129,7 @@ After assembling the pins the right way, note that the pins on the K30 aren't la
 Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino UNO (this works the same way as with the Arduino Nano) should result in a functional CO$_2$ sensor. 
 \end{itemize}
 \chapter{Raspberry Pi Camera}
+\includegraphics[width=0.50\textwidth]{images/Raspberry-Pi-Camera-Board-v2-1.png}
 
 \chapter{Galvanic skin response sensor}
 

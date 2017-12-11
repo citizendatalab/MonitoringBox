@@ -46,19 +46,105 @@ A1 pin - Analog pin 1
 \chapter{Pushing code to an Arduino Nano}
 
 \chapter{Global Positioning System (GPS) sensor}
+The Global Positioning System(GPS) sensor, from now on called the GPS sensor, is named PmodGPS. The schematics for the assembly of the sensor are as follows. \\
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1]{images/GPS.jpg}
+\caption{Global Positioning System Schematics}	
+\end{center}
+\end{figure}
+
+Note that the actual sensor looks quite different, though the pinout is the same.\\
+
+The actual sensor looks like the following:\\
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1]{images/GPSsensor.png}
+\caption{GPS sensor}
+\end{center}
+\end{figure}
+
+
+\begin{itemize}
+\item 'VCC3V3' of the GPS sensor goes to the 5V(or VCC) of the Arduino, 
+\item 'GND' of the GPS sensor goes to the GND of the Arduino,
+\item 'RXD' of the GPS sensor goes to D5 pin(TXD) of the Arduino 
+\item 'TXD' of the GPS sensor goes to D6 pin(RXD) of the Arduino. 
+\end{itemize}
+Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino Nano should result in a functional GPS sensor.\\
+
+
+
+
 
 \chapter{Temperature and humidity sensor}
 The Temperature and humidity sensor is named 'DHT22' and 'AM2302'. The schematics for the assembly of the sensor are as follows.\\
 
-\includegraphics[scale=0.5]{images/Humi.jpg}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1.25]{images/H&T.jpg}
+\caption{Temperature and humidity Schematics}	
+\end{center}
+\end{figure}
 
-There is no pin name on the sensor so you need to see the order in which the pins are listed. When looking at the sensor in front, the leftmost pin is VCC pin which goes onto the 5V on the Arduino and second pin is DATA pin which goes onto the D2 on the Arduino. The rightmost pin is GND pin and connected with GND on the Arduino. Note that the third pin means nothing. \\
 Below is the picture of explaining pin on the DHT22 \\
 
+\begin{figure}[H]
+\begin{center}
 \includegraphics[scale=0.25]{images/DHT22.jpg}
+\caption{Temperature and humidity sensor}
+\end{center}
+\end{figure}
+
+
+There is no pin name on the sensor, so you need to see the order in which the pins are listed. When looking at the sensor in front, I'll call the leftmost pin 'pin1'.\\
+
+\begin{itemize}
+\item 'pin 1' of the Temperature and humidity sensor(VCC) goes to the 5V(or VCC) of the Arduino, 
+\item 'pin 2' of the Temperature and humidity sensor(DATA) goes to the D2 of the Arduino,
+\item 'pin 3' of the Temperature and humidity sensor is nothing. You do not need to connect anything.
+\item 'pin 4' of the Temperature and humidity sensor(GND) goes to GND of the Arduino.
+\end{itemize}
+ 
+Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino Nano should result in a functional Temperature and humidity sensor.\\
 
 
 \chapter{Heartrate sensor}
+The Heart-rate sensor which is a sensor developed by Maxim intergrated is named MAXREFDES117\#. The schematics for the assembly of the sensor are as follows.\\
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1.25]{images/heartrate_bb.jpg}
+\caption{Heart rate Schematic}
+\end{center}
+\end{figure}
+
+Note that the actual sensor looks quite different, though the pinout is the same.\\
+
+The actual sensor looks like the following:\\
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.25]{images/MAXREFDES117Fig00.png}
+\caption{Heart rate sensor}
+\end{center}
+\end{figure}
+
+\begin{itemize}
+\item 'VIN' of the Heartrate sensor goes to the 5V(or VCC) of the Arduino, 
+\item 'GND' of the Heartrate sensor goes to the GND of the Arduino,
+\item 'SDA' of the Heartrate sensor goes to A4 pin(SDA) of the Arduino 
+\item 'SCL' of the Heartrate sensor goes to A5 pin(SCL) of the Arduino.\\
+\\In Arduino-nano that we used doesn't have SDA and SCL name on the arduino. However, A4 and A5 act as SDA and SCL, respectively. If your Arduino has an SDA or SCL pin, you can connect it by name.
+ 
+\end{itemize}
+Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino Nano should result in a functional GPS sensor. \\
+For more information about this sensor, Please visit below website.\\
+https://www.maximintegrated.com/en/design/reference-design-center/system-board/6300.html
+
+
 
 \chapter{Regular carbon dioxide (CO$_2$) sensor}
 The regular carbon dioxide (CO$_2$) sensor, from now on called the regular (CO$_2$) sensor, is a sensor developed by mikroelectronics, and the schematics for the assembly of the sensor are as follows. \\
@@ -105,7 +191,18 @@ Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and upl
 \chapter{Raspberry Pi Camera}
 
 \chapter{Galvanic skin response sensor}
+Galvanic skin response sensor(GSR) sensor, from now on called the GSR sensor, does nor require any sensor hardware. Only a little resistance is needed for stability. The schematics for the assembly of the sensor are as follows. \\
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1.25]{images/GSR.jpg}
+\caption{Galvanic skin response Schematic}
+\end{center}
+\end{figure}
+
+The two current-carrying wires are connected to A0 and 5V, respectively, of the Arduino. The resistors for stability are connected to A0 and GND respectively.	\\
+
+The way to use this GSR sensor is to put two fingers on two wires. Individual currents are different and will vary depending on emotional state or condition. To compare this, the result of the sensor will show the minimum, maximum and average values ​​of the current. An example of usage and an example of the result value are shown in the following photograph.
 \chapter{Development issued example sensor}
 
 \chapter{Development issued unknown sensor}

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.27)  14 DEC 2017 14:21
+=======
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.28)  14 DEC 2017 12:58
+>>>>>>> e1f8a5a09a2526858705811ef4ce68f7f5277688
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -313,13 +317,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 112--113
 
  []
 
+<<<<<<< HEAD
 <images/GPS.jpg, id=48, 288.277pt x 202.356pt>
+=======
+<images/GPS.jpg, id=48, 238.491pt x 160.6pt>
+>>>>>>> e1f8a5a09a2526858705811ef4ce68f7f5277688
 File: images/GPS.jpg Graphic file (type jpg)
 <use images/GPS.jpg>
 Package pdftex.def Info: images/GPS.jpg  used on input line 116. on input line 
 116.
+<<<<<<< HEAD
 Package pdftex.def Info: Requested size: 288.27629pt x 202.3555pt on input line
  116.
+=======
+Package pdftex.def Info: Requested size: 238.4904pt x 160.5996pt on input line 
+116.
+>>>>>>> e1f8a5a09a2526858705811ef4ce68f7f5277688
 
 Underfull \hbox (badness 10000) in paragraph at lines 121--122
 
@@ -330,6 +343,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
+<<<<<<< HEAD
 [10
 
  <./images/GPS.jpg>]
@@ -341,6 +355,18 @@ Package pdftex.def Info: images/GPSsensor.png  used on input line 127. on input
 Package pdftex.def Info: Requested size: 144.53963pt x 139.96255pt on input lin
 e 127.
 
+=======
+<images/GPSsensor.png, id=49, 144.54pt x 139.9629pt>
+File: images/GPSsensor.png Graphic file (type png)
+<use images/GPSsensor.png>
+Package pdftex.def Info: images/GPSsensor.png  used on input line 127. on input
+ line 127.
+Package pdftex.def Info: Requested size: 144.53963pt x 139.96255pt on input lin
+e 127.
+[10
+
+ <./images/GPS.jpg>]
+>>>>>>> e1f8a5a09a2526858705811ef4ce68f7f5277688
 Underfull \hbox (badness 10000) in paragraph at lines 139--140
 
  []
@@ -377,6 +403,7 @@ Package pdftex.def Info: Requested size: 106.39723pt x 88.32977pt on input line
 Underfull \hbox (badness 10000) in paragraph at lines 165--166
 
  []
+<<<<<<< HEAD
 
 
 Overfull \hbox (5.47298pt too wide) in paragraph at lines 174--175
@@ -389,6 +416,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 174--175
 
  []
 
+=======
+
+
+Overfull \hbox (5.47298pt too wide) in paragraph at lines 174--175
+[]\OT1/cmr/m/n/10 Downloading the code from https://github.com/pjotrscholtze/Mo
+nitoringBox
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
+
+ []
+
+>>>>>>> e1f8a5a09a2526858705811ef4ce68f7f5277688
 [13 <./images/DHT22.jpg>]
 Chapter 7.
 
@@ -557,8 +598,13 @@ ts/cm/cmmi7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/20
 17/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2017/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+<<<<<<< HEAD
 Output written on Manual_setup_sensory_setup_Monitoring_Box.pdf (26 pages, 3245
 988 bytes).
+=======
+Output written on Manual_setup_sensory_setup_Monitoring_Box.pdf (26 pages, 3031
+674 bytes).
+>>>>>>> e1f8a5a09a2526858705811ef4ce68f7f5277688
 PDF statistics:
  142 PDF objects out of 1000 (max. 8388607)
  87 compressed objects within 1 object stream

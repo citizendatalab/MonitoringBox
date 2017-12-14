@@ -33,7 +33,8 @@ class SensorType(Enum):
             "CO2_SENSOR": SensorType.CO2_SENSOR,
             "HEART_RATE_SENSOR": SensorType.HEART_RATE_SENSOR,
             "HEARTRATE_SENSOR": SensorType.HEART_RATE_SENSOR,
-            "GALVANIC_SKIN_RESPONSE_SENSOR": SensorType.GALVANIC_SKIN_RESPONSE_SENSOR
+            "GALVANIC_SKIN_RESPONSE_SENSOR": SensorType.GALVANIC_SKIN_RESPONSE_SENSOR,
+            "GSR_SENSOR": SensorType.GALVANIC_SKIN_RESPONSE_SENSOR
         }
         if type in types:
             return types[type]
@@ -156,10 +157,27 @@ def _sensor_line_listener(
 def _update_information(data,
                         connection: service.serial.manager.SerialConnection,
                         callback_options):
-    sensor_manager = SensorManager.get_instance()  # type: SensorManager
-    sensor = sensor_manager.get_sensor_by_device(connection.device)
-    sensor.name = data["name"]
-    sensor.sensor_type = SensorType.from_string(data["sensor"])
+    if callback_options["handler"].keep_running:
+        callback_options["handler"].keep_running = False
+        sensor_manager = SensorManager.get_instance()  # type: SensorManager
+        sensor = sensor_manager.get_sensor_by_device(connection.device)
+        sensor.name = data["name"]
+        sensor.sensor_type = SensorType.from_string(data["sensor"])
+
+
+class _UpdateInformationHandler(threading.Thread):
+    def __init__(self, connection: service.serial.manager.SerialConnection):
+        super(_UpdateInformationHandler, self).__init__()
+        self.connection = connection
+        self.keep_running = True
+
+    def run(self):
+        time.sleep(2)
+        while self.keep_running:
+            self.connection.send_command("ping", "", _update_information, {
+                "handler": self
+            })
+            time.sleep(1)
 
 
 class _SensorSearcher(threading.Thread):
@@ -258,7 +276,7 @@ class _SensorSearcher(threading.Thread):
         sensor_manager = SensorManager.get_instance()  # type: SensorManager
         sensor_manager._register_sensor(sensor)
 
-        connection.send_command("ping", "", _update_information)
+        _UpdateInformationHandler(connection).start()
 
 
 class SensorManager:

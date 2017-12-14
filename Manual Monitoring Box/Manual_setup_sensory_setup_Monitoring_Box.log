@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.27)  13 DEC 2017 17:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.27)  14 DEC 2017 14:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -308,131 +308,246 @@ Underfull \hbox (badness 10000) in paragraph at lines 103--110
 
 [9 <./images/Select-port.JPG>]
 Chapter 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--113
+
+ []
+
+<images/GPS.jpg, id=48, 288.277pt x 202.356pt>
+File: images/GPS.jpg Graphic file (type jpg)
+<use images/GPS.jpg>
+Package pdftex.def Info: images/GPS.jpg  used on input line 116. on input line 
+116.
+Package pdftex.def Info: Requested size: 288.27629pt x 202.3555pt on input line
+ 116.
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
+
+ []
+
 [10
 
-]
+ <./images/GPS.jpg>]
+<images/GPSsensor.png, id=52, 144.54pt x 139.9629pt>
+File: images/GPSsensor.png Graphic file (type png)
+<use images/GPSsensor.png>
+Package pdftex.def Info: images/GPSsensor.png  used on input line 127. on input
+ line 127.
+Package pdftex.def Info: Requested size: 144.53963pt x 139.96255pt on input lin
+e 127.
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
+
+ []
+
+[11 <./images/GPSsensor.png>]
 Chapter 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
 
  []
 
-<images/Humi.jpg, id=51, 469.755pt x 187.099pt>
-File: images/Humi.jpg Graphic file (type jpg)
-<use images/Humi.jpg>
-Package pdftex.def Info: images/Humi.jpg  used on input line 116. on input line
- 116.
-Package pdftex.def Info: Requested size: 234.87692pt x 93.54926pt on input line
- 116.
+<images/H&T.jpg, id=59, 135.707pt x 168.63pt>
+File: images/H&T.jpg Graphic file (type jpg)
+<use images/H&T.jpg>
+Package pdftex.def Info: images/H&T.jpg  used on input line 150. on input line 
+150.
+Package pdftex.def Info: Requested size: 169.6333pt x 210.78697pt on input line
+ 150.
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--120
+Underfull \hbox (badness 10000) in paragraph at lines 155--156
 
  []
 
-<images/DHT22.jpg, id=52, 425.59pt x 353.32pt>
+<images/DHT22.jpg, id=60, 425.59pt x 353.32pt>
 File: images/DHT22.jpg Graphic file (type jpg)
 <use images/DHT22.jpg>
-Package pdftex.def Info: images/DHT22.jpg  used on input line 121. on input lin
-e 121.
+Package pdftex.def Info: images/DHT22.jpg  used on input line 159. on input lin
+e 159.
 Package pdftex.def Info: Requested size: 106.39723pt x 88.32977pt on input line
- 121.
-[11
-
- <./images/Humi.jpg> <./images/DHT22.jpg>]
-Chapter 7.
+ 159.
 [12
 
-]
-Chapter 8.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <24.88> on input line 126.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <20.74> on input line 126.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <17.28> on input line 126.
-
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
+ <./images/H&T.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 
  []
 
-<images/Mikroe-Gas-sensor-schematic.jpg, id=60, 179.069pt x 168.63pt>
+
+Overfull \hbox (5.47298pt too wide) in paragraph at lines 174--175
+[]\OT1/cmr/m/n/10 Downloading the code from https://github.com/pjotrscholtze/Mo
+nitoringBox
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
+
+ []
+
+[13 <./images/DHT22.jpg>]
+Chapter 7.
+
+Underfull \hbox (badness 10000) in paragraph at lines 178--179
+
+ []
+
+<images/heartrate_bb.jpg, id=67, 158.191pt x 191.114pt>
+File: images/heartrate_bb.jpg Graphic file (type jpg)
+<use images/heartrate_bb.jpg>
+Package pdftex.def Info: images/heartrate_bb.jpg  used on input line 182. on in
+put line 182.
+Package pdftex.def Info: Requested size: 197.73824pt x 238.8919pt on input line
+ 182.
+
+Underfull \hbox (badness 10000) in paragraph at lines 187--188
+
+ []
+
+[14
+
+ <./images/heartrate_bb.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 189--190
+
+ []
+
+<images/MAXREFDES117Fig00.png, id=71, 602.25pt x 587.19376pt>
+File: images/MAXREFDES117Fig00.png Graphic file (type png)
+<use images/MAXREFDES117Fig00.png>
+Package pdftex.def Info: images/MAXREFDES117Fig00.png  used on input line 193. 
+on input line 193.
+Package pdftex.def Info: Requested size: 150.56212pt x 146.79808pt on input lin
+e 193.
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--204
+
+ []
+
+
+Overfull \hbox (72.08418pt too wide) in paragraph at lines 206--209
+\OT1/cmr/m/n/10 https://www.maximintegrated.com/en/design/reference-design-cent
+er/system-board/6300.html 
+ []
+
+[15 <./images/MAXREFDES117Fig00.png>]
+Chapter 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <24.88> on input line 212.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <20.74> on input line 212.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 212.
+
+Underfull \hbox (badness 10000) in paragraph at lines 213--214
+
+ []
+
+<images/Mikroe-Gas-sensor-schematic.jpg, id=76, 179.069pt x 168.63pt>
 File: images/Mikroe-Gas-sensor-schematic.jpg Graphic file (type jpg)
 <use images/Mikroe-Gas-sensor-schematic.jpg>
 Package pdftex.def Info: images/Mikroe-Gas-sensor-schematic.jpg  used on input 
-line 131. on input line 131.
-Package pdftex.def Info: Requested size: 258.75pt x 243.67354pt on input line 1
-31.
+line 217. on input line 217.
+Package pdftex.def Info: Requested size: 258.75pt x 243.67354pt on input line 2
+17.
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--137
+Underfull \hbox (badness 10000) in paragraph at lines 221--223
 
  []
 
-[13
+[16
 
  <./images/Mikroe-Gas-sensor-schematic.jpg>]
-<images/air-quality-click-breakout.jpg, id=64, 1606.0pt x 1606.0pt>
+<images/air-quality-click-breakout.jpg, id=80, 1606.0pt x 1606.0pt>
 File: images/air-quality-click-breakout.jpg Graphic file (type jpg)
 <use images/air-quality-click-breakout.jpg>
 Package pdftex.def Info: images/air-quality-click-breakout.jpg  used on input l
-ine 140. on input line 140.
-Package pdftex.def Info: Requested size: 258.75pt x 258.75415pt on input line 1
-40.
+ine 226. on input line 226.
+Package pdftex.def Info: Requested size: 258.75pt x 258.75415pt on input line 2
+26.
 
-Overfull \hbox (47.79955pt too wide) in paragraph at lines 144--145
+Overfull \hbox (47.79955pt too wide) in paragraph at lines 230--231
 \OML/cmm/m/it/10 https \OT1/cmr/m/n/10 : \OML/cmm/m/it/10 ==github:com=pjotrsch
 oltze=MonitoringBox=tree=develop=Sensors=CO\OT1/cmr/m/n/10 2[]\OML/cmm/m/it/10 
 Sensor$ 
  []
 
-[14 <./images/air-quality-click-breakout.jpg>]
+[17 <./images/air-quality-click-breakout.jpg>]
 Chapter 9.
-<images/K30-gas-sensor-schematic.jpg, id=69, 395.076pt x 212.795pt>
+<images/K30-gas-sensor-schematic.jpg, id=86, 395.076pt x 212.795pt>
 File: images/K30-gas-sensor-schematic.jpg Graphic file (type jpg)
 <use images/K30-gas-sensor-schematic.jpg>
 Package pdftex.def Info: images/K30-gas-sensor-schematic.jpg  used on input lin
-e 155. on input line 155.
-Package pdftex.def Info: Requested size: 258.75pt x 139.37036pt on input line 1
-55.
-[15
+e 241. on input line 241.
+Package pdftex.def Info: Requested size: 258.75pt x 139.37036pt on input line 2
+41.
+[18
 
  <./images/K30-gas-sensor-schematic.jpg>]
-Overfull \hbox (15.473pt too wide) in paragraph at lines 166--167
+Overfull \hbox (15.473pt too wide) in paragraph at lines 252--253
 []\OT1/cmr/m/n/10 Downloading the code from https://github.com/pjotrscholtze/Mo
 nitoringBox
  []
 
-[16]
+[19]
 Chapter 10.
-<images/Raspberry-Pi-Camera-Board-v2-1.png, id=76, 752.8125pt x 752.8125pt>
+<images/Raspberry-Pi-Camera-Board-v2-1.png, id=93, 752.8125pt x 752.8125pt>
 File: images/Raspberry-Pi-Camera-Board-v2-1.png Graphic file (type png)
 <use images/Raspberry-Pi-Camera-Board-v2-1.png>
 Package pdftex.def Info: images/Raspberry-Pi-Camera-Board-v2-1.png  used on inp
-ut line 169. on input line 169.
-Package pdftex.def Info: Requested size: 172.5pt x 172.49995pt on input line 16
-9.
-[17
+ut line 255. on input line 255.
+Package pdftex.def Info: Requested size: 172.5pt x 172.49995pt on input line 25
+5.
+[20
 
  <./images/Raspberry-Pi-Camera-Board-v2-1.png>]
 Chapter 11.
-[18
 
-]
+Underfull \hbox (badness 10000) in paragraph at lines 258--259
+
+ []
+
+<images/GSR.jpg, id=98, 256.157pt x 183.084pt>
+File: images/GSR.jpg Graphic file (type jpg)
+<use images/GSR.jpg>
+Package pdftex.def Info: images/GSR.jpg  used on input line 262. on input line 
+262.
+Package pdftex.def Info: Requested size: 320.19543pt x 228.85442pt on input lin
+e 262.
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--268
+
+ []
+
+[21
+
+ <./images/GSR.jpg>]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ‹ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ‹ in font cmr10!
+ [22]
 Chapter 12.
-[19
+[23
 
 ]
 Chapter 13.
-[20
+[24
 
 ] (./Manual_setup_sensory_setup_Monitoring_Box.aux) ) 
 Here is how much of TeX's memory you used:
- 2679 strings out of 492985
- 43294 string characters out of 6136283
+ 2704 strings out of 492985
+ 43844 string characters out of 6136283
  100328 words of memory out of 5000000
- 6220 multiletter control sequences out of 15000+600000
+ 6240 multiletter control sequences out of 15000+600000
  10040 words of font info for 35 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,6n,39p,439b,267s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,6n,39p,439b,314s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2017/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2017/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2017/texmf-dist/fonts/type1/publ
@@ -442,11 +557,11 @@ ts/cm/cmmi7.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/20
 17/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2017/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Manual_setup_sensory_setup_Monitoring_Box.pdf (22 pages, 1940
-369 bytes).
+Output written on Manual_setup_sensory_setup_Monitoring_Box.pdf (26 pages, 3245
+988 bytes).
 PDF statistics:
- 121 PDF objects out of 1000 (max. 8388607)
- 77 compressed objects within 1 object stream
+ 142 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

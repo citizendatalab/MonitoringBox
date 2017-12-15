@@ -95,6 +95,7 @@ Step 3. Selecting the right board as shown in the next figure. \\
 \includegraphics[width=1\textwidth]{images/Select-board.JPG} 
 	\caption{Selection of the right board via Arduino IDE}
 \end{figure}
+\newpage
 Step 4. Selecting the right port as shown in the next figure, the port may differ every time you connect. Usually the IDE only shows one port, select this one. \\
 \begin{figure}[H]
 	\centering
@@ -118,7 +119,7 @@ The Global Positioning System(GPS) sensor, from now on called the GPS sensor, is
 \caption{Global Positioning System Schematics}	
 \end{center}
 \end{figure}
-
+\newpage
 Below is the picture of the PmodGPS: \\
 
 \begin{figure}[H]
@@ -150,7 +151,7 @@ The Temperature and humidity sensor is named 'DHT22' and 'AM2302'. The schematic
 \caption{Temperature and humidity Schematics}	
 \end{center}
 \end{figure}
-
+\newpage
 Below is the picture of explaining pin on the DHT22 \\
 
 \begin{figure}[H]
@@ -251,10 +252,25 @@ After assembling the pins the right way, note that the pins on the K30 aren't la
 Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino UNO (this works the same way as with the Arduino Nano) should result in a functional CO$_2$ sensor. 
 \end{itemize}
 \chapter{Raspberry Pi Camera}
+\begin{figure}[H]
+	\centering
 \includegraphics[width=0.50\textwidth]{images/Raspberry-Pi-Camera-Board-v2-1.png}
+\caption{The Raspberry Pi Camera}	
+\end{figure}
+
+The raspberry Pi cam doesnt require any extra hardware as an Arduino, it can be directly plugged into the Raspberry Pi and it will be detected by the Raspberry Pi as a camera. \\
+Do note that there are two similar connectors that the Camera may fit in, one is named 'Camera' and the other is named 'Display' connector. We will be using the 'Camera' connection. The next image shows the connector and the direction to pull in order to open it.  
+
+\begin{figure}[H]
+	\centering
+\includegraphics[width=0.50\textwidth]{images/clips-and-ribbon-cable.jpg}
+\caption{The Raspberry Pi Camera connector}	
+\end{figure}
+
+Pull the connector lid on both sides of the connector in order to open, insert the Pi Camera and close the connector by pushing on both sides of the connector, as the arrows in the images implies. 
 
 \chapter{Galvanic skin response sensor}
-Galvanic skin response sensor(GSR) sensor, from now on called the GSR sensor, does not require any sensor hardware. Only a little resistance is needed for stability. And the type of the resistor is free, but less than 1k is recommended. The schematics for the assembly of the sensor are as follows. \\
+Galvanic skin response sensor(GSR) sensor, from now on called the GSR sensor, does not require any sensor hardware. Only a little resistance is needed for stability. There a free choice for the type of resistor , but a resistor with less than 1k resistance is recommended. The schematics for the assembly of the sensor are as follows. \\
 
 \begin{figure}[H]
 \begin{center}
@@ -268,6 +284,10 @@ The two current-carrying wires are connected to A0 and 5V, respectively, of the 
 The way to use this GSR sensor is to put two fingers on two wires. Individual currents are different and will vary depending on emotional state or condition. To compare this, the result of the sensor will show the minimum, maximum and average values ​​of the current. An example of usage and the result value are shown in the following photograph.
 \chapter{Development issued example sensor}
 
+This chapter has no content yet. The purpose of this chapter is issued for test purposes and development purposes. 
+
 \chapter{Development issued unknown sensor}
+
+This chapter has no content yet. The purpose of this chapter is issued for test purposes and development purposes. 
 
 \end{document}

@@ -8,6 +8,6 @@
 \contentsline {chapter}{\numberline {8}Regular carbon dioxide (CO$_2$) sensor}{16}
 \contentsline {chapter}{\numberline {9}Advanced carbon dioxide (CO$_2$) sensor}{18}
 \contentsline {chapter}{\numberline {10}Raspberry Pi Camera}{20}
-\contentsline {chapter}{\numberline {11}Galvanic skin response sensor}{21}
-\contentsline {chapter}{\numberline {12}Development issued example sensor}{23}
-\contentsline {chapter}{\numberline {13}Development issued unknown sensor}{24}
+\contentsline {chapter}{\numberline {11}Galvanic skin response sensor}{22}
+\contentsline {chapter}{\numberline {12}Development issued example sensor}{24}
+\contentsline {chapter}{\numberline {13}Development issued unknown sensor}{25}

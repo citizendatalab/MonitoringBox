@@ -4,6 +4,7 @@
 \usepackage{caption}
 \usepackage{float}
 
+
 \title{Manual for setting up the sensors of the Monitoring Box}
 \author{Mick Nieman \\ Amsterdam University of Applied Sciences \and Pjotr Scholtze \\ Amsterdam University of Applied Sciences \and Heeyeon Joung \\ Seoul National University of Science and Technolgy}
 \date{November 2017}
@@ -66,9 +67,27 @@ Depending on your wishes you can use one or more of the following sensors:
 
 
 \chapter{Glossary}
+\begin{tabular}{ p{5cm} p{5cm} }
+A & A \\
+Ax Pin & Pin on arduino that is giving analog output \\
+Arduino Nano & Programmable microprocessor, processes simple code \\
+Arduino UNO & Programmable microprocessor, processes simple code \\
+G & G \\
+Galvanic Skin Response & The conductance of the skin that is being measured by its galvanic values \\
+GND Pin & The pin that functions as 'ground' on an Arduino or other programmable board \\
+H & H \\
+Hardware & The machines, wiring, and other physical components of an electronic system \\
+I & i \\
+IDE & Integrated Development Environment, production supplied development environment \\
+P & p \\
+Protocol & Used by machines to communicate \\
+R & R \\
+Raspberry Pi & Advanced programmable processor, similar to Arduino but better \\
+S & S \\
+Software & Code on a processor or machine that defines behaviour \\
+Source & Place where the software or code comes from \\
+\end{tabular}
 
-GND pin - Ground pin \\
-A1 pin - Analog pin 1
 
 \chapter{Pushing code to an Arduino Nano}
 To start working with an Arduino the Arduino Integrated development environment (IDE) is needed. This is a development environment custom build by Arduino for the Arduino. The IDE can be retrieved from their site www.arduino.cc and the direct link to their software downloads is https://www.arduino.cc/en/Main/Software. Then download the right IDE for your operating system to continue. \\
@@ -282,12 +301,13 @@ Galvanic skin response sensor(GSR) sensor, from now on called the GSR sensor, do
 The two current-carrying wires are connected to A0 and 5V, respectively, of the Arduino. The resistors for stability are connected to A0 and GND respectively.	\\
 
 The way to use this GSR sensor is to put two fingers on two wires. Individual currents are different and will vary depending on emotional state or condition. To compare this, the result of the sensor will show the minimum, maximum and average values ​​of the current. An example of usage and the result value are shown in the following photograph.
-\chapter{Development issued example sensor}
 
-This chapter has no content yet. The purpose of this chapter is issued for test purposes and development purposes. 
+%\chapter{Development issued example sensor}
+%
+%This chapter has no content yet. The purpose of this chapter is %issued for test purposes and development purposes. 
 
-\chapter{Development issued unknown sensor}
-
-This chapter has no content yet. The purpose of this chapter is issued for test purposes and development purposes. 
+% \chapter{Development issued unknown sensor}
+%	
+%This chapter has no content yet. The purpose of this chapter %is issued for test purposes and development purposes. 
 
 \end{document}

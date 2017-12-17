@@ -1,11 +1,10 @@
-\contentsline {chapter}{\numberline {1}Introduction}{2}
-\contentsline {chapter}{\numberline {2}Requirements}{3}
-\contentsline {chapter}{\numberline {3}Glossary}{5}
-\contentsline {chapter}{\numberline {4}Pushing code to an Arduino Nano}{7}
-\contentsline {chapter}{\numberline {5}Global Positioning System (GPS) sensor}{11}
-\contentsline {chapter}{\numberline {6}Temperature and humidity sensor}{13}
-\contentsline {chapter}{\numberline {7}Heartrate sensor}{15}
-\contentsline {chapter}{\numberline {8}Regular carbon dioxide (CO$_2$) sensor}{17}
-\contentsline {chapter}{\numberline {9}Advanced carbon dioxide (CO$_2$) sensor}{19}
-\contentsline {chapter}{\numberline {10}Raspberry Pi Camera}{21}
-\contentsline {chapter}{\numberline {11}Galvanic skin response sensor}{23}
+\contentsline {chapter}{\numberline {1}Requirements}{2}
+\contentsline {chapter}{\numberline {2}Glossary}{4}
+\contentsline {chapter}{\numberline {3}Pushing code to an Arduino Nano}{6}
+\contentsline {chapter}{\numberline {4}Global Positioning System (GPS) sensor}{10}
+\contentsline {chapter}{\numberline {5}Temperature and humidity sensor}{12}
+\contentsline {chapter}{\numberline {6}Heartrate sensor}{14}
+\contentsline {chapter}{\numberline {7}Regular carbon dioxide (CO$_2$) sensor}{16}
+\contentsline {chapter}{\numberline {8}Advanced carbon dioxide (CO$_2$) sensor}{18}
+\contentsline {chapter}{\numberline {9}Raspberry Pi Camera}{20}
+\contentsline {chapter}{\numberline {10}Galvanic skin response sensor}{22}

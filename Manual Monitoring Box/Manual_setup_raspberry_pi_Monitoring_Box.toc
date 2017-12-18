@@ -1,0 +1,26 @@
+\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}
+\contentsline {chapter}{\numberline {2}Requirements/parts}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Hardware}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}Software}{3}{section.2.2}
+\contentsline {chapter}{\numberline {3}Installation}{4}{chapter.3}
+\contentsline {section}{\numberline {3.1}Hardware}{4}{section.3.1}
+\contentsline {section}{\numberline {3.2}OS}{5}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Download}{5}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Flash the SD card}{6}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Software}{8}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Required packages}{8}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Install MonitoringBox mangement software}{9}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Setup auto login}{9}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Setup better shell (optional)}{9}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}From now on run the commands as root}{9}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Startup script}{10}{subsection.3.3.6}
+\contentsline {paragraph}{When \relax $\@@underline {\hbox {NOT}}\mathsurround \z@ $\relax using ZSH}{10}{section*.26}
+\contentsline {paragraph}{When using ZSH}{10}{section*.27}
+\contentsline {subsection}{\numberline {3.3.7}Access point/WiFi setup}{11}{subsection.3.3.7}
+\contentsline {paragraph}{Network interface}{11}{section*.28}
+\contentsline {paragraph}{Access point}{11}{section*.29}
+\contentsline {subsection}{\numberline {3.3.8}Enable remote access (SSH) (optional)}{13}{subsection.3.3.8}
+\contentsline {subsection}{\numberline {3.3.9}Reduce space consumption (optional)}{14}{subsection.3.3.9}
+\contentsline {paragraph}{Warning}{14}{section*.30}
+\contentsline {paragraph}{Warning}{14}{section*.31}
+\contentsline {chapter}{\numberline {4}Problems}{23}{chapter.4}

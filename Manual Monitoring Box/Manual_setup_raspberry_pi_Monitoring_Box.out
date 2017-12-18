@@ -1,0 +1,20 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Requirements/parts}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Hardware}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{Software}{chapter.2}% 4
+\BOOKMARK [0][-]{chapter.3}{Installation}{}% 5
+\BOOKMARK [1][-]{section.3.1}{Hardware}{chapter.3}% 6
+\BOOKMARK [1][-]{section.3.2}{OS}{chapter.3}% 7
+\BOOKMARK [2][-]{subsection.3.2.1}{Download}{section.3.2}% 8
+\BOOKMARK [2][-]{subsection.3.2.2}{Flash the SD card}{section.3.2}% 9
+\BOOKMARK [1][-]{section.3.3}{Software}{chapter.3}% 10
+\BOOKMARK [2][-]{subsection.3.3.1}{Required packages}{section.3.3}% 11
+\BOOKMARK [2][-]{subsection.3.3.2}{Install MonitoringBox mangement software}{section.3.3}% 12
+\BOOKMARK [2][-]{subsection.3.3.3}{Setup auto login}{section.3.3}% 13
+\BOOKMARK [2][-]{subsection.3.3.4}{Setup better shell \(optional\)}{section.3.3}% 14
+\BOOKMARK [2][-]{subsection.3.3.5}{From now on run the commands as root}{section.3.3}% 15
+\BOOKMARK [2][-]{subsection.3.3.6}{Startup script}{section.3.3}% 16
+\BOOKMARK [2][-]{subsection.3.3.7}{Access point/WiFi setup}{section.3.3}% 17
+\BOOKMARK [2][-]{subsection.3.3.8}{Enable remote access \(SSH\) \(optional\)}{section.3.3}% 18
+\BOOKMARK [2][-]{subsection.3.3.9}{Reduce space consumption \(optional\)}{section.3.3}% 19
+\BOOKMARK [0][-]{chapter.4}{Problems}{}% 20

@@ -156,7 +156,11 @@ Below is the picture of the PmodGPS: \\
 \item 'RXD' of the GPS sensor goes to D5 pin(TXD) of the Arduino 
 \item 'TXD' of the GPS sensor goes to D6 pin(RXD) of the Arduino. 
 \end{itemize}
-Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino Nano should result in a functional GPS sensor.\\
+
+The code coming with this sensor can be downloaded with the following link: $ MonitoringBox/Sensor\_driver/main\_GPS\_SENSOR $
+
+
+Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor. 
 
 
 
@@ -191,7 +195,10 @@ There is no pin name on the sensor, so you need to see the order in which the pi
 \item 'pin 4' of the Temperature and humidity sensor(GND) goes to GND of the Arduino.
 \end{itemize}
  
-Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino Nano should result in a functional Temperature and humidity sensor.\\
+The code coming with this sensor can be downloaded with the following link: $ MonitoringBox/Sensor\_driver/main\_TEM\_AND\_HUM\_SENSOR $
+
+
+Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor. 
 
 
 \chapter{Heartrate sensor}
@@ -223,7 +230,10 @@ The actual sensor looks like the following:\\
 \\In Arduino-nano that we used doesn't have SDA and SCL name on the arduino. However, A4 and A5 act as SDA and SCL, respectively. If your Arduino has an SDA or SCL pin, you can connect it by name.
  
 \end{itemize}
-Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino Nano should result in a functional GPS sensor. \\
+The code coming with this sensor can be downloaded with the following link: $ MonitoringBox/Sensor\_driver/main\_HEARTRATE\_SENSOR $
+
+
+Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor. \\
 For more information about this sensor, Please visit below website.\\
 https://www.maximintegrated.com/en/design/reference-design-center/system-board/6300.html
 
@@ -300,6 +310,11 @@ Galvanic skin response sensor(GSR) sensor, from now on called the GSR sensor, do
 \end{figure}
 
 The two current-carrying wires are connected to A0 and 5V, respectively, of the Arduino. The resistors for stability are connected to A0 and GND respectively.	\\
+
+The code coming with this sensor can be downloaded with the following link: $ MonitoringBox/Sensor\_driver/main\_GSR\_SENSOR $
+
+
+Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor.\\
 
 The way to use this GSR sensor is to put two fingers on two wires. Individual currents are different and will vary depending on emotional state or condition. To compare this, the result of the sensor will show the minimum, maximum and average values ​​of the current. An example of usage and the result value are shown in the following photograph.
 

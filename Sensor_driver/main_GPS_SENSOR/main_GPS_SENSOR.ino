@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "driver.h"
 #include <SoftwareSerial.h>
-#include <TinyGPS.h>
+#include "TinyGPS.h"
 
 SoftwareSerial mySerial(6, 5); // RX, TX
 TinyGPS gps;

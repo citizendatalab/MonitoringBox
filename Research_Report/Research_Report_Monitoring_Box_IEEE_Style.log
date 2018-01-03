@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.27)  19 DEC 2017 13:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.27)  3 JAN 2018 21:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -566,6 +566,11 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Underfull \hbox (badness 1454) in paragraph at lines 41--43
+\OT1/ptm/b/n/9 data-gathering plat-form. Com-mis-sioner of this re-search is
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 41--43
 
  []
@@ -594,13 +599,13 @@ Here is how much of TeX's memory you used:
  6276 multiletter control sequences out of 15000+600000
  33007 words of font info for 62 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 41i,7n,25p,583b,234s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,7n,25p,586b,234s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2017/texmf-dist/
 fonts/enc/dvips/base/8r.enc}<c:/texlive/2017/texmf-dist/fonts/type1/urw/times/u
 tmb8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/tex
 live/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2017/texmf-di
 st/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Research_Report_Monitoring_Box_IEEE_Style.pdf (1 page, 52255 
+Output written on Research_Report_Monitoring_Box_IEEE_Style.pdf (1 page, 53270 
 bytes).
 PDF statistics:
  25 PDF objects out of 1000 (max. 8388607)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.27)  3 JAN 2018 21:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.11.27)  4 JAN 2018 22:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -576,6 +576,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 41--43
  []
 
 No file Research_Report_Monitoring_Box_IEEE_Style.bbl.
+[1{c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -587,29 +591,27 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[1{c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+[2
 
-
-]
-(./Research_Report_Monitoring_Box_IEEE_Style.aux) ) 
+] (./Research_Report_Monitoring_Box_IEEE_Style.aux) ) 
 Here is how much of TeX's memory you used:
  2732 strings out of 492985
  42757 string characters out of 6136283
- 108881 words of memory out of 5000000
+ 109881 words of memory out of 5000000
  6276 multiletter control sequences out of 15000+600000
  33007 words of font info for 62 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 41i,7n,25p,586b,234s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2017/texmf-dist/
-fonts/enc/dvips/base/8r.enc}<c:/texlive/2017/texmf-dist/fonts/type1/urw/times/u
-tmb8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/tex
-live/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2017/texmf-di
-st/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Research_Report_Monitoring_Box_IEEE_Style.pdf (1 page, 53270 
-bytes).
+ 41i,7n,25p,1074b,234s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2017/texmf-dis
+t/fonts/enc/dvips/base/8r.enc}<c:/texlive/2017/texmf-dist/fonts/type1/urw/times
+/utmb8a.pfb><c:/texlive/2017/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/t
+exlive/2017/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2017/texmf-
+dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Research_Report_Monitoring_Box_IEEE_Style.pdf (2 pages, 54819
+ bytes).
 PDF statistics:
- 25 PDF objects out of 1000 (max. 8388607)
- 17 compressed objects within 1 object stream
+ 28 PDF objects out of 1000 (max. 8388607)
+ 19 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

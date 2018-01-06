@@ -7,6 +7,6 @@
 \contentsline {chapter}{\numberline {3}Review of literature}{4}
 \contentsline {chapter}{\numberline {4}Methods}{5}
 \contentsline {chapter}{\numberline {5}Results}{6}
-\contentsline {chapter}{\numberline {6}Discussion}{7}
-\contentsline {chapter}{\numberline {7}Limitations}{8}
-\contentsline {chapter}{\numberline {8}Conclusion}{9}
+\contentsline {chapter}{\numberline {6}Discussion}{8}
+\contentsline {chapter}{\numberline {7}Limitations}{9}
+\contentsline {chapter}{\numberline {8}Conclusion}{10}

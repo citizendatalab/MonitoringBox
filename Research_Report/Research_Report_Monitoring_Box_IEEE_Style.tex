@@ -1,8 +1,10 @@
 \documentclass[conference]{IEEEtran}
 \usepackage[utf8]{inputenc}
 \usepackage{blindtext, graphicx}
-
-
+\usepackage{tikz}
+\usepackage{tikz}
+% we want ER + above/below + left/right
+\usetikzlibrary{er,positioning}
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 \begin{document}
@@ -77,8 +79,105 @@ What factors contribute to creating an open source, multi-research, sensor geolo
 This has no content yet and needs to be filled in. 
 
 \section{Methods}
-This has no content yet and needs to be filled in. 
+	To conduct the research a prototype that can be build multiple times is required. Therefore a prototype was created before user studies were preformed. And further modified during the research process. In order to complete the research we carried out the following steps:
+	\begin{enumerate}
+		\item Identify the use cases of the system.
+		\item Generalize the use cases to a generic platform design.
+		\item Create prototype.
+		\item Research usability concerns.
+	\end{enumerate}
+	\subsection{Prototype}
+		The prototype consists of a base station (a Raspberry Pi) and different sensors (using Arduino's). To make sure that the whole setup stayed modular a translation part (the Arduino's) were used. This design ensures that the base station only needs to know one protocol and does not need to know the individual sensors. ("Designing Multi-Agent Systems around a Programmable Communication Abstraction") Which allows the base station  to focus on using recording the data, managing data storage and making the sensors dynamically attachable.
+		\begin{figure}[ht]
+			\centering
+			\begin{tikzpicture}[auto,node distance=1cm]
+				\node[entity] (node1) {Base station}
+								[grow=up,sibling distance=3cm];
+				% Now place a relation (ID=rel1)
+				\node[relationship] (rel1) [below right = of node1] {Translation};
+				\node[relationship] (rel2) [right = of node1] {Translation};
+				\node[relationship] (rel3) [above right = of node1] {Translation};
+				% Now the 2nd entity (ID=rel2)
+				\node[entity] (node2) [right = of rel1]	{Sensor};
+				\node[entity] (node3) [right = of rel2]	{Sensor};
+				\node[entity] (node4) [right = of rel3]	{Sensor};
+				% Draw an edge between rel1 and node1; rel1 and node2
+				\path (rel1) edge node {} (node1)
+							edge	 node {}	(node2);
+				\path (rel2) edge node {} (node1)
+							edge	 node {}	(node3);
+				\path (rel3) edge node {} (node1)
+							edge	 node {}	(node4);
+			\end{tikzpicture}
+			\caption{Example connection diagram prototype}
+		\end{figure}
+		\paragraph{Prototype parts}
+			\begin{enumerate}
+				\item Base station
+					\begin{enumerate}
+						\item Wifi accesspoint
+						\item Web interface
+						\item Recording
+					\end{enumerate}
+				\item Sensors
+					\begin{enumerate}
+						\item GPS
+						\item Temperature and humidity sensor
+						\item CO2 sensor (two types)
+						\item Heartrate sensor
+						\item Galvanic skin response sensor
+						\item Camera (PIcam)
+					\end{enumerate}
+			\end{enumerate}
+		\paragraph{Prototype features}
+			The base station allows all sensors to be plug and play while on except the Picam. Each sensor can be seen on the web interface or via the screen on the base station. The recordings can only be started via the touchscreen on the base station. Recordings can be downloaded from the web interface or via USB stick that can be mounted on the base station. Every sensor is attached to the base station via USB for ease of use and availability of the devices. An USB hub can easily be used to extend the amount of sensors the base station can handle simultaneously. 
+	\subsection{Research}
+		In this section is described how each sub question of our main research question is researched. So as to decide the effective method of research we have considered what we needed to do with the research. We considered what should be focused more between breadth and depth or between quantification and qualification and what would be more efficient in empirical research and desk research in each sub question. Along with these considerations, we have came to the following decision. 
 
+		First, to research 'how technical are the students and researchers from the Makerslab on the Amsterdam University of applied sciences?', We let students and researchers from the Makerslab use the Monitoring box. Because we wanted to gain various types of students and researchers in technical point, panels of survey should be breadth. With this we can determine what explanation is needed according to the technical level. So, questions of survey include users' comments so to gain insight in to this. 
+
+		Second, in order to research 'What improves the usability of the product when taking the structure plane of user experience into account?', surveys and desk research are used. And compare this with the shortcomings in usability aspects through existing, similar-functioning platforms and devices. In order to research the Monitoring box in the direction of improving the insufficient aspects of usability.
+
+		Third, in order to research the question 'How can the data be made available such that the students \& researchers from the Minor Makerslab can use it?' desk research is used. We look at other similar cases and consider choosing the most appropriate way of data sharing and how researchers use open source and data gathering platforms.
+	\paragraph{Interview setup} The interviews were executed in the following order:
+		\begin{enumerate}
+			\item Give general introduction to the project to participant.
+			\item Let participant assemble hardware and upload software.
+			\item During assembly of product observe participant.
+			\item Let the participant test their work.
+			\item Let participant use the prototype.
+			\item Ask participant questions from the survey and ask for general feedback.
+		\end{enumerate}
+		The interviews were recorded with a camera and notes were made during this interview. Of our team all team members were present, one member controlled the camera, one made notes and one did the presentation.
+	\paragraph{Interview participants}
+		In order to get an accurate picture of user group, a sample with different backgrounds were chosen. This included students and researchers with different levels of technical skills. The participants of the interviews can be categorized in to the following categories:
+		\begin{figure}[ht]
+			\centering
+			\begin{tabular}{ | l | r | l | }
+				\hline
+				Type			& Amount	& Description \\ \hline \hline
+				Researcher		& 2			& Different technical levels* \\ \hline
+				Master-students	& 0			& Did not take part \\ \hline \hline
+				Student			& 4			& See figure ... for details \\ \hline \hline
+				Total			& 6			& \\ \hline
+			\end{tabular}
+			\caption{General distribution of participants}
+		\end{figure}\\
+		The master students were unfortunately unavailable for our research. The student group can be sub divided into different sub-categories:
+		\begin{figure}[ht]
+			\centering
+			\begin{tabular}{ | l | r | l | }
+				\hline
+				Type					& Amount \\ \hline \hline
+				Business IT				& 1 \\ \hline
+				Game design				& 1 \\ \hline
+				Software engineering	& 2 \\ \hline
+				Design					& 1? \\ \hline \hline
+				Total					& 4 \\ \hline
+			\end{tabular}
+			\caption{Major of the participating students}
+		\end{figure} \\
+		This shows a users from varying backgrounds participated in the research. However unfortunately because of time and resources we had limitation in size of this group
 \section{Results}
 This has no content yet and needs to be filled in. 
 

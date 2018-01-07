@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Dict
+from typing import List, Dict, Callable
 import threading
 import service.serial.manager
 import time
@@ -306,6 +306,7 @@ class SensorManager:
             SensorManager.__instance = self
         self._sensors = {}  # type: Dict[str, Sensor]
         self._handler_watcher = []  # type: List[HandlerWatcher]
+        self._registration_informers = []  # type: List[Callable]
 
     def register_handler_watcher(self, handler_watcher: HandlerWatcher):
         """
@@ -383,6 +384,15 @@ class SensorManager:
         :param sensor: Sensor to register.
         """
         self._sensors[sensor.device] = sensor
+        for informer in self._registration_informers:
+            informer(sensor)
+
+    @property
+    def sensor_count(self):
+        return len(self._sensors)
+
+    def add_informer(self, informer: Callable):
+        self._registration_informers.append(informer)
 
     def _deregister_sensor(self, sensor: Sensor):
         """
@@ -395,6 +405,9 @@ class SensorManager:
         manager = service.serial.manager.Manager.get_instance()  # type: service.serial.manager.Manager
         manager.remove_connection(sensor.device)
         del self._sensors[sensor.device]
+
+        for informer in self._registration_informers:
+            informer(sensor)
 
     def start(self):
         """

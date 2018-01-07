@@ -1,6 +1,8 @@
 import os
 import shutil
 import json
+from typing import Dict
+
 from werkzeug.wrappers import Response
 
 import service.serial.manager
@@ -35,6 +37,8 @@ import threading
 from service.sensor_manager import Sensor
 import uuid
 import service.sensor.camera
+from service.serial.manager import SerialConnection
+
 current = 0
 sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
 sensor_manager.start()
@@ -121,6 +125,44 @@ def show_recordings():
 class NoProgressInformer(ProgressInformer):
     def status_update(self, value: int, max: int):
         pass
+
+
+def execute_command_callback(data: Dict[str, any],
+                             connection: SerialConnection,
+                             callback_options: Dict[str, any]):
+    callback_options["data"] = data
+    callback_options["lock"].release()
+
+
+@web_app.route('/device/<device>/options', methods=['GET', 'POST'])
+def show_sensor(device):
+    device_id = base64.b64decode(device).decode("UTF-8")
+    sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
+    sensor = sensor_manager.get_sensor_by_device(device_id)  # type: Sensor
+    if sensor.sensor_type == SensorType.PI_CAMERA:
+        return show_api_camera()
+    loaded = (len(sensor.available_commands) > 0) + (
+    sensor.sensor_type != SensorType.UNKOWN)
+
+    result = ""
+    if request.method == 'POST' and request.form[
+        "command"] in sensor.available_commands:
+        command = request.form["command"]
+        options = request.form["param"]
+        lock = threading.Lock()
+        lock.acquire()
+        callback_options = {"lock": lock, "data": None}
+        sensor.connection.send_command(command, options,
+                                       execute_command_callback,
+                                       callback_options)
+        lock.acquire()
+        lock.release()
+        result = ">>> " + command
+        if len(options) > 0: result += ":" + options
+        result += "\n" + json.dumps(callback_options["data"], indent=4)
+
+    return render_template('sensor_device_options.html', sensor=sensor,
+                           result=result, device_id=device, loaded=loaded, loaded_info=["Connecting", "Finishing", "Connected"][loaded])
 
 
 @web_app.route('/recordings/<recording_raw>/delete/yes')
@@ -393,10 +435,11 @@ def show_api_sensors_list():
             pass
 
         resp_table.table_body.append(
-            [sensor.name,
+            ["<a href=\"/device/" + quote(
+                device_id) + "/options\">" + sensor.name + "</a>",
              name,
              device,
-             "<a href=\"device/" + quote(
+             "<a href=\"/device/" + quote(
                  device_id) + "/raw_data\">Raw data</a>"])
     return jsonify(resp_table.as_dict())
 

@@ -91,3 +91,9 @@ table thead .fa-sort-asc, table thead .fa-sort-desc {
 .custom-control-description span {
     float: right;
 }
+.result-area {
+    background: #eee;
+    border: 0.1em solid #DDD;
+    padding: 1.5em;
+    margin-top: 1.5em;
+}

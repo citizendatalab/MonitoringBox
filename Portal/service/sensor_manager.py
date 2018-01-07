@@ -88,6 +88,11 @@ class Sensor:
         self._device = device
         self._sensor_type = sensor_type
         self._name = name
+        self._available_commands = []
+
+    @property
+    def available_commands(self):
+        return self._available_commands
 
     @property
     def connection(self):
@@ -154,6 +159,17 @@ def _sensor_line_listener(
     manager._trigger_type_handlers(connection.device, line)
 
 
+def _update_help(data,
+                 connection: service.serial.manager.SerialConnection,
+                 callback_options):
+    sensor = callback_options["sensor"]  # type: Sensor
+    if len(sensor.available_commands) == 0:
+        for command in data["data"]:
+            a = command[0:len("command")]
+            if a == "command":
+                sensor._available_commands.append(data["data"][command])
+
+
 def _update_information(data,
                         connection: service.serial.manager.SerialConnection,
                         callback_options):
@@ -163,6 +179,9 @@ def _update_information(data,
         sensor = sensor_manager.get_sensor_by_device(connection.device)
         sensor.name = data["name"]
         sensor.sensor_type = SensorType.from_string(data["sensor"])
+        connection.send_command("help", "", _update_help, {
+            "sensor": sensor
+        })
 
 
 class _UpdateInformationHandler(threading.Thread):

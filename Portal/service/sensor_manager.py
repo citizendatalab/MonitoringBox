@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Dict
+from typing import List, Dict, Callable
 import threading
 import service.serial.manager
 import time
@@ -88,6 +88,11 @@ class Sensor:
         self._device = device
         self._sensor_type = sensor_type
         self._name = name
+        self._available_commands = []
+
+    @property
+    def available_commands(self):
+        return self._available_commands
 
     @property
     def connection(self):
@@ -154,6 +159,17 @@ def _sensor_line_listener(
     manager._trigger_type_handlers(connection.device, line)
 
 
+def _update_help(data,
+                 connection: service.serial.manager.SerialConnection,
+                 callback_options):
+    sensor = callback_options["sensor"]  # type: Sensor
+    if len(sensor.available_commands) == 0:
+        for command in data["data"]:
+            a = command[0:len("command")]
+            if a == "command":
+                sensor._available_commands.append(data["data"][command])
+
+
 def _update_information(data,
                         connection: service.serial.manager.SerialConnection,
                         callback_options):
@@ -163,6 +179,9 @@ def _update_information(data,
         sensor = sensor_manager.get_sensor_by_device(connection.device)
         sensor.name = data["name"]
         sensor.sensor_type = SensorType.from_string(data["sensor"])
+        connection.send_command("help", "", _update_help, {
+            "sensor": sensor
+        })
 
 
 class _UpdateInformationHandler(threading.Thread):
@@ -306,6 +325,7 @@ class SensorManager:
             SensorManager.__instance = self
         self._sensors = {}  # type: Dict[str, Sensor]
         self._handler_watcher = []  # type: List[HandlerWatcher]
+        self._registration_informers = []  # type: List[Callable]
 
     def register_handler_watcher(self, handler_watcher: HandlerWatcher):
         """
@@ -383,6 +403,15 @@ class SensorManager:
         :param sensor: Sensor to register.
         """
         self._sensors[sensor.device] = sensor
+        for informer in self._registration_informers:
+            informer(sensor)
+
+    @property
+    def sensor_count(self):
+        return len(self._sensors)
+
+    def add_informer(self, informer: Callable):
+        self._registration_informers.append(informer)
 
     def _deregister_sensor(self, sensor: Sensor):
         """
@@ -395,6 +424,9 @@ class SensorManager:
         manager = service.serial.manager.Manager.get_instance()  # type: service.serial.manager.Manager
         manager.remove_connection(sensor.device)
         del self._sensors[sensor.device]
+
+        for informer in self._registration_informers:
+            informer(sensor)
 
     def start(self):
         """

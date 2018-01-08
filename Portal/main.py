@@ -13,6 +13,8 @@ import service.sensor_manager
 import service.sensor.handler_watcher
 from gui.manager import GUIManager
 from gui.screen.boot_screen import BootScreen
+from service.live_data_view import LiveView
+from service.live_data_view import LiveViewManager
 from service.recorder.post_recording import FormatEnum, FormatMaker, \
     ProgressInformer
 from service.recorder.recordings_manager import RecordingManager
@@ -142,7 +144,7 @@ def show_sensor(device):
     if sensor.sensor_type == SensorType.PI_CAMERA:
         return show_api_camera()
     loaded = (len(sensor.available_commands) > 0) + (
-    sensor.sensor_type != SensorType.UNKOWN)
+        sensor.sensor_type != SensorType.UNKOWN)
 
     result = ""
     if request.method == 'POST' and request.form[
@@ -162,7 +164,21 @@ def show_sensor(device):
         result += "\n" + json.dumps(callback_options["data"], indent=4)
 
     return render_template('sensor_device_options.html', sensor=sensor,
-                           result=result, device_id=device, loaded=loaded, loaded_info=["Connecting", "Finishing", "Connected"][loaded])
+                           result=result, device_id=device, loaded=loaded,
+                           loaded_info=["Connecting", "Finishing", "Connected"][
+                               loaded])
+
+
+@web_app.route('/device/<device>/live')
+def show_sensor_live(device):
+    connection = service.data.connection.Connection.get_instance()
+    sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
+    device_id_human = base64.b64decode(device).decode("UTF-8")
+    sensor = sensor_manager.get_sensor_by_device(device_id_human )
+
+    return render_template('sensor_device_live.html', device_id=device,
+                           device_id_human=device_id_human,sensor=sensor,
+                           speed=connection.get_setting("recording.speed", 300))
 
 
 @web_app.route('/recordings/<recording_raw>/delete/yes')
@@ -339,6 +355,25 @@ def test():
         resp_table.table_body.append(
             ["hoi" + str(i), "test", "dinges" + str(datetime.datetime.now())])
     return jsonify(resp_table.as_dict())
+
+
+@web_app.route('/api/device/<device_id>/live')
+def show_api_device_device_id_live(device_id):
+    device_id = base64.b64decode(device_id).decode("UTF-8")
+    sensor_manager = service.sensor_manager.SensorManager.get_instance()  # type:service.sensor_manager.SensorManager
+    sensor = sensor_manager.get_sensor_by_device(device_id)
+    if sensor.sensor_type == SensorType.PI_CAMERA:
+        return show_api_camera()
+    manager = LiveViewManager.get_instance()  # type: LiveViewManager
+    live_view = manager.get_data(sensor)  # type: LiveView
+
+    out = {}
+    for item in live_view.data:
+        for k in item["data"]:
+            if k not in out:
+                out[k] = []
+            out[k].append(item["data"][k])
+    return jsonify(out)
 
 
 @web_app.route('/device/action/shutdown', methods=['POST'])

@@ -7,7 +7,7 @@
 <strong>Device:</strong> {{sensor.device}}<br/>
 <strong>Name:</strong> {{sensor.name}}<br/>
 <strong>Status:</strong> {{loaded_info}}<br/>
-<a href="#" class="btn btn-primary">live data</a>
+<a href="/device/{{device_id}}/live" class="btn btn-primary">live data</a>
 <form class="form-inline my-2 my-lg-0" method="post" action="/device/{{device_id}}/options">
         <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
         <div class="form-group">

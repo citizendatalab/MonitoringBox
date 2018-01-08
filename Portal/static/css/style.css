@@ -97,3 +97,7 @@ table thead .fa-sort-asc, table thead .fa-sort-desc {
     padding: 1.5em;
     margin-top: 1.5em;
 }
+
+.chart {
+    margin: 0 auto;
+}

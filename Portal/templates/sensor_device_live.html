@@ -1,0 +1,8 @@
+{% extends "layout/layout.html" %}
+{% set current_page = 'connected_sensors' %}
+{% set title %}Sensor details "{{sensor.sensor_type.value}}/{{sensor.name}}" ({{device_id_human}}) {% endset %}
+
+{% block body %}
+<script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+<div class="charts" data-device="{{device_id}}" data-speed="{{speed}}">Loading please wait...</div>
+{% endblock %}

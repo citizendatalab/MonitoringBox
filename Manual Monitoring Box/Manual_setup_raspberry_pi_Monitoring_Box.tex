@@ -11,7 +11,7 @@
 \usepackage{caption}
 \usepackage{listings}
 \usepackage{hyperref}
-
+\usepackage{float}
 % we want ER + above/below + left/right
 \usetikzlibrary{er,positioning}
 \usepackage{hyperref}
@@ -105,128 +105,145 @@
 				\caption{Download Etcher}
 			\end{figure}
 		\subsection{Flash the SD card}
-			Start Etcher.
+			Start Etcher. And press "Select image"
 			\begin{figure}[ht]
 				\centering
 				\includegraphics[width=0.75\textwidth]{images/pi/install_etcher_2.jpg} 
 				\caption{Etcher start up state.}
 			\end{figure}
 			\newpage
-			And press "Select image":
-			\begin{figure}[ht]
+			Go to the location of the downloaded Raspbian file.
+			\begin{figure}[H]
 				\centering
 				\includegraphics[width=0.75\textwidth]{images/pi/install_etcher_3.jpg} 
 				\caption{The Mikroe Gas Detector}
 			\end{figure}
-			Go to the location of the downloaded Raspbian file.\\
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/install_etcher_4.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/install_etcher_5.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/install_etcher_6.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/install_sd_1.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/install_cables.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/install_first_boot.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/first_login.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/first_login_after_login.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/ssh_command.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/ssh_1.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/ssh_2.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/ssh_3.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/ssh_4.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/ssh_5.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/get_ip.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/login_ssh_nix.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/login_ssh_nix_2.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
-		\begin{figure}[ht]
-			\centering
-			\includegraphics[width=0.75\textwidth]{images/pi/login_ssh_nix_3.jpg} 
-			\caption{The Mikroe Gas Detector}
-		\end{figure}
-
+			Select the SD card.
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/install_etcher_4.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			\newpage
+			And press "Flash!"
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/install_etcher_5.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			This will take sometime. Afterwards the following screen will appear:
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/install_etcher_6.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			This screen means you can remove the SD card.
+			\newpage
+			And plug it into the Pi.
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.45\textwidth]{images/pi/install_sd_1.jpg}
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			Attach all required cables (keyboard, HDMI for screen power and Ethernet).
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.6\textwidth]{images/pi/install_cables.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			\newpage
+		\subsection{First boot}
+			On first boot the system is going to show this screen and restart automatically.
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/install_first_boot.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}\\
+			When the following is visible you need to login in to the Pi. Default username is: pi and the default password is: raspberry
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/first_login.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			\newpage
+			After logging in the following should show:
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.6\textwidth]{images/pi/first_login_after_login.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}\\
+			In here write the following command: sudo raspi-config
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.6\textwidth]{images/pi/ssh_command.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			\newpage
+			In the screen that just showed, go to the 5th option with the arrow keys, then enter:
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/ssh_1.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}\\
+			Select the the second option \textbf{SSH}:
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/ssh_2.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			\newpage
+			Enable the SSH server (select \textbf{Yes} and then press enter)
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/ssh_3.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}\\
+			Press \textbf{Ok}
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/ssh_4.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			\newpage
+			Finish the dialog (close it).
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/ssh_5.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+		\subsection{Get the IP address}
+			type: \textbf{ip addr} and then enter
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/get_ip.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			\newpage
+		\subsection{Login remotely (Linux or mac)}
+			Open your terminal and write 
+			\begin{lstlisting}[language=sh]
+ssh pi@<<ip-address>>
+			\end{lstlisting}
+			For example:
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/login_ssh_nix.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}\\
+			When this is the first connection being made the following question will be asked.
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/login_ssh_nix_2.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}
+			\newpage
+			Accept it and, then it will ask for your password (default: raspberry), the typed letters will not show but it will register the characters.
+			\begin{figure}[ht]
+				\centering
+				\includegraphics[width=0.75\textwidth]{images/pi/login_ssh_nix_3.jpg} 
+				\caption{The Mikroe Gas Detector}
+			\end{figure}\\
+			When everything went according to the described steps the following screen should be visible:
 		\begin{figure}[ht]
 			\centering
 			\includegraphics[width=0.75\textwidth]{images/pi/login_ssh_nix_4.jpg} 
@@ -235,7 +252,7 @@
 
 		\newpage
 	\section{Software}
-		@todo get the user here.
+		After the operating system is installed, the required software must be installed. You do this while being logged in to the Raspberry Pi. Both console or SSH (remote connection) can be used, however the remote connection is advised.
 		\subsection{Required packages}
 			Install the required base software with the following command (single line).
 			\begin{lstlisting}[language=sh]
@@ -520,7 +537,7 @@ sudo dphys-swapfile uninstall
 sudo update-rc.d dphys-swapfile remove
 			\end{lstlisting}
 
-\chapter{Problems}
+\chapter{Problems and their solutions}
 	What to do when you cann't connect to the internet while you've pluggedin the ethernet cable. Run the following command:
 	\begin{lstlisting}[language=sh]
 sudo service dnsmasq stop

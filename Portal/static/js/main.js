@@ -208,12 +208,12 @@
 
       var modalContent = modal.find('.modal-content');
       modalContent.html(content);
-      modalContent.trigger("modal.show",[{'button':button, 'modal':modal, 'event': event}]);
+      modalContent.trigger("modal.show", [{'button': button, 'modal': modal, 'event': event}]);
       modalContent.find("#modalRemoveRecordingVerification").show("fast");
     }
 
   });
-  $('.modal-content').on('modal.show',function(event, params){
+  $('.modal-content').on('modal.show', function (event, params) {
     var button = $(params.button);
     var row = button.parent().parent().find("td")
     var name = $(row[0]).text();
@@ -225,9 +225,100 @@
     $(params.modal).find('#submitter').attr('href', button.attr('data-action-url'));
   });
 
-  $('.show-password').change(function(){
-    var inputType = ['password', 'text'][1*this.checked];
+  $('.show-password').change(function () {
+    var inputType = ['password', 'text'][1 * this.checked];
     $($(this).attr('data-password-to-show')).attr('type', inputType);
   });
 
+  $('.charts').each(function (index, elemCharts) {
+    var deviceId = $(elemCharts).attr("data-device");
+    var chartContexts = {};
+    var chartHandlers = {};
+    setInterval(function () {
+      $.ajax({
+        dataType: "json",
+        url: '/api/device/' + deviceId + '/live',
+        success: function (data) {
+          var createNew = $(elemCharts).find(".chart").length !== Object.keys(data).length;
+          if (createNew) {
+            // Create
+            chartContexts = {};
+            chartHandlers = {};
+            var out = '<div class="container">';
+            var i = 0;
+            for (var k in data) {
+              if (i % 2 == 0) {
+                out += '<div class="row">';
+              }
+              out += '<div class="col"><div style="width:' + (($(
+                  elemCharts).width() / 2) * 0.7) + 'px;" class="chart"><canvas id="chart[\'' + k + '\']" width="300" height="300"></canvas></div></div>';
+              if (i % 2 == 1) {
+                out += '</div>';
+              }
+              i++;
+            }
+            $(elemCharts).html(out + '</div>');
+            for (var k in data) {
+              chartContexts[k] = document.getElementById("chart['" + k + "']").getContext('2d');
+              chartHandlers[k] = new Chart(chartContexts[k], {
+                type: 'line',
+                data: {
+                  labels: ["1"],
+                  datasets: [
+                    {
+                      label: k,
+                      data: [0],
+                      backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                      ],
+                      borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1
+                    }
+                  ]
+                },
+                options: {
+                  animation: {
+                    duration: 0
+                  },
+                  scales: {
+                    yAxes: [{
+                      ticks: {
+                        beginAtZero: false
+                      }
+                    }]
+                  }
+                }
+              });
+
+            }
+          }
+          for (var k in data) {
+            while (data[k].length > chartHandlers[k].data.labels.length) {
+              chartHandlers[k].data.labels.push(chartHandlers[k].data.labels.length + 1);
+            }
+            chartHandlers[k].data.datasets[0].data = data[k];
+            chartHandlers[k].update();
+          }
+        }
+      });
+
+    }, $(elemCharts).attr("data-speed"));
+    $(window).resize(function () {
+      $(elemCharts).find(".chart").each(function (k, elem) {
+        $(elem).width($(elem).parent().width() - 20);
+      });
+    });
+  });
 })(jQuery);

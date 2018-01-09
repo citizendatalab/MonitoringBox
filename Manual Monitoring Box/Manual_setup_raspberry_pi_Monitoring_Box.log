@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.9.10)  14 DEC 2017 14:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.9.10)  9 JAN 2018 13:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1086,6 +1086,14 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip52
 )
+(/usr/share/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count340
+\float@exts=\toks59
+\float@box=\box83
+\@float@everytoks=\toks60
+\@floatcapt=\box84
+)
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 er.code.tex
 File: tikzlibraryer.code.tex 2008/02/20 v3.0.1a (rcs-revision 1.2)
@@ -1113,17 +1121,17 @@ LaTeX Font Info:    ... okay on input line 22.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count340
+\scratchcounter=\count341
 \scratchdimen=\dimen316
-\scratchbox=\box83
-\nofMPsegments=\count341
-\nofMParguments=\count342
-\everyMPshowfont=\toks59
-\MPscratchCnt=\count343
+\scratchbox=\box85
+\nofMPsegments=\count342
+\nofMParguments=\count343
+\everyMPshowfont=\toks61
+\MPscratchCnt=\count344
 \MPscratchDim=\dimen317
-\MPnumerator=\count344
-\makeMPintoPDFobject=\count345
-\everyMPtoPDFconversion=\toks60
+\MPnumerator=\count345
+\makeMPintoPDFobject=\count346
+\everyMPtoPDFconversion=\toks62
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -1159,11 +1167,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Package xypdf Info: Line width: 0.43799pt on input line 22.
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count346
-\AtBeginShipoutBox=\box84
+\c@lstlisting=\count347
+\AtBeginShipoutBox=\box86
 Package hyperref Info: Link coloring OFF on input line 22.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
@@ -1172,7 +1181,7 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count347
+\c@section@level=\count348
 )
 LaTeX Info: Redefining \ref on input line 22.
 LaTeX Info: Redefining \pageref on input line 22.
@@ -1215,7 +1224,7 @@ Chapter 3.
 [4
 
 ]
-<images/pi/download_raspbian.png, id=135, 1040.88875pt x 923.45pt>
+<images/pi/download_raspbian.png, id=150, 1040.88875pt x 923.45pt>
 File: images/pi/download_raspbian.png Graphic file (type png)
 <use images/pi/download_raspbian.png>
 Package pdftex.def Info: images/pi/download_raspbian.png  used on input line 96
@@ -1234,14 +1243,14 @@ Overfull \hbox (3.38538pt too wide) in paragraph at lines 100--101
 n Win-dows, Linux
  []
 
-<images/pi/install_etcher_1.jpg, id=142, 963.6pt x 492.33937pt>
+<images/pi/install_etcher_1.jpg, id=157, 963.6pt x 492.33937pt>
 File: images/pi/install_etcher_1.jpg Graphic file (type jpg)
 <use images/pi/install_etcher_1.jpg>
 Package pdftex.def Info: images/pi/install_etcher_1.jpg  used on input line 104
 . on input line 104.
 Package pdftex.def Info: Requested size: 270.0pt x 137.95174pt on input line 10
 4.
-<images/pi/install_etcher_2.jpg, id=143, 614.295pt x 315.42844pt>
+<images/pi/install_etcher_2.jpg, id=158, 614.295pt x 315.42844pt>
 File: images/pi/install_etcher_2.jpg Graphic file (type jpg)
 <use images/pi/install_etcher_2.jpg>
 Package pdftex.def Info: images/pi/install_etcher_2.jpg  used on input line 111
@@ -1249,213 +1258,226 @@ Package pdftex.def Info: images/pi/install_etcher_2.jpg  used on input line 111
 Package pdftex.def Info: Requested size: 270.0pt x 138.63972pt on input line 11
 1.
 [6 <./images/pi/install_etcher_1.jpg> <./images/pi/install_etcher_2.jpg>]
-<images/pi/install_etcher_3.jpg, id=151, 722.7pt x 385.44pt>
+<images/pi/install_etcher_3.jpg, id=167, 722.7pt x 385.44pt>
 File: images/pi/install_etcher_3.jpg Graphic file (type jpg)
 <use images/pi/install_etcher_3.jpg>
 Package pdftex.def Info: images/pi/install_etcher_3.jpg  used on input line 118
 . on input line 118.
 Package pdftex.def Info: Requested size: 270.0pt x 143.99855pt on input line 11
 8.
-<images/pi/install_etcher_4.jpg, id=152, 614.295pt x 315.42844pt>
+<images/pi/install_etcher_4.jpg, id=168, 614.295pt x 315.42844pt>
 File: images/pi/install_etcher_4.jpg Graphic file (type jpg)
 <use images/pi/install_etcher_4.jpg>
 Package pdftex.def Info: images/pi/install_etcher_4.jpg  used on input line 124
 . on input line 124.
 Package pdftex.def Info: Requested size: 270.0pt x 138.63972pt on input line 12
 4.
-<images/pi/install_etcher_5.jpg, id=153, 614.295pt x 315.42844pt>
+
+[7 <./images/pi/install_etcher_3.jpg> <./images/pi/install_etcher_4.jpg>]
+<images/pi/install_etcher_5.jpg, id=175, 614.295pt x 315.42844pt>
 File: images/pi/install_etcher_5.jpg Graphic file (type jpg)
 <use images/pi/install_etcher_5.jpg>
-Package pdftex.def Info: images/pi/install_etcher_5.jpg  used on input line 130
-. on input line 130.
+Package pdftex.def Info: images/pi/install_etcher_5.jpg  used on input line 131
+. on input line 131.
 Package pdftex.def Info: Requested size: 270.0pt x 138.63972pt on input line 13
-0.
-<images/pi/install_etcher_6.jpg, id=154, 614.295pt x 315.42844pt>
+1.
+<images/pi/install_etcher_6.jpg, id=176, 614.295pt x 315.42844pt>
 File: images/pi/install_etcher_6.jpg Graphic file (type jpg)
 <use images/pi/install_etcher_6.jpg>
-Package pdftex.def Info: images/pi/install_etcher_6.jpg  used on input line 136
-. on input line 136.
+Package pdftex.def Info: images/pi/install_etcher_6.jpg  used on input line 137
+. on input line 137.
 Package pdftex.def Info: Requested size: 270.0pt x 138.63972pt on input line 13
-6.
-<images/pi/install_sd_1.jpg, id=155, 722.7pt x 963.6pt>
+7.
+
+[8 <./images/pi/install_etcher_5.jpg> <./images/pi/install_etcher_6.jpg>]
+<images/pi/install_sd_1.jpg, id=183, 722.7pt x 963.6pt>
 File: images/pi/install_sd_1.jpg Graphic file (type jpg)
 <use images/pi/install_sd_1.jpg>
-Package pdftex.def Info: images/pi/install_sd_1.jpg  used on input line 142. on
- input line 142.
-Package pdftex.def Info: Requested size: 270.0pt x 359.99641pt on input line 14
-2.
-<images/pi/install_cables.jpg, id=156, 963.6pt x 542.025pt>
+Package pdftex.def Info: images/pi/install_sd_1.jpg  used on input line 145. on
+ input line 145.
+Package pdftex.def Info: Requested size: 161.9989pt x 215.99196pt on input line
+ 145.
+<images/pi/install_cables.jpg, id=184, 963.6pt x 542.025pt>
 File: images/pi/install_cables.jpg Graphic file (type jpg)
 <use images/pi/install_cables.jpg>
-Package pdftex.def Info: images/pi/install_cables.jpg  used on input line 148. 
-on input line 148.
-Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 14
-8.
-<images/pi/install_first_boot.jpg, id=157, 963.6pt x 542.025pt>
+Package pdftex.def Info: images/pi/install_cables.jpg  used on input line 151. 
+on input line 151.
+Package pdftex.def Info: Requested size: 216.0022pt x 121.49547pt on input line
+ 151.
+
+[9 <./images/pi/install_sd_1.jpg> <./images/pi/install_cables.jpg>]
+<images/pi/install_first_boot.jpg, id=191, 963.6pt x 542.025pt>
 File: images/pi/install_first_boot.jpg Graphic file (type jpg)
 <use images/pi/install_first_boot.jpg>
 Package pdftex.def Info: images/pi/install_first_boot.jpg  used on input line 1
-54. on input line 154.
+59. on input line 159.
 Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 15
-4.
-<images/pi/first_login.jpg, id=158, 963.6pt x 542.025pt>
+9.
+<images/pi/first_login.jpg, id=192, 963.6pt x 542.025pt>
 File: images/pi/first_login.jpg Graphic file (type jpg)
 <use images/pi/first_login.jpg>
-Package pdftex.def Info: images/pi/first_login.jpg  used on input line 160. on 
-input line 160.
+Package pdftex.def Info: images/pi/first_login.jpg  used on input line 165. on 
+input line 165.
 Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 16
-0.
-<images/pi/first_login_after_login.jpg, id=159, 963.6pt x 722.7pt>
+5.
+ [10 <./images/pi/install_first_boot.jpg> <./images/pi/first_login.jpg>]
+<images/pi/first_login_after_login.jpg, id=199, 963.6pt x 722.7pt>
 File: images/pi/first_login_after_login.jpg Graphic file (type jpg)
 <use images/pi/first_login_after_login.jpg>
 Package pdftex.def Info: images/pi/first_login_after_login.jpg  used on input l
-ine 166. on input line 166.
-Package pdftex.def Info: Requested size: 270.0pt x 202.49797pt on input line 16
-6.
-<images/pi/ssh_command.jpg, id=160, 963.6pt x 722.7pt>
+ine 172. on input line 172.
+Package pdftex.def Info: Requested size: 216.0022pt x 161.99396pt on input line
+ 172.
+<images/pi/ssh_command.jpg, id=200, 963.6pt x 722.7pt>
 File: images/pi/ssh_command.jpg Graphic file (type jpg)
 <use images/pi/ssh_command.jpg>
-Package pdftex.def Info: images/pi/ssh_command.jpg  used on input line 172. on 
-input line 172.
-Package pdftex.def Info: Requested size: 270.0pt x 202.49797pt on input line 17
-2.
-<images/pi/ssh_1.jpg, id=161, 963.6pt x 542.025pt>
+Package pdftex.def Info: images/pi/ssh_command.jpg  used on input line 178. on 
+input line 178.
+Package pdftex.def Info: Requested size: 216.0022pt x 161.99396pt on input line
+ 178.
+ [11 <./images/pi/first_login_after_login.jpg> <./images/pi/ssh_command.jpg>]
+<images/pi/ssh_1.jpg, id=207, 963.6pt x 542.025pt>
 File: images/pi/ssh_1.jpg Graphic file (type jpg)
 <use images/pi/ssh_1.jpg>
-Package pdftex.def Info: images/pi/ssh_1.jpg  used on input line 178. on input 
-line 178.
-Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 17
-8.
-<images/pi/ssh_2.jpg, id=162, 963.6pt x 542.025pt>
+Package pdftex.def Info: images/pi/ssh_1.jpg  used on input line 185. on input 
+line 185.
+Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 18
+5.
+<images/pi/ssh_2.jpg, id=208, 963.6pt x 542.025pt>
 File: images/pi/ssh_2.jpg Graphic file (type jpg)
 <use images/pi/ssh_2.jpg>
-Package pdftex.def Info: images/pi/ssh_2.jpg  used on input line 184. on input 
-line 184.
-Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 18
-4.
-<images/pi/ssh_3.jpg, id=163, 963.6pt x 542.025pt>
+Package pdftex.def Info: images/pi/ssh_2.jpg  used on input line 191. on input 
+line 191.
+Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 19
+1.
+ [12 <./images/pi/ssh_1.jpg> <./images/pi/ssh_2.jpg>]
+<images/pi/ssh_3.jpg, id=216, 963.6pt x 542.025pt>
 File: images/pi/ssh_3.jpg Graphic file (type jpg)
 <use images/pi/ssh_3.jpg>
-Package pdftex.def Info: images/pi/ssh_3.jpg  used on input line 190. on input 
-line 190.
+Package pdftex.def Info: images/pi/ssh_3.jpg  used on input line 198. on input 
+line 198.
 Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 19
-0.
-<images/pi/ssh_4.jpg, id=164, 963.6pt x 542.025pt>
+8.
+<images/pi/ssh_4.jpg, id=217, 963.6pt x 542.025pt>
 File: images/pi/ssh_4.jpg Graphic file (type jpg)
 <use images/pi/ssh_4.jpg>
-Package pdftex.def Info: images/pi/ssh_4.jpg  used on input line 196. on input 
-line 196.
-Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 19
-6.
-<images/pi/ssh_5.jpg, id=165, 963.6pt x 542.025pt>
+Package pdftex.def Info: images/pi/ssh_4.jpg  used on input line 204. on input 
+line 204.
+Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 20
+4.
+ [13 <./images/pi/ssh_3.jpg> <./images/pi/ssh_4.jpg>]
+<images/pi/ssh_5.jpg, id=224, 963.6pt x 542.025pt>
 File: images/pi/ssh_5.jpg Graphic file (type jpg)
 <use images/pi/ssh_5.jpg>
-Package pdftex.def Info: images/pi/ssh_5.jpg  used on input line 202. on input 
-line 202.
-Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 20
-2.
-<images/pi/get_ip.jpg, id=166, 963.6pt x 542.025pt>
+Package pdftex.def Info: images/pi/ssh_5.jpg  used on input line 211. on input 
+line 211.
+Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 21
+1.
+<images/pi/get_ip.jpg, id=225, 963.6pt x 542.025pt>
 File: images/pi/get_ip.jpg Graphic file (type jpg)
 <use images/pi/get_ip.jpg>
-Package pdftex.def Info: images/pi/get_ip.jpg  used on input line 208. on input
- line 208.
-Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 20
+Package pdftex.def Info: images/pi/get_ip.jpg  used on input line 218. on input
+ line 218.
+Package pdftex.def Info: Requested size: 270.0pt x 151.87347pt on input line 21
 8.
-<images/pi/login_ssh_nix.jpg, id=167, 459.96844pt x 223.58531pt>
-File: images/pi/login_ssh_nix.jpg Graphic file (type jpg)
-<use images/pi/login_ssh_nix.jpg>
-Package pdftex.def Info: images/pi/login_ssh_nix.jpg  used on input line 214. o
-n input line 214.
-Package pdftex.def Info: Requested size: 270.0pt x 131.25232pt on input line 21
-4.
-<images/pi/login_ssh_nix_2.jpg, id=168, 520.94624pt x 61.73062pt>
-File: images/pi/login_ssh_nix_2.jpg Graphic file (type jpg)
-<use images/pi/login_ssh_nix_2.jpg>
-Package pdftex.def Info: images/pi/login_ssh_nix_2.jpg  used on input line 220.
- on input line 220.
-Package pdftex.def Info: Requested size: 270.0pt x 31.9946pt on input line 220.
-
-<images/pi/login_ssh_nix_3.jpg, id=169, 536.75531pt x 79.79813pt>
-File: images/pi/login_ssh_nix_3.jpg Graphic file (type jpg)
-<use images/pi/login_ssh_nix_3.jpg>
-Package pdftex.def Info: images/pi/login_ssh_nix_3.jpg  used on input line 226.
- on input line 226.
-Package pdftex.def Info: Requested size: 270.0pt x 40.14003pt on input line 226
-.
-<images/pi/login_ssh_nix_4.jpg, id=170, 654.94687pt x 268.75406pt>
-File: images/pi/login_ssh_nix_4.jpg Graphic file (type jpg)
-<use images/pi/login_ssh_nix_4.jpg>
-Package pdftex.def Info: images/pi/login_ssh_nix_4.jpg  used on input line 232.
- on input line 232.
-Package pdftex.def Info: Requested size: 270.0pt x 110.7927pt on input line 232
-.
-
-[7 <./images/pi/install_etcher_3.jpg> <./images/pi/install_etcher_4.jpg>]
+ [14 <./images/pi/ssh_5.jpg> <./images/pi/get_ip.jpg>]
 (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
-) [8 <./images/pi/install_etcher_5.jpg> <./images/pi/install_etcher_6.jpg>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 257.
-
-
-(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 257.
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 257.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 225.
 
 
 (/usr/share/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <9> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 257.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 225.
+<images/pi/login_ssh_nix.jpg, id=232, 459.96844pt x 223.58531pt>
+File: images/pi/login_ssh_nix.jpg Graphic file (type jpg)
+<use images/pi/login_ssh_nix.jpg>
+Package pdftex.def Info: images/pi/login_ssh_nix.jpg  used on input line 230. o
+n input line 230.
+Package pdftex.def Info: Requested size: 270.0pt x 131.25232pt on input line 23
+0.
+<images/pi/login_ssh_nix_2.jpg, id=233, 520.94624pt x 61.73062pt>
+File: images/pi/login_ssh_nix_2.jpg Graphic file (type jpg)
+<use images/pi/login_ssh_nix_2.jpg>
+Package pdftex.def Info: images/pi/login_ssh_nix_2.jpg  used on input line 236.
+ on input line 236.
+Package pdftex.def Info: Requested size: 270.0pt x 31.9946pt on input line 236.
 
-Overfull \hbox (29.15128pt too wide) in paragraph at lines 278--280
+ [15 <./images/pi/login_ssh_nix.jpg> <./images/pi/login_ssh_nix_2.jpg>]
+<images/pi/login_ssh_nix_3.jpg, id=245, 536.75531pt x 79.79813pt>
+File: images/pi/login_ssh_nix_3.jpg Graphic file (type jpg)
+<use images/pi/login_ssh_nix_3.jpg>
+Package pdftex.def Info: images/pi/login_ssh_nix_3.jpg  used on input line 243.
+ on input line 243.
+Package pdftex.def Info: Requested size: 270.0pt x 40.14003pt on input line 243
+.
+<images/pi/login_ssh_nix_4.jpg, id=246, 654.94687pt x 268.75406pt>
+File: images/pi/login_ssh_nix_4.jpg Graphic file (type jpg)
+<use images/pi/login_ssh_nix_4.jpg>
+Package pdftex.def Info: images/pi/login_ssh_nix_4.jpg  used on input line 249.
+ on input line 249.
+Package pdftex.def Info: Requested size: 270.0pt x 110.7927pt on input line 249
+.
+ [16 <./images/pi/login_ssh_nix_3.jpg> <./images/pi/login_ssh_nix_4.jpg>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 274.
+
+
+(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 274.
+
+Overfull \hbox (29.15128pt too wide) in paragraph at lines 295--297
 \OT1/cmr/m/n/10.95 Source: https://superuser.com/questions/969923/automatic-roo
 t-login-in-debian-
  []
 
-[9] [10]
-Overfull \hbox (30.21582pt too wide) in paragraph at lines 356--358
+[17] [18]
+Overfull \hbox (30.21582pt too wide) in paragraph at lines 373--375
 \OT1/cmr/m/n/10.95 https://frillip.com/using-your-raspberry-pi-3-as-a-wifi-acce
 ss-point-with-hostapd/
  []
 
 
-Overfull \hbox (6.12576pt too wide) in paragraph at lines 356--358
+Overfull \hbox (6.12576pt too wide) in paragraph at lines 373--375
 \OT1/cmr/m/n/10.95 https://superuser.com/questions/985082/is-there-a-way-to-dis
 able-the-dhcp-
  []
 
-[11] [12] [13] [14] [15 <./images/pi/install_sd_1.jpg>] [16 <./images/pi/instal
-l_cables.jpg> <./images/pi/install_first_boot.jpg>] [17 <./images/pi/first_logi
-n.jpg> <./images/pi/first_login_after_login.jpg>] [18 <./images/pi/ssh_command.
-jpg> <./images/pi/ssh_1.jpg>] [19 <./images/pi/ssh_2.jpg> <./images/pi/ssh_3.jp
-g>] [20 <./images/pi/ssh_4.jpg> <./images/pi/ssh_5.jpg>] [21 <./images/pi/get_i
-p.jpg> <./images/pi/login_ssh_nix.jpg> <./images/pi/login_ssh_nix_2.jpg> <./ima
-ges/pi/login_ssh_nix_3.jpg>] [22 <./images/pi/login_ssh_nix_4.jpg>]
+[19] [20] [21] [22]
 Chapter 4.
 [23
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 530.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 530.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 547.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 547.
  (./Manual_setup_raspberry_pi_Monitoring_Box.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 530.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 530.
-Package rerunfilecheck Info: File `Manual_setup_raspberry_pi_Monitoring_Box.out
-' has not changed.
-(rerunfilecheck)             Checksum: 11FD787DF58ABD6DC340810B69987BCB;1328.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 547.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 547.
+
+
+Package rerunfilecheck Warning: File `Manual_setup_raspberry_pi_Monitoring_Box.
+out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Manual_setup_raspberry_pi_Monitorin
+g_Box.out':
+(rerunfilecheck)             Before: E6C5CD496231D20F7C5B59B46847B515;1549
+(rerunfilecheck)             After:  EADEA9DEAA0910385D3BAC5D3777C8AF;1569.
  ) 
 Here is how much of TeX's memory you used:
- 48808 strings out of 492990
- 1152460 string characters out of 6138688
- 1429233 words of memory out of 5000000
- 51483 multiletter control sequences out of 15000+600000
+ 48868 strings out of 492990
+ 1153240 string characters out of 6138688
+ 1426343 words of memory out of 5000000
+ 51534 multiletter control sequences out of 15000+600000
  543142 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,11n,96p,10409b,1249s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,11n,96p,10409b,1737s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -1463,11 +1485,11 @@ ts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public
 r12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/s
 hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on Manual_setup_raspberry_pi_Monitoring_Box.pdf (24 pages, 15814
-05 bytes).
+Output written on Manual_setup_raspberry_pi_Monitoring_Box.pdf (24 pages, 15851
+91 bytes).
 PDF statistics:
- 540 PDF objects out of 1000 (max. 8388607)
- 478 compressed objects within 5 object streams
- 258 named destinations out of 1000 (max. 500000)
- 288 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 558 PDF objects out of 1000 (max. 8388607)
+ 496 compressed objects within 5 object streams
+ 263 named destinations out of 1000 (max. 500000)
+ 312 words of extra memory for PDF output out of 10000 (max. 10000000)
 

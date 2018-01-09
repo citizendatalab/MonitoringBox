@@ -158,7 +158,7 @@ class PiCamCommunicator(AbstractCommunicator):
         }, None, callback_options)
 
 
-def get_communicator_instance(sensor: Sensor):
+def get_communicator_instance(sensor: Sensor) -> AbstractArduinoCommunicator:
     if sensor.sensor_type == SensorType.EXAMPLE_SENSOR:
         return ExampleCommunicator()
     elif sensor.sensor_type == SensorType.PI_CAMERA:

@@ -1,0 +1,37 @@
+{% extends "layout/layout.html" %}
+{% set current_page = 'connected_sensors' %}
+{% set title = 'Sensor details' %}
+
+{% block body %}
+<strong>Sensor type:</strong> {{sensor.sensor_type}}<br/>
+<strong>Device:</strong> {{sensor.device}}<br/>
+<strong>Name:</strong> {{sensor.name}}<br/>
+<strong>Status:</strong> {{loaded_info}}<br/>
+<a href="/device/{{device_id}}/live" class="btn btn-primary">live data</a>
+<form class="form-inline my-2 my-lg-0" method="post" action="/device/{{device_id}}/options">
+        <input name=_csrf_token type=hidden value="{{ csrf_token() }}">
+        <div class="form-group">
+            <select class="form-control" name="command">
+                <option selected disabled>-- Select action --</option>
+                {% for command in sensor.available_commands %}
+                <option value="{{command}}">{{command}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="param"
+                   class="navbar-text navbar-space">Parameter</label>
+            <input class="form-control mr-sm-2" type="text"
+                   value="" aria-label="parameter" name="param" id="param">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary my-2 my-sm-0"
+                    type="submit">Execute
+            </button>
+        </div>
+</form>
+<div class="result-area">
+    <pre>{{result}}</pre>
+</div>
+
+{% endblock %}

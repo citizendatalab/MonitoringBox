@@ -185,20 +185,113 @@ This has no content yet and needs to be filled in.
 \begin{enumerate}
 \item What documentation is needed and how detailed should it be
 \end{enumerate}
- We wrote 'Manual Monitoring Box' documentation based on the subjective answer to 'What documentation is needed and how detailed should it be'. We started with a list of parts we used and a brief introduction to them. Since we thought there might be some people who are new to the Arduino program, we explain how to install the software, how to upload it to Arduino, and how to get the results. And for each sensor, we describe how the Arduino and the sensor should be connected by schematic and letter. We invited two researchers and three students from the Amsterdam University of applied sciences and require them building the Monitoring box based on our 'Manual Monitoring Box'. \\
-As a result, their technical level varied. Each student and researcher had their background knowledge, but they were all different. There is no mention of how to use the breadboard and how to soldering in the manual, but two researchers commented on it. One student pointed out the order of pictures and text. We added the picture of schematics and wrote the explain of schematics after the picture. However, the number in the picture was not clear, which caused a mistake. In fact, one researcher had difficulties in trying to connect only with the picture, and one student also had difficulty connecting, even though he had several experience of Arduino.\\
-In conclusion, to create a monitoring box, you need a piece of hardware such as a circuit and a software knowledge such as raspberry pie and arduino. The range of hardware and software is very large and we can not measure and decide someone's technical level through the monitoring box buildability interview. However, depending on their own experience and background knowledge, there may be a first-hand knowledge of re-building this monitoring box. So the documentation for the students and researchers form the Makerslab on the Amsterdam University of applied sciences should be as detailed as possible including the structure of the plate, the principle of circuit connection, the necessary preparations and precautions for soldering.\\
+
+ We created 'Manual Monitoring Box' documentation based on the process of building the Monitoring Box. We started with a list of parts we used and a brief introduction to them. Since their background knowledge is different, we explain first how to install the software, how to upload it to Arduino, and how to get the results. And for each sensor, we describe how the Arduino and the sensor should be connected by schematic and letter. We invited two researchers and three students from the Amsterdam University of applied sciences and require them building the Monitoring box based on our 'Manual Monitoring Box'. \\
+\begin{enumerate}
+\item Researcher A
+
+The researcher encountered the following problems during the interview.\\
+
+		First, she does not know how to use breadboard. To create a Galvanic Skin Response sensor, user have to connect the Arduino Nano, resistor, and several wires. However, these connections are not just one-to-one connections, they require multiple connections. So in order to succeed, user must understand the structure of the breadboard. The manual did not explain the structure of the breadboard, and the researcher had difficulty with it.\\
+		Second, she wanted more specify information about cable connections.\\
+		 		
+The researcher has mentioned that we need the following elements in the document.\\
+
+		First, she suggested that we mention in the manual how to use breadboard and the structure of breadboard. \\
+		Second, she suggested that we add more information about Arduino nano and Arduino uno.\\
+		Third, she said the manual does not focus in Dutch, but English. \\
+		
+\item Researcher B
+
+Researcher B knows quite a bit of software and has little knowledge of hardware. The researcher encountered the following problems during the interview.\\
+
+		First, he feels there are something unclear about the schematic. He pointed out that the schematic pin number is missing. The pin number is too small to specify, so he was uncomfortable with rebuilding.\\
+		Second, he was wondering about the difference between the two CO2 sensors. The manual only briefly specifies the name and characteristics of each sensor, but the difference between the two sensors is not specified in detail.\\
+		Third, he did not know how to use the breadboard.\\
+
+The researcher has mentioned that we need the following elements in the document.\\
+
+		First, he suggested that we mention in the manual when to upload and where to see the results. \\
+		Second, he suggested links to tutorials about breadboard.\\
+		Third, he suggested that we put the technical names in the shopping list\\
+		Forth, he suggested that we explain in the manual which part is wrong for each error message.\\
+
+\item Student A
+
+Student A is majoring in Computer Science and has  quite some experience in Arduino. The student A encountered the following problems during the interview.\\
+
+		First, he confused about the GPS and Arduino nano. He was confused because the GPS and Arduino nano have similar size and similar color.\\
+		Second, he had difficulty reading the schematics. The letters in the schematics are too small to read, and it took some time to find out what was written on the next page.\\
+
+The researcher has mentioned that we need the following elements in the document.\\
+
+		First, he suggested to write the steps in bold.\\
+		Second, he suggested adjusting the order of text and schematics. He mentioned that it took a some time to find that there is a text which explain schematics. 
+
+\item Student B
+
+Student B is majoring in Game development and has  quite some experience in Arduino. He replied that his technical level is a hobby in the hardware and professional in the software. The student B pointed out the following during the interview.\\
+
+		First, the manual is really easy but it did not state which arduino sketch is necessary to complete.
+		Second, pictures should represent the real life device. Heart rate sensor in the schematic and real heart rate sensor look different.
+
+\item Student C
+
+Student C is majoring in Computer science and has  quite some experience in Arduino. The student C pointed out the following during the interview.\\
+
+		First, the Galvanic Skin Response schematic is not clear. The Galvanic Skin Response chapter is not indepth with the explanation of how to connect everything.\\
+		Second, he ask how can he test the sensors.\\
+		Third, he suggested that we explain more information about cable.\\
+
+\end{enumerate}
+
  
 \item What improves the usability of the product when taking the structure plane of user experience into account?
 
 In interaction design in the structure plane of user experience, users must communicate correctly to the monitoring box and the monitoring box must deliver the information that the user wants immediately and accurately. In this respect, the Monitoring box has a touch screen and we have added four menus in this screen so that when the user has the information they want, they can instantly check the menu. The home screen shows what percentage of the storage capacity is in use and if users select 'Sensor' menu from the Monitoring Box, users can see the currently connected sensor. And if users select 'Wifi' menu from Monitoring Box, users can confirm the Wifi name and password.//
 In information architecture in the structure plane of user experience, it should facilitate intuitive access to data. So we used wireless WiFi so that we could check the information if we had an internet capable device. And with a single push of a button on the Internet Web site, users are able to download the data of the sensors they had recorded at a glance. In addition, the monitoring box screen design allows intuitive use of the menu.
-
+\\
 
 \item How can the data be made available such that the students \& researchers from the Minor Makerslab can use it?
+\begin{enumerate}
+\item In the Monitoring Box
+\begin{enumerate}
+\item Screen
+\begin{enumerate}
+\item Main menu
 
-We thought that in order for users to easily access data, they had to be able to see the data at a glance and approach it in an uncomplicated way. So we make the data users have recorded download at once and use the wireless data transmitter to view the data, even if users do not have a certain cable, users can see data only if they have a laptop or smart phone nearby. \\
-There are some steps for Makerslab students and researchers to use. The monitoring box is equipped with Wi-Fi function. First, use a computer, laptop or mobile phone to connect to the monitoring box WiFi. And users can access the monitoring box web page by accessing 'monitoring.box:5000' on the web page. In this web page, users can see which sensor is connected now and download recoded data. 
+ In the main menu, there are one bar and four menus. The bar tells users how much storage they have used. This percentage allows the user to see how much memory is left on the SD card and to control usage. Each menu button has a label for explaining its purpose.\\
+\item Record
+
+ Users can start recording by pushing this menu. In addition, they can see which sensors are recording while recording.\\
+\item Sensor
+
+ In the Sensor menu, user can see a list of currently connected sensors. It is good to check before users know that the users are sure of the connection.\\
+\item WiFi
+
+ WiFi name and password can be found in this menu. Users do not need to remember or write down Monitoring Bx WiFi name and password.\\
+\end{enumerate}
+
+\end{enumerate}
+
+\item In the Website
+\begin{enumerate}
+\item Wireless connect to Web page
+
+ The data that users have recorded can be downloaded at once. We use the wireless data transmitter to view the data, even if users do not have a certain cable, users can see data only if they have a Wi-Fi enabled devices such as laptop computer or smart phone. \\
+ A few simple steps are required for users to connect their Monitoring Box to the Web page. First, turn on a Wi-Fi enabled devices and connect Monitoring box Wi-Fi. The Monitoring box is equipped with Wi-fi function and the WiFi name and password can be found in the menu on the monitoring box screen. Second, if you complete the first step, users can go to the monitoring box website by typing 'monitoring.box:5000' in the web site address.\\
+
+\item Download the recorded information
+
+ After users access a website, they can see and download the data which they have recorded. The downloadable format is CSV(Comma Separated Value). Because it is truncated in the form of a comma, it can be read not only as a text file but also as an Excel file. When users open CSV file in Excel, the user can view and store the sorted data in sequence.\\
+
+\item Graph
+
+ Users can view a list of currently connected sensors in real time on the web page and a graph of their sensor values. Users can easily access data and see the data at a glance.\\
+
+\end{enumerate}
+\end{enumerate}
+ 
 \end{enumerate}
 
 \section{Discussion}

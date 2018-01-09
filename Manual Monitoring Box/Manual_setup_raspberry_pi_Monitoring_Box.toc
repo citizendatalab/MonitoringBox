@@ -7,20 +7,23 @@
 \contentsline {section}{\numberline {3.2}OS}{5}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Download}{5}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Flash the SD card}{6}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Software}{8}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Required packages}{8}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Install MonitoringBox mangement software}{9}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Setup auto login}{9}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Setup better shell (optional)}{9}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}From now on run the commands as root}{9}{subsection.3.3.5}
-\contentsline {subsection}{\numberline {3.3.6}Startup script}{10}{subsection.3.3.6}
-\contentsline {paragraph}{When \relax $\@@underline {\hbox {NOT}}\mathsurround \z@ $\relax using ZSH}{10}{section*.26}
-\contentsline {paragraph}{When using ZSH}{10}{section*.27}
-\contentsline {subsection}{\numberline {3.3.7}Access point/WiFi setup}{11}{subsection.3.3.7}
-\contentsline {paragraph}{Network interface}{11}{section*.28}
-\contentsline {paragraph}{Access point}{11}{section*.29}
-\contentsline {subsection}{\numberline {3.3.8}Enable remote access (SSH) (optional)}{13}{subsection.3.3.8}
-\contentsline {subsection}{\numberline {3.3.9}Reduce space consumption (optional)}{14}{subsection.3.3.9}
-\contentsline {paragraph}{Warning}{14}{section*.30}
-\contentsline {paragraph}{Warning}{14}{section*.31}
-\contentsline {chapter}{\numberline {4}Problems}{23}{chapter.4}
+\contentsline {subsection}{\numberline {3.2.3}First boot}{10}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Get the IP address}{14}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Login remotely (Linux or mac)}{15}{subsection.3.2.5}
+\contentsline {section}{\numberline {3.3}Software}{17}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Required packages}{17}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Install MonitoringBox mangement software}{17}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Setup auto login}{17}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Setup better shell (optional)}{18}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}From now on run the commands as root}{18}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Startup script}{18}{subsection.3.3.6}
+\contentsline {paragraph}{When \relax $\@@underline {\hbox {NOT}}\mathsurround \z@ $\relax using ZSH}{18}{section*.26}
+\contentsline {paragraph}{When using ZSH}{19}{section*.27}
+\contentsline {subsection}{\numberline {3.3.7}Access point/WiFi setup}{19}{subsection.3.3.7}
+\contentsline {paragraph}{Network interface}{19}{section*.28}
+\contentsline {paragraph}{Access point}{20}{section*.29}
+\contentsline {subsection}{\numberline {3.3.8}Enable remote access (SSH) (optional)}{22}{subsection.3.3.8}
+\contentsline {subsection}{\numberline {3.3.9}Reduce space consumption (optional)}{22}{subsection.3.3.9}
+\contentsline {paragraph}{Warning}{22}{section*.30}
+\contentsline {paragraph}{Warning}{22}{section*.31}
+\contentsline {chapter}{\numberline {4}Problems and their solutions}{23}{chapter.4}

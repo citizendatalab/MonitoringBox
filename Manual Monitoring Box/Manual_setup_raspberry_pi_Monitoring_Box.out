@@ -7,14 +7,17 @@
 \BOOKMARK [1][-]{section.3.2}{OS}{chapter.3}% 7
 \BOOKMARK [2][-]{subsection.3.2.1}{Download}{section.3.2}% 8
 \BOOKMARK [2][-]{subsection.3.2.2}{Flash the SD card}{section.3.2}% 9
-\BOOKMARK [1][-]{section.3.3}{Software}{chapter.3}% 10
-\BOOKMARK [2][-]{subsection.3.3.1}{Required packages}{section.3.3}% 11
-\BOOKMARK [2][-]{subsection.3.3.2}{Install MonitoringBox mangement software}{section.3.3}% 12
-\BOOKMARK [2][-]{subsection.3.3.3}{Setup auto login}{section.3.3}% 13
-\BOOKMARK [2][-]{subsection.3.3.4}{Setup better shell \(optional\)}{section.3.3}% 14
-\BOOKMARK [2][-]{subsection.3.3.5}{From now on run the commands as root}{section.3.3}% 15
-\BOOKMARK [2][-]{subsection.3.3.6}{Startup script}{section.3.3}% 16
-\BOOKMARK [2][-]{subsection.3.3.7}{Access point/WiFi setup}{section.3.3}% 17
-\BOOKMARK [2][-]{subsection.3.3.8}{Enable remote access \(SSH\) \(optional\)}{section.3.3}% 18
-\BOOKMARK [2][-]{subsection.3.3.9}{Reduce space consumption \(optional\)}{section.3.3}% 19
-\BOOKMARK [0][-]{chapter.4}{Problems}{}% 20
+\BOOKMARK [2][-]{subsection.3.2.3}{First boot}{section.3.2}% 10
+\BOOKMARK [2][-]{subsection.3.2.4}{Get the IP address}{section.3.2}% 11
+\BOOKMARK [2][-]{subsection.3.2.5}{Login remotely \(Linux or mac\)}{section.3.2}% 12
+\BOOKMARK [1][-]{section.3.3}{Software}{chapter.3}% 13
+\BOOKMARK [2][-]{subsection.3.3.1}{Required packages}{section.3.3}% 14
+\BOOKMARK [2][-]{subsection.3.3.2}{Install MonitoringBox mangement software}{section.3.3}% 15
+\BOOKMARK [2][-]{subsection.3.3.3}{Setup auto login}{section.3.3}% 16
+\BOOKMARK [2][-]{subsection.3.3.4}{Setup better shell \(optional\)}{section.3.3}% 17
+\BOOKMARK [2][-]{subsection.3.3.5}{From now on run the commands as root}{section.3.3}% 18
+\BOOKMARK [2][-]{subsection.3.3.6}{Startup script}{section.3.3}% 19
+\BOOKMARK [2][-]{subsection.3.3.7}{Access point/WiFi setup}{section.3.3}% 20
+\BOOKMARK [2][-]{subsection.3.3.8}{Enable remote access \(SSH\) \(optional\)}{section.3.3}% 21
+\BOOKMARK [2][-]{subsection.3.3.9}{Reduce space consumption \(optional\)}{section.3.3}% 22
+\BOOKMARK [0][-]{chapter.4}{Problems and their solutions}{}% 23

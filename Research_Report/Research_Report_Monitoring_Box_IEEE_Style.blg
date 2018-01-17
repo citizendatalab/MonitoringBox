@@ -3,44 +3,47 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: Research_Report_Monitoring_Box_IEEE_Style.aux
 The style file: plain.bst
 Database file #1: Research_Report_Monitoring_Box_IEEE_Style.bib
-You've used 3 entries,
+Warning--entry type for "monitoringBox2017researchproposal" isn't style-file defined
+--line 41 of file Research_Report_Monitoring_Box_IEEE_Style.bib
+You've used 5 entries,
             2118 wiz_defined-function locations,
-            520 strings with 4653 characters,
-and the built_in function-call counts, 1095 in all, are:
-= -- 110
-> -- 43
-< -- 1
-+ -- 19
-- -- 14
-* -- 77
-:= -- 182
-add.period$ -- 10
-call.type$ -- 3
-change.case$ -- 16
+            532 strings with 5194 characters,
+and the built_in function-call counts, 2034 in all, are:
+= -- 195
+> -- 114
+< -- 2
++ -- 47
+- -- 40
+* -- 148
+:= -- 335
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 35
 chr.to.int$ -- 0
-cite$ -- 3
-duplicate$ -- 44
-empty$ -- 89
-format.name$ -- 14
-if$ -- 231
+cite$ -- 5
+duplicate$ -- 72
+empty$ -- 149
+format.name$ -- 40
+if$ -- 427
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 3
-newline$ -- 18
-num.names$ -- 6
-pop$ -- 15
+int.to.str$ -- 5
+missing$ -- 4
+newline$ -- 27
+num.names$ -- 10
+pop$ -- 42
 preamble$ -- 1
-purify$ -- 13
+purify$ -- 30
 quote$ -- 0
-skip$ -- 30
+skip$ -- 53
 stack$ -- 0
-substring$ -- 75
-swap$ -- 10
-text.length$ -- 1
+substring$ -- 109
+swap$ -- 20
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
+type$ -- 20
 warning$ -- 0
-while$ -- 12
-width$ -- 4
-write$ -- 36
+while$ -- 19
+width$ -- 6
+write$ -- 56
+(There was 1 warning)

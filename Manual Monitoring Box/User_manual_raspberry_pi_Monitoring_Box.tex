@@ -1,0 +1,54 @@
+\documentclass[11pt]{report}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepackage{amsfonts}
+\usepackage[all]{xy}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{forest}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{float}
+% we want ER + above/below + left/right
+\usetikzlibrary{er,positioning}
+\usepackage{hyperref}
+%Gummi|065|=)
+\title{\textbf{MonitoringBox User manual}\\Raspberry pi}
+\author{Team MonitoringBox}
+\date{2017}
+\begin{document}
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{bg}{rgb}{0.9,0.9,0.9}
+
+% https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+\lstset{ %
+  backgroundcolor=\color{bg},   % choose the background color
+  basicstyle=\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+  framesep=10pt,xleftmargin=10pt,xrightmargin=10pt
+}
+
+\maketitle
+
+\tableofcontents{}
+
+\chapter{Introduction}
+	The manual describes how to use the MonitoringBox. For instructions of building the device see the setup manual.
+\chapter{Device}
+	\section{Parts}
+		The MonitoringBox is made up from an Raspberry Pi and Arduinos connected to it. The Arduinos are in turn connected to the real sensors, these sensors
+\chapter{Device interface}
+\chapter{Web interface}
+\end{document}

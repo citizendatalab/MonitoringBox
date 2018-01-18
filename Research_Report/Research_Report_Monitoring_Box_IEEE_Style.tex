@@ -5,7 +5,8 @@
 % we want ER + above/below + left/right
 \usetikzlibrary{er,positioning}
 \hyphenation{op-tical net-works semi-conduc-tor}
-
+\usepackage{booktabs} % For formal tables
+\usepackage{float}
 \begin{document}
 
 \title{The usability and buildability of an open source Monitoring Box}
@@ -21,7 +22,7 @@
 		\IEEEauthorblockN{Pjotr Scholtze}
 		\IEEEauthorblockA{Software Engineering \\Amsterdam University\\of Applied Sciences\\
 			Wibautstraat 2-4 1091GM Amsterdam\\
-			The Netherlands\\
+			The Netherland
 			Pjotr.Scholtze@hva.nl
 			}			
 		\and
@@ -151,6 +152,37 @@ What factors contribute to creating an open source, multi-research, sensor geolo
 			\end{enumerate}
 			The interviews were recorded with a camera and notes were made during this interview. All team members were present during the interviews, one member controlled the camera, one made notes and one did the presentation and guidance.
 \section{Results}
+		\begin{figure*}[ht]
+			\centering
+			\begin{tabular}{ | l | l | l | l | l | l | l | l | }
+				\hline
+								& Background	& 		& Technical 	& Time taken	& Sensors			& Code & Knowledge & Order\\ 
+				Participant		& (Study)		& Age	& level (1-10)	& (minutes)		& created			& error & gap issues & issues\\ \hline \hline
+				Researcher A	& N.A.			& 30-35 & 4				& 81			& Humidity,	& & \\ 
+								& 				& 		& 				& 				& CO2, GPS,	& & \\ 
+								& 				& 		& 				& 				& GSR,				& & \\
+								& 				& 		& 				& 				& Heartrate				& & \\ \hline
+				Researcher B	& N.A.			& 25-30 & 5 			& 52			& Humidity,	& & \\ 
+								& 				& 		& 				& 				& CO2, GPS,	& & \\ 
+								& 				& 		& 				& 				& GSR,	& & \\ 
+								& 				& 		& 				& 				& Heartrate				& & \\ \hline
+				Student A		& Business IT	& 20-25 & 4 			& 25			& CO2, GPS, & & \\ 
+								& 				& 		& 	 			& 				& GSR		& & \\ \hline
+				Student B		& Game 			& 25-30 & 8 			& 32			& CO2, Humidity		& & \\ 
+								& Design		& 		& 				& 				& GPS, GSR			& & \\ \hline
+				Student C		& Design		& 20-25 & 5				& 20			& CO2, GPS,			& & \\ 
+								& 				& 		& 				& 				& Heartrate			& & \\ \hline
+				Student D		& Software 		& 25-30	& 9				& 21			& Humidity, GPS,	& & \\ 
+								& Engineering 	& 		& 				& 				& GSR				& & \\ \hline
+				Student E		& Business IT 	& 20-25	& 5 			& 38			& Humidity, GPS,	& & \\ 
+								& 				& 		& 				& 				& Heartrate			& & \\ \hline
+				Student F		& Software 		& 20-25	& 8				& 39			& CO2, Humidity,	& & \\ 
+								& Engineering 	& 		& 				& 				& GPS, Heartrate,	& & \\ 
+								& 				& 		& 				& 				& GSR				& & \\ \hline
+			\end{tabular}
+			\caption{General distribution of participants}
+		\end{figure*}
+
 	\subsection{Interview participants}
 		In order to get an accurate picture of the user group, a sample of users with different backgrounds were chosen. This included students and researchers with different levels of technical skills. The participants of the interviews can be categorized in to the following categories:
 		\begin{figure}[ht]
@@ -184,7 +216,7 @@ What factors contribute to creating an open source, multi-research, sensor geolo
 					\item What documentation is needed and how detailed should it be
 				\end{enumerate}
 
-				We created the 'Manual Monitoring Box' documentation based on the process of building the Monitoring Box. We started with a list of parts we used and a brief introduction to them. Since their background knowledge is different, we explained first how to install the software, how to upload it to Arduino, and how to get the results. And for each sensor, we described how the Arduino and the sensor should be connected by schematics and text. Two researchers and three students from the Amsterdam University of Applied Sciences were invited and asked to build the Monitoring box based on the 'Manual Monitoring Box'. \\
+
 				\begin{enumerate}
 					\item Researcher A
 

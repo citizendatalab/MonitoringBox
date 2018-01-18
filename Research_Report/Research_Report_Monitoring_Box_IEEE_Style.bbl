@@ -6,4 +6,28 @@ Enrico Denti and Andrea Omicini.
   abstraction.
 \newblock In {\em Formal Models of Agents}, pages 90--102. Springer, 1997.
 
+\bibitem{frizzelle2009importance}
+Brian~G Frizzelle, Kelly~R Evenson, Daniel~A Rodriguez, and Barbara~A Laraia.
+\newblock The importance of accurate road data for spatial applications in
+  public health: customizing a road network.
+\newblock {\em International journal of health geographics}, 8(1):24, 2009.
+
+\bibitem{kwan2012uncertain}
+Mei-Po Kwan.
+\newblock The uncertain geographic context problem.
+\newblock {\em Annals of the Association of American Geographers},
+  102(5):958--968, 2012.
+
+\bibitem{mun2009peir}
+Min Mun, Sasank Reddy, Katie Shilton, Nathan Yau, Jeff Burke, Deborah Estrin,
+  Mark Hansen, Eric Howard, Ruth West, and P{\'e}ter Boda.
+\newblock Peir, the personal environmental impact report, as a platform for
+  participatory sensing systems research.
+\newblock In {\em Proceedings of the 7th international conference on Mobile
+  systems, applications, and services}, pages 55--68. ACM, 2009.
+
+\bibitem{monitoringBox2017researchproposal}
+Mick Nieman, Pjotr Scholtze, and Heeyeon Joung.
+\newblock Research proposal the monitoring box, 2017.
+
 \end{thebibliography}

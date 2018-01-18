@@ -1,4 +1,29 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{arscott2017publishing}
+Dave Arscott and David Bressler.
+\newblock Do-it-yourself, real-time,low cost environmental monitoring
+  solutions.
+\newblock 2017.
+
+\bibitem{auer2007dbpedia}
+S{\"o}ren Auer, Christian Bizer, Georgi Kobilarov, Jens Lehmann, Richard
+  Cyganiak, and Zachary Ives.
+\newblock Dbpedia: A nucleus for a web of open data.
+\newblock {\em The semantic web}, pages 722--735, 2007.
+
+\bibitem{balestrinideliverable}
+Mara Balestrini, Tomas~Diez Ladera, Alexandre P{\'o}lvora, and Susana
+  Nascimento.
+\newblock Deliverable.
+
+\bibitem{barnaghi2010publishing}
+Payam Barnaghi, Mirko Presser, and Klaus Moessner.
+\newblock Publishing linked sensor data.
+\newblock In {\em CEUR Workshop Proceedings: Proceedings of the 3rd
+  International Workshop on Semantic Sensor Networks (SSN), Organised in
+  conjunction with the International Semantic Web Conference}, volume 668,
+  2010.
 
 \bibitem{denti1997designing}
 Enrico Denti and Andrea Omicini.
@@ -18,6 +43,16 @@ Mei-Po Kwan.
 \newblock {\em Annals of the Association of American Geographers},
   102(5):958--968, 2012.
 
+\bibitem{lassila1998resource}
+Ora Lassila, Ralph~R Swick, et~al.
+\newblock Resource description framework (rdf) model and syntax specification.
+\newblock 1998.
+
+\bibitem{mcguinness2004owl}
+Deborah~L McGuinness, Frank Van~Harmelen, et~al.
+\newblock Owl web ontology language overview.
+\newblock {\em W3C recommendation}, 10(10):2004, 2004.
+
 \bibitem{mun2009peir}
 Min Mun, Sasank Reddy, Katie Shilton, Nathan Yau, Jeff Burke, Deborah Estrin,
   Mark Hansen, Eric Howard, Ruth West, and P{\'e}ter Boda.
@@ -29,5 +64,18 @@ Min Mun, Sasank Reddy, Katie Shilton, Nathan Yau, Jeff Burke, Deborah Estrin,
 \bibitem{monitoringBox2017researchproposal}
 Mick Nieman, Pjotr Scholtze, and Heeyeon Joung.
 \newblock Research proposal the monitoring box, 2017.
+
+\bibitem{ICRISET2017:An_open_source_Real}
+Ronak Vithlani, Siddharth Fultariya, Mahesh Jivani, and Haresh Pandya.
+\newblock An open source real time iot based environmental sensor monitoring
+  system.
+\newblock In Rajkumar Buyya, Rajiv Ranjan, Sumantra~Dutta Roy, Mehul Raval,
+  Mukesh Zaveri, Hiren Patel, Amit Ganatra, Darshak~G. Thakore, Trupti~A.
+  Desai, Zankhana~H. Shah, Narendra~M. Patel, Mukesh~E. Shimpi, Rajiv~B.
+  Gandhi, Jagdish~M. Rathod, Bhargav~C. Goradiya, Mehfuza~S. Holia, and
+  Dharita~K. Patel, editors, {\em ICRISET2017. International Conference on
+  Research and Innovations in Science, Engineering and Technology. Selected
+  Papers in Computing}, volume~2 of {\em Kalpa Publications in Computing},
+  pages 145--150. EasyChair, 2017.
 
 \end{thebibliography}

@@ -13,16 +13,14 @@
 \author{
 	\IEEEauthorblockN{Mick Nieman}
 	\IEEEauthorblockA{Business IT \& Management\\Amsterdam University\\of Applied Sciences\\
-		Wibautstraat 2-4 \\
-		1091GM Amsterdam \\
+		Wibautstraat 2-4 1091GM Amsterdam\\
 		The Netherlands\\
 		Mick.Nieman@hva.nl
 		}		
 	\and
 		\IEEEauthorblockN{Pjotr Scholtze}
 		\IEEEauthorblockA{Software Engineering \\Amsterdam University\\of Applied Sciences\\
-			Wibautstraat 2-4 \\
-			1091GM Amsterdam\\
+			Wibautstraat 2-4 1091GM Amsterdam\\
 			The Netherlands\\
 			Pjotr.Scholtze@hva.nl
 			}			
@@ -31,8 +29,7 @@
 			\IEEEauthorblockA{Electrical Engineering\\Seoul National University\\
 			of Science and Technology \\
 			Seoul Nowon-gu, Gongneung-dong,\\
-			Gongneung-ro 232 \\
-			South-Korea\\
+			Gongneung-ro 232, South-Korea\\
 			Julia.Joung@hva.nl
 			}
 		}
@@ -44,50 +41,37 @@ This paper is written in commission of the Citizen Data lab from Amsterdam. The 
 \end{abstract}
 
 \begin{IEEEkeywords}
-Open-source, usability, buildability, environment, environmental logging, data logging, participatory m%apping 
+Open-source, usability, buildability, environment, data logging
 \end{IEEEkeywords}
 
 \IEEEpeerreviewmaketitle
 \section{Introduction}
-There is a need for tools that enable environmental data logging or participatory mapping in order to conduct cetrain research. Currently there are no open source solutions that cover both environmental data capturing and the capturing of the Global Positioning System (GPS)-location. As written in the paper Uncertain Geographic Context Problem \cite{kwan2012uncertain} is still a problem. Researchers that were questioned during the first phases of the research also pointed out that they see a gap  between the collected data, from for example data-sprints \footnote{A group of people, mostly researchers trying to collect as much data as possible to do new findings on a certain topic.}, and the location the data is captured. These gaps result in in-accurate data whilst the accuracy is very important for conducting research as discussed in the paper "The importance of accurate road data for spatial applications in public health: customizing a road network." \cite{frizzelle2009importance}
+ Researchers nowadays use data to answer the questions asked within their research, that is how research is done. Because of this collecting data for their research is also part of the researchers their task-list and that is not as easy as it seems. Data is collected by researchers doing so called 'data-sprints', this is where a group of people try to collect as much data as possible to do new findings on a certain topic. This is not different for the Citizen Data Lab and their researchers who do research, and back their research, by collecting data through data-sprints. Lately they find their selves struggling collecting the data and most important a specific aspect of their data, the location. For this very reason the development of the Monitoring Box began. The monitoring box tries to hand a solution to the researchers that not only is very convenient but also something researchers can build individually and without any interference of third parties. This way the costs stay low and the usability high. \par
+This paper is a result of findings made during the development phase and the testing phase of the prototype of the monitoring box. The paper is written based on the findings and used to be learnt from when further developing the monitoring box. It may also be used by others developing similar open source data gathering platforms.
 
-\par
-A lot of similar studies have been done, one of them is "PEIR, the Personal Environmental Impact Report, as a Platform for Participatory Sensing Systems Research"
- \cite{mun2009peir} a paper which also contributes to participatory sensing and environmental mapping using cell phones. In the paper they mention "This calls for new
-features on both the server side and the handheld device."  \cite{mun2009peir} \\
-The Monitoring Box is developed to serve this call. Using the modern day emerged technologies combined in one hand-held device that can be used for participatory mapping and environmental sensing. At the same time The Monitoring Box is open source and is always available for improvement and adjustment.  
+\subsection{Statement of Purpose}
+This has no content yet or is a work in progress and thus not yet shown. 
 
-\par
-This paper has a selection of questions that serve as a thread. Every subject discussed contributes to answering these questions. The questions asked during this study are: "What factors contribute to creating an open source, multi-research, sensor geolocation aware, data gathering platform"  \cite{monitoringBox2017researchproposal} and "How technical are the students and researchers" along with "What documentation is needed and how detailed should it be?" Also we have taken a closer look at what improves the usability of the product when taking the structure plane of user experience into account. \cite{monitoringBox2017researchproposal} The research proposal of the Monitoring Box also stated the following as a sub-question: "How can the data be made available such that the students \& researchers can use it?" \cite{monitoringBox2017researchproposal} though this question is not as thoroughly studied as the others it has been thought of when answering the main research question.  
+\subsection{Statement of Significance}
+This has no content yet or is a work in progress and thus not yet shown.
 
-\par
-This paper is a result of findings made during the development-  and the testing phase of prototype of The Monitoring Box. The paper is written based on the findings made during the research and development and to be learnt from when further developing the monitoring box. It may also be used by others developing similar open source data gathering platforms.
+\section{Research Questions}
 
-\section{Background}
-\subsection{Generic articles}
-The Mayfly data logger is an open source data logger for environmental research, they use a customized Arduino. The project is mainly focused on research in a certain environment, for example forests, dunes, swamps and other nature reserves. \footnote{https://envirodiy.org/mayfly/} This project is different from ours because it doesn't use a GPS module for logging its location. It also has solar cells with it for recharging its battery and keep operating for a view days. 
-\par
-An open source Real Time IOT based environmental sensor monitoring sensor \cite{ICRISET2017:An_open_source_Real} Is research done on low cost central sensor data gathering for greenhouses which can allow for optimized crop production. The paper concludes that thinger.io can be used for data gathering, however thinger.io is a paid PAAS \footnote{Platform As A Service} solution and thus not open source. Besides this, it is real-time which isn't a requirement for our research.
-\par
-Another project is CKAN \footnote{https://ckan.org/features/}, which is kind of like a CMS \footnote{Content Management System} for data. It is an open source solution which allows multiple data sources to be stored on it. You can search multiple datasets with geolocation information such that you can find information about that area, besides that you can also download the datasets and it provides an API for other applications to use. An example of CKAN is \footnote{https://ckan.org/features/}  which contains almost 1200 datasets about the Netherlands.
+\subsection{Overall research question}
+What factors contribute to creating an open source, multi-research, sensor geolocation aware, data gathering platform that can be used by the students and researchers from the Makerslab on the Amsterdam University of applied sciences?
 
-\subsection{Data sharing articles}
-While the research in this section does not directly goes into a monitoring box it still is related because it goes into detail of how to handle the data produced by sensor(s) or data that was manually entered.
-\par
-DBPedia \cite{auer2007dbpedia}  is an open data database based on the datasets available in Wikipedia, but in a better searchable format. This study shows that even if the data is by default easily exchanged it still can be made searchable in a centralized repository. However, it is of course a better idea to make this step is unnecessary and allow direct addition to a centralized repository.
-\par
-RDF (Resource Description Framework) is a format that can be used for exchanging data. \cite{lassila1998resource}  This format uses XML to describe the attributes of the data with their values this allows for interchangeability and searchability of the data in a centralized fashion.
-OWL Web Ontology Language Reference \cite{mcguinness2004owl}  is like RDF but it also allows for relationships to other items. This means that one data item can link to another data item and thus describe for example history, something that it is part of.
-\par
-The open data handbook \footnote{http://opendatahandbook.org/guide/en/appendices/file-formats/} describes some more formats that can be used for data sharing: JSON, XML, RDF, Spreadsheets, CSVs, text documents, plaintext or HTML, and describes them.
-\par
-The "Linked sensor data" paper describes an example of publishing sensor data to an open data database \footnote{http://linkeddata.org/} where a large amount of datasets are available. We can use this to see possible how geolocation aware data can be published and shared.
-\par
-The paper "Publishing linked sensor data" describes an example with geolocation aware data where its data is published onto the Dbpedia database. \cite{barnaghi2010publishing} 
-\subsection{Open Source Articles}
-For making the product open source we can look into the Mayfly data logger of EnviroDIY \cite{arscott2017publishing},  which also created an open source sensor data gathering platform and open sourced the hard and software. This research is different than because this still requires a certain level of skills in for example programming, while our research will try to find out how can minimize this.
-\par
-The "Mapping participatory sensing and community-led environmental monitoring initiatives" \cite{balestrinideliverable} paper describes multiple projects that have participatory mapping of sensor data in cities. This will give us a broad view of what already has been created. Thus this paper is not related in a direct fashion like a solution, it still describes multiple projects that try to achieve what we're going to research.
+\subsection{Sub-questions}
+	\begin{enumerate}
+		\item How technical are the students and researchers from the Makerslab on the Amsterdam University of applied sciences?
+			\begin{enumerate}
+				\item What documentation is needed and how detailed should it be
+			\end{enumerate}
+		\item What improves the usability of the product when taking the structure plane of user experience into account?
+		\item How can the data be made available such that the students \& researchers from the Minor Makerslab can use it?
+	\end{enumerate}
+
+\section{Review of literature}
+	This has no content yet or is a work in progress and thus not yet shown.
 
 \section{Methods}
 	In order to conduct the research a prototype is created that can be reproduced multiple times. During the research process further modifications are made to the prototype. In order to complete the research we took the following steps:

@@ -7,7 +7,7 @@
 \hyphenation{op-tical net-works semi-conduc-tor}
 \usepackage{booktabs} % For formal tables
 \usepackage{float}
-
+\usepackage{rotating}
 
 \begin{document}
 
@@ -177,55 +177,70 @@ The "Mapping participatory sensing and community-led environmental monitoring in
 			\centering
 			\begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | }
 				\hline
-							& 				& 		& Skill	& 		& 			& 				& 					& 			& 				\\ 
-							& 				& 		& level	& Time	& Sensors	& Software		& Knowledge			& Order 	& 				\\ 
-			Participant		& Study			& Age	& 1-10	& taken	& created	& issues 		& gap issues		& issues	& Interface		\\ \hline \hline
+			Participant		& Software issues			& Knowledge gap					& Order issues				& Interface				\\ \hline \hline
 			
 			
-			Researcher A	& N.A.			& 30-35 & 4		& 81	& Humidity	& COM port 		& Does not know		& Missing	& Add icons on	\\ 
-							& 				& 		& 		& 		& CO2		& selection 	& what a bread-		& common	& buttons,link	\\ 
-							& 				& 		& 		& 		& GPS		& not repeated	& board is, 		& problem	& to manual on	\\
-							& 				& 		& 		& 		& GSR		& 				& differences 		& solutions	& device		\\
-							& 				& 		& 		& 		& Heartrate	& 				& between Arduino	& 			& 				\\
-							&				&		&		&		&			&				& types				&			&				\\ \hline
+			Researcher A	& COM port selection not	& Does not know what a			& Missing common			& Add icons on buttons,	\\ 
+							& repeated					& breadboard, differences		& problem solutions			& link to manual on		\\ 
+							& 							& between Arduino types			& 							& device				\\ \hline
 							
-			Researcher B	& N.A.			& 25-30 & 5 	& 52	& Humidity	& list common	& Differences 		& how to	& Show values	\\ 
-							& 				& 		& 		& 		& CO2		& error 		& between sensors 	& test the	& during recording,\\
-							& 				& 		& 		& 		& GPS		& messages		& unkown, does not 	& sensor,	& sand by mode	\\
-							& 				& 		& 		& 		& GSR		& 				& know how a bread-	& describe	& for screen, disk	\\
-							& 				& 		& 		& 		& Heartrate	& 				& board works		& order to	& usage unclear	\\
-							&				&		&		&		&			&				&					& follow	& show url in 	\\
-							&				&		&		&		&			&				&					& for doing	& wifi screen	\\
-							&				&		&		&		&			&				&					& hardware	&				\\ 
-							&				&		&		&		&			&				&					& and		&				\\ 
-							&				&		&		&		&			&				&					& software	&				\\ \hline
+			Researcher B	& List common error			& Differences between sensors	& how to test sensor,		& Show values during	\\ 
+							& messages 					& unkown, does not known 		& describe order to	follow	& recording, stand by	\\
+							& 							& how a breadboard works		& for doing	hardware and	& mode for screen, disk	\\
+							& 							& know how a bread-				& software					& usage unclear, show	\\
+							& 							& board works					& 							& url in WiFi screen	\\	\hline
 
-			Student A		& BIM			& 20-25 & 4 	& 25	& CO2 		& 				& 					& 			& 				\\
-							& 				& 		& 	 	& 		& GPS		& 				& 					& 		 	& 				\\
-							& 				& 		& 	 	& 		& GSR		& 				& 					& 			& 				\\ \hline
+			Student A		& None						& Difference between GPS and 	& Did not know about the	& It is practical		\\
+							&  							& Arduino boards				& description because it 	& 						\\
+							&  							& 								& was on the next page		& 						\\ \hline
+
+			Student B		& Unclear what firmware		& Image	should be realistic in	& None						& "It looks fine"		\\ 
+							& to upload					& the way that they should be 	& 							& 						\\ 
+							&  							& recognizable					& 							& 						\\ \hline
 							
-			Student B		& GD 			& 25-30 & 8 	& 32	& CO2		& 				& 					& 			& 				\\
-							& 				& 		& 		& 		& GPS		& 				& 					& 			& 				\\
-							& 				& 		& 		& 		& Humidity	& 				& 					& 			& 				\\
-							& 				& 		& 		& 		& GSR		& 				& 					& 			& 				\\ \hline
-							
-			Student C		& DE			& 20-25 & 5		& 20	& CO2		& 				& 					& 			& 				\\ 
-							& 				& 		& 		& 		& GPS		& 				& 					& 			& 				\\
-							& 				& 		& 		& 		& Heartrate	& 				& 					& 			& 				\\ \hline
-							
-			Student D		& SE 			& 25-30	& 9		& 21	& Humidity	& 				& 					& 			& 				\\ 
-							& 				& 		& 		& 		& GPS		& 				& 					& 			& 				\\ 
-							& 				& 		& 		& 		& GSR		& 				& 					& 			& 				\\ \hline
-							
-			Student E		& BIM		 	& 20-25	& 5 	& 38	& Humidity	& 				& 					& 			& 				\\ 
-							& 				& 		& 		& 		& GPS		& 				& 					& 			& 				\\ 
-							& 				& 		& 		& 		& Heartrate	& 				& 					& 			& 				\\ \hline
-							
-			Student F		& SE 			& 20-25	& 8		& 39	& Humidity	& 				& 					& 			& 				\\ 
-							& 				& 		& 		& 		& GPS		& 				& 					& 			& 				\\ 
-							& 				& 		& 		& 		& CO2		& 				& 					& 			& 				\\ 
-							& 			 	& 		& 		& 		& Heartrate& 				& 					& 			& 				\\ 
-							& 				& 		& 		& 		& GSR		& 				& 					& 			& 				\\ \hline
+
+			Student C		& It was unclear that you	& Folder structure for firmware& None						& It works, is not too	\\ 
+							& need to upload code		& is unclear					& 							& complicated			\\ \hline
+
+			Student D		& It was unclear how to 	& How to connect wires to the	& It was unclear how to 	& Very clear, but could	\\ 
+							& upload software			& sensors and Arduino			& code to the Arduino		& have been more pretty	\\ \hline
+
+			Student E		& Did not know what 		& Schematic is hard to follow	& The order of the 			& Add sensor data		\\ 
+							& firmware to upload the	& with low knowledge of 		& schematic and description	& preview option so		\\ 
+							& folder structure was 		& hardware						& should be reversed		& you know the device	\\ 
+							& unclear					& 								& 							& works					\\ \hline
+	
+			Student F		& Didn't know wen to push	& Didn't know what the which	& Didn't know when to push	& Looks fine, however a	\\ 
+							& code						& board was the heart rate 		& code to the Arduino.		& link to the manual	\\
+							&  							& board							& 							& would be nice			\\ \hline
+			\end{tabular}
+			\caption{General distribution of participants}
+		\end{figure*}
+		\begin{figure*}[ht]
+			\centering
+			\begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | l }
+				\hline
+					\begin{turn}{-90}Participant\end{turn}			&
+					\begin{turn}{-90}Study\end{turn}				&
+					\begin{turn}{-90}Age\end{turn}					&
+					\begin{turn}{-90}Skill level (1-10)\end{turn}	&
+					\begin{turn}{-90}Time taken\end{turn}			&
+					\begin{turn}{-90}Humidity\end{turn}			&
+					\begin{turn}{-90}CO2\end{turn}					&
+					\begin{turn}{-90}GPS\end{turn}					&
+					\begin{turn}{-90}GSR\end{turn}					&
+					\begin{turn}{-90}Heartrate\end{turn}			
+					\\ \hline \hline
+			
+			
+			Researcher A	& N.A.			& 30-35 & 4		& 81	& X	& X	& X	& X	& X	\\ \hline
+			Researcher B	& N.A.			& 25-30 & 5 	& 52	& X	& X	& X	& X	& X	\\ \hline
+			Student A		& BIM			& 20-25 & 4 	& 25	& 	& X	& X	& X	& 	\\ \hline
+			Student B		& GD 			& 25-30 & 8 	& 32	& X	& X	& X	& X	&	\\ \hline
+			Student C		& DE			& 20-25 & 5		& 20	& 	& X	& X	&	& X	\\ \hline
+			Student D		& SE 			& 25-30	& 9		& 21	& X	& 	& X	& X	&	\\ \hline
+			Student E		& BIM		 	& 20-25	& 5 	& 38	& X	&	& X	&	& X	\\ \hline
+			Student F		& SE 			& 20-25	& 8		& 39	& X	& X	& X	& X	& X	\\ \hline
 			\end{tabular}
 			\caption{General distribution of participants}
 		\end{figure*}
@@ -272,7 +287,7 @@ The "Mapping participatory sensing and community-led environmental monitoring in
 
 
 				\begin{enumerate}
-					\item Researcher A
+					\item Researcher A\\
 
 						The researcher encountered the following problems during the interview.\\
 
@@ -283,7 +298,7 @@ The "Mapping participatory sensing and community-led environmental monitoring in
 						Second, she suggested that we add more information about Arduino nano and Arduino uno.\\
 						Third, she said the manual does not focus in Dutch, but English. \\		
 						
-					\item Researcher B
+					\item Researcher B\\
 					Researcher B knows quite a bit of software and has little knowledge of hardware. The researcher encountered the following problems during the interview.\\
 					First, he feels there are something unclear about the schematic. 						He pointed out that the schematic pin number is missing. The pin number is too small to specify, so he was uncomfortable with rebuilding.\\
 					Second, he was wondering about the difference between the two CO2 sensors. The manual only briefly specifies the name and characteristics of each sensor, but the difference between the two sensors is not specified in detail.\\
@@ -294,7 +309,7 @@ The "Mapping participatory sensing and community-led environmental monitoring in
 					Third, he suggested that we put the technical names in the shopping list\\
 					Forth, he suggested that we explain in the manual which part is wrong for each error message.\\
 					
-					\item Student A
+					\item Student A\\
 					Student A is majoring in Software engineering and has  quite some experience in Arduino. The student A encountered the following problems during the interview.\\
 					First, he was confused about the GPS and Arduino nano. He was confused because the GPS and Arduino nano have similar size and similar color.\\
 					Second, he had difficulty reading the schematics. The letters in the schematics are too small to read, and it took some time to find out what was written on the next page.\\
@@ -302,24 +317,41 @@ The "Mapping participatory sensing and community-led environmental monitoring in
 					First, he suggested to write the steps in the manual in a bold font.\\
 					Second, he suggested adjusting the order of text and schematics. He mentioned that it took a some time to find that there is a text which explain schematics.
 					
-					\item Student B
+					\item Student B\\
 					Student B is majoring in Game development and has  quite some experience in Arduino. He replied that his technical level is a hobby in the hardware and professional in the software. The student B pointed out the following during the interview.\\
 					First, the manual is really easy but it did not state which Arduino sketch is necessary to complete.
 					Second, pictures should represent the real life device. Heart rate sensor in the schematics and the real heart rate sensor look different.\\
 					
-					\item Student C
+					\item Student C\\
 					Student C is majoring in Software engineering and has  quite some experience in Arduino. The student C pointed out the following during the interview.\\
 					First, the Galvanic Skin Response schematic is not clear. The Galvanic Skin Response chapter is not in depth with the explanation of how to connect everything.\\
 					Second, he asks how he could test the sensors.\\
 					Third, he suggested that the manual explained more information about cables.\\
 
-					\item Student D
+					\item Student D\\
 					Student D is majoring in Business IT. He has understanding of user software like programs on Windows and can read code but not write it. Student D pointed out the following during the interview.\\
 					First, it is unclear how the wires are connected.\\
 					Second, the chapter order is not right. He recommended to put the pushing code chapter be after connecting the wires.\\
 					Third, the soldering is hard so the breadboard should be shown.\\
 					Fourth, he suggested that the manual shows how the Arduino and computer are connected while pushing code to the Arduino.\\
 					He said the Manual is pretty clear but it is not detailed enough. It is unclear where a button is and when he have to upload software. And he suggested that the manual describes some error messages and add 3D photographs. So He thought students with similar levels could have some trouble. 
+					
+					\item Student E\\
+					Student E is majoring in Software engineering and has quite some software skills and has average hardware skills.\\
+					The student pointed out the following during the interview.\\
+					First, the GSR sensor is tough to follow when not having a lot of hardware experience.\\
+					Second, while recording it would've been nice to see the sensor data, this way you now if the recording is working.\\
+					Third, the order of the schematic and description should be reversed.
+					
+					\item Student F\\
+					Student F is majoring in Business IT \& Management and is averagely technical-skilled. He has been working with an Arduino before and has read multiple programs in C++ but not actually programmed in C++ by himself.\\
+					During the test-phase the student ran into some problems, as listed following.\\
+					The first issue he had was with the 'pushing code' chapter which is explained before actually having to push code to the Arduino.\\ 
+					This was inconvenient for the user and he suggested that the manual should be written in the same chronological order as the building-steps.\\
+					Another remark he made during the building of the heart rate sensor was that it does not look similar to the heart-rate sensor he was holding. \\
+When thinking out loud he thought that he doubted if it would have the same functionality then.\\
+The student did not have problems with the breadboard.\\
+He told that he had seen others use breadboards a lot of times before and he only needed a reminder of what way the wiring would be connected using a breadboad.
 				\end{enumerate}
 
 			\item What improves the usability of the product when taking the structure plane of user experience into account?

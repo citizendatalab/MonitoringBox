@@ -65,7 +65,7 @@ A lot of similar studies have been done, one of them is "PEIR, the Personal Envi
 The Monitoring Box is developed to serve this call. Using the modern day emerged technologies and advanced consumer electronics as, for example FitBit\footnote{ An activity tracker, for more info see https://www.fitbit.com/home}, combined in a hand-held device that can be used for participatory mapping and environmental sensing. At the same time The Monitoring Box is open source and is always available for improvement and adjustment.  
 
 \par
-This paper has a selection of questions that serve as a thread. Every subject discussed contributes to answering these questions. The questions asked during this study are: "What factors contribute to creating an open source, multi-research, sensor geolocation aware, data gathering platform"  \cite{monitoringBox2017researchproposal} and "How technical are the students and researchers" along with "What documentation is needed and how detailed should it be?" Also we have taken a closer look at what improves the usability of the product when taking the structure plane of user experience into account. \cite{monitoringBox2017researchproposal} The research proposal of the Monitoring Box also stated the following as a sub-question: "How can the data be made available such that the students \& researchers can use it?" \cite{monitoringBox2017researchproposal} though this question is not as thoroughly studied as the others it has been thought of when answering the main research question.  
+This paper has a selection of questions that serve as a thread. Every subject discussed contributes to answering these questions. The questions asked during this study are: "What factors contribute to creating an open source, multi-research, sensor geolocation aware, data gathering platform"  \cite{monitoringBox2017researchproposal} and "How technical are the students and researchers" along with "What documentation is needed and how detailed should it be?" Also there has beene taken a closer look at what improves the usability of the product when taking the structure plane of user experience into account. \cite{monitoringBox2017researchproposal} The research proposal of the Monitoring Box also stated the following as a sub-question: "How can the data be made available such that the students \& researchers can use it?" \cite{monitoringBox2017researchproposal} though this question is not as thoroughly studied as the others it has been thought of when answering the main research question.  
 
 \par
 This paper is a result of findings made during the development-  and the testing phase of prototype of The Monitoring Box. The paper is written based on the findings made during the research and development and to be learnt from when further developing the monitoring box. It may also be used by others developing similar open sourced data gathering platforms.
@@ -88,16 +88,16 @@ OWL Web Ontology Language Reference \cite{mcguinness2004owl}  is like RDF but it
 \par
 The open data handbook\footnote{ http://opendatahandbook.org/guide/en/appendices/file-formats/} describes some more formats that can be used for data sharing: JSON, XML, RDF, Spreadsheets, CSVs, text documents, plaintext or HTML, and describes them.
 \par
-The "Linked sensor data" paper describes an example of publishing sensor data to an open data database\footnote{ http://linkeddata.org/} where a large amount of datasets are available. We can use this to see possible how geolocation aware data can be published and shared.
+The "Linked sensor data" paper describes an example of publishing sensor data to an open data database\footnote{ http://linkeddata.org/} where a large amount of datasets are available. This can be used to see the possibilities of how geolocation  data can be published and shared.
 \par
 The paper "Publishing linked sensor data" describes an example with geolocation aware data where its data is published onto the Dbpedia database. \cite{barnaghi2010publishing} 
 \subsection{Open Source Articles}
-For making the product open source we can look into the Mayfly data logger of EnviroDIY \cite{arscott2017publishing},  which also created an open source sensor data gathering platform and open sourced the hard and software. This research is different from the Monitoring Box because this still requires a certain technical skill level in for example programming, while our research attempts to figure out how to minimize the amount of skill needed.
+For making the product open source there has been look at the Mayfly data logger of EnviroDIY \cite{arscott2017publishing},  which also created an open source sensor data gathering platform and open sourced the hard and software. This research is different from the Monitoring Box because this still requires a certain technical skill level in for example programming, while our research attempts to figure out how to minimize the amount of skill needed.
 \par
 The "Mapping participatory sensing and community-led environmental monitoring initiatives" \cite{balestrinideliverable} paper describes multiple projects that have participatory mapping of sensor data in cities. This will give a broad view of what already has been created. Thus this paper is not related in a direct manner like a solution, it still describes multiple projects that try to achieve what the Monitoring Box attempts.
 
 \section{Methods}
-	In order to conduct the research a prototype is created that can be reproduced multiple times. During the research process further modifications have been applied to the prototype. In order to complete the research we took the following steps:
+	In order to conduct the research a prototype is created that can be reproduced multiple times. During the research process further modifications have been applied to the prototype. In order to complete the research the following steps have been taken:
 		\begin{enumerate}
 			\item Identify the use cases of the system.
 			\item Generalize the use cases to a generic platform design.
@@ -150,25 +150,26 @@ The "Mapping participatory sensing and community-led environmental monitoring in
 			\paragraph{Prototype features}
 				The base station allows all sensors to be plugged and played while turned on, except for the Pi-cam, which is either build in or it is not. Each sensor can be seen on the web interface or via the screen of the base station. The recordings can only be started via the touch screen on the base station. Recordings can be downloaded from the web interface or via an USB stick that can be mounted on the base station. Every sensor is attached to the base station via USB for ease of use and availability of the devices. An USB hub can easily be used to extend the amount of sensors the base station can handle simultaneously. 
 		\subsection{Bias}
-			Bias is a risk that always occurs when doing research. To avoid bias the researchers have tried not to intervene with the test subjects and only guide them through the process. Only when necessary the researchers would share their point of view with the test subjects. Also during the processing of the outcome of the research and the test the researchers try to have a position as neutral as possible regarding to the topic that is being researched. Another measure taken is the selection of text-subjects. During the testing phase there are a few selected researchers from different backgrounds who applied, this way there is a diversity in the group of selected researchers. The group of students as test-subjects are also selected by their background to have group that is more diverse as only students with the same background. Because of this the bias is kept as minimal as possible with the resources available. It may had been totally absent but this would result in a project-duration longer than the given 10, or 20 when looking at the total project, weeks. We decided to use a fairly diverse group of test subjects, however the size of the group and the diversity could have been bigger by including more faculties.
+			Bias is a risk that always occurs when doing research. To avoid bias the researchers have tried not to intervene with the test subjects and only guide them through the process. Only when necessary the researchers would share their point of view with the test subjects. Also during the processing of the outcome of the research and the test the researchers try to have a position as neutral as possible regarding to the topic that is being researched. Another measure taken is the selection of text-subjects. During the testing phase there are a few selected researchers from different backgrounds who applied, this way there is a diversity in the group of selected researchers. The group of students as test-subjects are also selected by their background to have group that is more diverse as only students with the same background. Because of this the bias is kept as minimal as possible with the resources available. It may had been totally absent but this would result in a project-duration longer than the given 10, or 20 when looking at the total project, weeks. There is decided to use a fairly diverse group of test subjects, however the size of the group and the diversity could have been bigger by including more faculties.
 		\subsection{Research}
-			In this section is described how each sub question of our main research question is researched. So as to decide the effective method of research we have considered what we needed to do with the research. We considered what should be focused more between breadth and depth or between quantification and qualification and what would be more efficient in empirical research and desk research in each sub question. Along with these considerations, we have came to the following decision. 
+			In this section is described how each sub question of our main research question is researched. So as to decide the effective method of research there has been considered what is needed to do with the research. It has been considered what should be focused more between breadth and depth or between quantification and qualification and what would be more efficient in empirical research and desk research in each sub question. Along with these considerations, the following decision has been made. 
 
-			First, to research 'how technical are the students and researchers', We let students and researchers  use the Monitoring box. Because we wanted to gain various types of students and researchers with different technical levels because the survey panel should be widely spread. With this we can determine what explanation is needed according to the technical level of the student or researcher. So, questions of survey include users' comments so to gain insight in to this. 
+			First, to research 'how technical are the students and researchers', Students and researchers had to use the Monitoring box. Because it is wanted to gain various types of students and researchers with different technical levels because the survey panel should be widely spread. With this it can be  determined what explanation is needed according to the technical level of the student or researcher. So, questions of survey include users' comments so to gain insight in to this. 
 
 			Second, in order to research the question 'What improves the usability of the product when taking the structure plane of user experience into account?', surveys and desk research are conducted and used. And compared afterwards with the shortcomings in usability aspects through existing, similar-functioning platforms and devices. In order to research the Monitoring box in the direction of improving the insufficient aspects of usability.
 
-			Third, in order to research the question 'How can the data be made available in such a way that the students \& researchers can use it?' desk research is used. We studied other similar cases and consider selecting the most appropriate way of data sharing and how researchers use open source and data gathering platforms.
-		\paragraph{Interview setup} The interviews were executed in the following order:
+			Third, in order to research the question 'How can the data be made available in such a way that the students \& researchers can use it?' desk research is used. Similar cases have been studied and considered selecting the most appropriate way of data sharing and how researchers use open source and data gathering platforms. \\
+		\paragraph{Interview setup\\}
+		The interviews were executed in the following order:
 			\begin{enumerate}
 				\item \textbf{Give the participant general introduction of project to participant.} \\
-				Describe the goal, what we are researching and what we they are going to do.
+				Describe the goal, what is being researched  and what is going to be done.
 				\item \textbf{Let the participant assemble hardware and upload software.}\\
-				Of the MonitoringBox. While he or she is doing the assembly of the prototype we observe participant.
+				Of the MonitoringBox. While the participant is doing the assembly of the prototype the participant is being  observed.
 				\item \textbf{Let the participant test built device(s).}\\
 				By connecting the sensor to the Raspberry Pi and trying to record.
 				\item \textbf{Let the participant use the prototype.}\\
-				So that the participant will use all the different features of the software and we observe them.
+				So that the participant will use all the different features of the software and the participant can be observed.
 				\item \textbf{Ask the participant questions from the survey and ask for general feedback.}\\
 				Such to get structured information and really find out what the participant thought.
 			\end{enumerate}
@@ -181,7 +182,7 @@ The "Mapping participatory sensing and community-led environmental monitoring in
 			\hline
 			Type			& Amount	& Description \\ \hline \hline
 			Researcher		& 2			& Different technical levels* \\ \hline
-			Student			& 4			& See figure ... for details \\ \hline \hline
+			Student			& 4			& See figure 4 for details \\ \hline \hline
 			Total			& 6			& \\ \hline
 		\end{tabular}
 		\caption{General distribution of participants}
@@ -211,9 +212,9 @@ The "Mapping participatory sensing and community-led environmental monitoring in
 
 						First, the researchers does not know how to use a breadboard. To create a Galvanic Skin Response sensor users have to connect the Arduino Nano, a resistor and several wires. However, these connections are not just one-to-one connections, they require multiple connections on a single point. So in order to succeed, users must understand the structure of a breadboard. The manual did not explain the structure of the breadboard because the breadboard is only used during the testing phase. The situation would normally be that the wires are soldered to avoid loose connections. Because of a lack of explanation on breadboards the researcher had difficulty with it.\\
 						Second, the researcher wanted more specified information about cable connections.\\
-						Afterwards the researcher has mentioned that we need the following elements in the document.\\
-						The following elements were suggested by the researcher, starting with the fact that we should mention in the manual how to use a breadboard and how the structure of breadboard functions. \\
-						Then she suggested that we add more information about the Arduino nano and Arduino uno.\\
+						Afterwards the researcher has mentioned that the following elements are needed in the document.\\
+						The following elements were suggested by the researcher, starting with the fact that it should mention in the manual how to use a breadboard and how the structure of breadboard functions. \\
+						Then she suggested that it could have more information about the Arduino nano and Arduino uno.\\
 						Finishing with the remark that the manual doesn't focus on Dutch users but is fully written in English.\\		
 						
 					\item Researcher B\\
@@ -221,19 +222,19 @@ The "Mapping participatory sensing and community-led environmental monitoring in
 					First, he feels there are some things unclear about the schematics. He pointed out that the schematics' pin number is missing or very unclear. The pin number is too small to specify, so he had to count the amount of pins in order to rebuild.\\
 					Second, he was wondering about the difference between the two CO2 sensors. The manual only briefly specifies the name and characteristics of each sensor, but the difference between the two sensors is not specified in detail.\\
 					Third, the researcher did not know how to use the breadboard.\\
-					The researcher has mentioned that we need the following elements in the document.\\
-					First, he suggested that we mention in the manual when to upload and where to see the results. \\
+					The researcher has mentioned that the following elements in the document are needed.\\
+					First, he suggested that it is mentioned in the manual how to upload and where to see the results. \\
 					Second, he suggested links to tutorials about the breadboard.\\
-					Third, he suggested that we put the technical names in the shopping list in order to ease the buying of hardware.\\
-					Fourth, he suggested that we explain in the manual what the error messages mean and how to solve them instead of only mentioning that there's a possibility of having error messages.\\
+					Third, he suggested to put the technical names in the shopping list in order to ease the buying of hardware.\\
+					Fourth, he suggested that it is being explained in the manual what the error messages mean and how to solve them instead of only mentioning that there's a possibility of having error messages.\\
 					
 					\item Student A\\
 					Student A is majoring in Software engineering and has  quite some experience in Arduino. Student A encountered the following problems during the interview.\\
 					First, he was confused about the GPS and Arduino nano because the GPS and Arduino nano have similar sizes and also have a similar color. Though after taking a closer look at both items the student figured out which item was the GPS and which item was the Arduino.\\
 					Second, he had difficulty reading the schematics. The letters in the schematics are too small to read, and it took some time to find out what was written on the next page. This is because the student was mainly focused on the provided schematic and did not mention the explanation of the schematic on the other page.\\
-					The researcher has mentioned that we need the following elements in the document.\\
+					The researcher has mentioned that the following elements are needed in the document.\\
 					First, he suggested to write the steps in the manual in a bold font to draw attention to the different steps.\\
-					Second, he suggested adjusting the order of text and schematics. He mentioned that it took a some time to find that there is a text which explains the provided schematics.
+					Second, he suggested adjusting the order of text and schematics. He mentioned that it took a some time to find that there is a text which explains the provided schematics.\\
 					
 					\item Student B\\
 					Student B is majoring in Game development and has  quite some experience in Arduino. He replied that his technical level is higher as average because he practices as a hobby with hardware and is a professional in using software. Student B pointed out the following during the interview.\\
@@ -276,7 +277,7 @@ The "Mapping participatory sensing and community-led environmental monitoring in
 							& folder structure was 		& hardware						& should be reversed		& you know the device	\\ 
 							& unclear					& 								& 							& works					\\ \hline
 	
-			Student F		& Didn't know wen to push	& Didn't know what the which	& Didn't know when to push	& Looks fine, however a	\\ 
+			Student F		& Didn't know when to push	& Didn't know what the which	& Didn't know when to push	& Looks fine, however a	\\ 
 							& code						& board was the heart rate 		& code to the Arduino.		& link to the manual	\\
 							&  							& board							& 							& would be nice			\\ \hline
 			\end{tabular}
@@ -397,10 +398,10 @@ He told that he had seen others use breadboards a lot of times before and he onl
 		\end{enumerate}
  	\end{enumerate}
 \section{Conclusion}
-	We start the research because of the problem that there are not open source solutions to perform participatory mappings using a sensor and map it to a geographical location. And we research the way Monitoring Box should be open sourced and which documentation should be present in order for designer and researchers to create and possibly build their own Monitoring Box. \\
-	We studied what factors contribute to creating an open source, multi-research, sensor geolocation aware, data gathering platform that can be used by the students and researchers. We interviewed six students and two researchers and asked which factors that we did are helpful and what factors are needed more. We can see the factor that has the biggest impact is the quality of the manual and having error-free code. For quality of the manual, as the research has demonstrated, not everyone has the basic knowledge of how to use certain parts depending on the level of skill. The requirements of each were different. Therefore, everything should be carefully explained. \\
-	We researched usability with the structure plane of user experiences. So we focused on how we could improve the usability of the product. When we take the structure plane of user experience into account, the order of events is logical to the order of events that happen when assembling. \\
-	We researched how can the data be made available the students and researchers from the Minor Makerslab can use it easily. We have learned how people prefer to use data and easy way to analysis data. Based on the findings, we applied them in the Monitoring Box and interviewed people. It is clear to gather analysis and store the data in a convenient way the Web Interface must allow access any where and any time.\\
+	We start doing research because researchers pointed out they are missing open source solutions to perform participatory mapping using one or multiple sensors and map it with a geographical location attached to the measurements. We as researchers conducted research on the way the Monitoring Box should be open sourced and which documentation should be present in a way that both designers and researchers can reproduce their own Monitoring Box or even elaborate on the product and further develop it. \\
+	There has been studied what factors contribute to creating an open source, multi-research, sensor geolocation aware, data gathering platform that can be used by the students and researchers. Also six students and two researchers are interviewed and asked which factors of the Monitoring Box are helpful and what other factors are need for. Proven is that the factor that has the biggest impact is the quality of the manual and having error-free code. For the quality of the manual, as the research has demonstrated, not everyone has basic technical knowledge of how to use certain parts, depending on the level of skill. The requirements of each part is different. Therefore, everything should be carefully explained. \\
+	Also researched is the usability with the structure plane of user experience. This means there was focus on how the usability of the product could improve. When taken into account the structure plane of user experience, the order of events in the manual is logical to the order of events that happen when assembling. \\
+	In the end is research researched how the data can be made available in a way that the students and researchers can use it easily. Also studied is how people prefer to use data and what an easy way to analyse data is. Based on the findings, it is then applied in the Monitoring Box and interviewed people on the product. It is clear to gather data to analyse and store the data in a convenient way the using the Web Interface which must allow access anywhere at any time.\\
 
 
 \section{Discussion}
@@ -412,11 +413,11 @@ He told that he had seen others use breadboards a lot of times before and he onl
 	It could be said that this report and the results of the research only apply to the Monitoring Box. This is partially true, though any researcher or developer well informed about the topic they are going to research on or work for can determine what results may apply to their product and what may not.
 
 \section{Future works}
-	In order for this study to be deeper, we need the following future works. \\
+	In order for this study to be deeper, it needs the following future works. \\
 	First, the master students were unavailable for our research. There was not enough time to recruit them. Interviews with master's degree students will improve the results of the study.\\
 	Second, the people of diverse background knowledge could belong to a group interview. Interviewing for usability and buildability of the Monitoring Box to more people with different majors can improve the results of the research.\\
-	Third, we might have conducted further research on following topic and this is something that should be done as further research: "How can the data be made available such that the students \& researchers can use it?" Having more time to think about this research question will help you validate and improve the usability of the Monitoring Box.\\
-	Fourth, we can develop the design parts. The Monitoring Box is equipped with various sensors as well as Global Positioning System. Since user have to carry around, a design that allows users to more easily use the Monitoring Box needs to be researched.\\
+	Third, there might have been further research conducted on  the following topic and this is something that should be done as further research: "How can the data be made available such that the students \& researchers can use it?" Having more time to think about this research question will help you validate and improve the usability of the Monitoring Box.\\
+	Fourth, the design parts could have been developed further. The Monitoring Box is equipped with various sensors as well as Global Positioning System. Since user have to carry around, a design that allows users to more easily use the Monitoring Box needs to be researched.\\
 	
 \section{Acknowledgements}
 We would like to pay our regards to our fellow researchers of the Minor Research in Emerging Technologies. \\

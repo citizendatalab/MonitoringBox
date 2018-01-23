@@ -95,6 +95,18 @@ class CO2SensorWriter(AbstractSensorWriter):
         data = temp["data"]["data"]
         return [data["Value"]]
 
+class GSRSensorWriter(AbstractSensorWriter):
+    def get_headers(self):
+        return ["GSRval", "GSRmin", "GSRmax", "GSRavg"]
+
+    def get_values(self, record: str):
+        temp = json.loads(record)
+        data = temp["data"]["data"]
+        out = []
+        for elm in ["GSRval", "GSRmin", "GSRmax", "GSRavg"]:
+            out.append(data[elm])
+        return out
+
 
 class HeartRateSensorWriter(AbstractSensorWriter):
     def get_headers(self):
@@ -127,6 +139,8 @@ def get_sensor_writer(sensor: Sensor):
         return HeartRateSensorWriter()
     elif sensor.sensor_type == SensorType.PI_CAMERA:
         return PiCamWriter()
+    elif sensor.sensor_type == SensorType.GALVANIC_SKIN_RESPONSE_SENSOR:
+        return GSRSensorWriter()
     raise NotImplemented()
 
 

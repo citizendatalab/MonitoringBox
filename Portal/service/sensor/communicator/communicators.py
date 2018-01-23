@@ -158,6 +158,11 @@ class PiCamCommunicator(AbstractCommunicator):
         }, None, callback_options)
 
 
+class GSRSensorCommunicator(AbstractArduinoCommunicator):
+    def get_command(self) -> str:
+        return "getCurrentCount"
+
+
 def get_communicator_instance(sensor: Sensor) -> AbstractArduinoCommunicator:
     if sensor.sensor_type == SensorType.EXAMPLE_SENSOR:
         return ExampleCommunicator()
@@ -169,4 +174,6 @@ def get_communicator_instance(sensor: Sensor) -> AbstractArduinoCommunicator:
         return CO2SensorCommunicator()
     elif sensor.sensor_type == SensorType.HEART_RATE_SENSOR:
         return HeartRateSensorCommunicator()
+    elif sensor.sensor_type == SensorType.GALVANIC_SKIN_RESPONSE_SENSOR:
+        return GSRSensorCommunicator()
     raise Exception("Unkown sensor")

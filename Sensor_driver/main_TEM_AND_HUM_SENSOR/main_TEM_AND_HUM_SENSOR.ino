@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "driver.h"
-#include <DHT.h>
+#include "DHT.h"
 #define DHTPIN 2
 #define DHTTYPE   DHT22   
 DHT dht(DHTPIN, DHTTYPE); 

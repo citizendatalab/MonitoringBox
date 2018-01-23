@@ -26,11 +26,11 @@ void registerListener() {
 }
 
 void setup() {
- particleSensor.begin(Wire, I2C_SPEED_FAST);
+  BoxDriver::getInstance()->init("HEARTRATE_SENSOR", "HEARTRATE_SENSOR", 9600, registerListener);
+  particleSensor.begin(Wire, I2C_SPEED_FAST);
   particleSensor.setup(); //Configure sensor with default settings
   particleSensor.setPulseAmplitudeRed(0x0A); //Turn Red LED to low to indicate sensor is running
   particleSensor.setPulseAmplitudeGreen(0); //Turn off Green LED
-  BoxDriver::getInstance()->init("HEARTRATE_SENSOR", "HEARTRATE_SENSOR", 9600, registerListener);
 }
 
 void loop() {

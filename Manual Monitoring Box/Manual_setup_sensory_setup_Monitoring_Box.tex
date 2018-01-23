@@ -12,13 +12,7 @@
 \begin{document}
 \maketitle
 
-%\begin{abstract}
-%This has not been written yet and still needs content to be %placed here. 
-%\end{abstract}
-
 \tableofcontents
-
-% \chapter{Introduction}
 
 \chapter{Requirements}
 For every sensor added there is need for an Arduino Nano. The Arduino Nano is a programmable microprocessor. Advanced users may be able to connect multiple sensors to a single Arduino Nano, note that this requires advanced knowledge of the communication protocols between the Raspberry Pi 3 b+ and Arduino Nano. Along with every Arduino Nano you need an USB A to Mini-USB B cable.  \\
@@ -44,7 +38,6 @@ For the sake of easy searching there's all of the used materials listed below.\\
 Always needed:
 
 \begin{itemize}
-
 \item Arduino Nano (ATMega 328 or better)
 \item USB A to Mini-USB B cable
 \item Arduino connector wires
@@ -53,7 +46,9 @@ Always needed:
 \item Micro USB power supply (2.1A)
 \item Digilent 410-237 GPS-receiver Board as the Global Positioning System module
 \end{itemize}
-Depending on your wishes you can use one or more of the following sensors: 
+
+Depending on your wishes you can use one or more of the following sensors:
+ 
 \begin{itemize}
 \item The DHT22 module for temperature and humidity
 \item The MAXREFDES117\# Reference Design Board with optical heart rate and pulse-oximetry as a heart rate sensor
@@ -66,16 +61,15 @@ Depending on your wishes you can use one or more of the following sensors:
 \item Grove-GSR from seeed studio for Galvanic Skin Response measurements
 \end{itemize}
 
-
 \chapter{Glossary}
-\begin{tabular}{ p{5cm} p{5cm} }
+\begin{tabular}{p{4,5cm} p{4,5cm}}
 A & A \\
 Ax Pin & Pin on arduino that is giving analog output \\
 Arduino Nano & Programmable microprocessor, processes simple code \\
 Arduino UNO & Programmable microprocessor, processes simple code \\
 G & G \\
 Galvanic Skin Response & The conductance of the skin that is being measured by its galvanic values \\
-GND Pin & The pin that functions as 'ground' on an Arduino or other programmable board \\
+GND Pin & The pin that functions as 'ground' on an Arduino\\
 H & H \\
 Hardware & The machines, wiring, and other physical components of an electronic system \\
 I & i \\
@@ -85,50 +79,8 @@ Protocol & Used by machines to communicate \\
 R & R \\
 Raspberry Pi & Advanced programmable processor, similar to Arduino but better \\
 S & S \\
-Software & Code on a processor or machine that defines behaviour \\
-Source & Place where the software or code comes from \\
+Software & Code on a processor or machine that defines behaviour\\
 \end{tabular}
-
-
-\chapter{Pushing code to an Arduino Nano}
-To start working with an Arduino the Arduino Integrated development environment (IDE) is needed. This is a development environment custom build by Arduino for the Arduino. The IDE can be retrieved from their site www.arduino.cc and the direct link to their software downloads is https://www.arduino.cc/en/Main/Software. Then download the right IDE for your operating system to continue. \\
-
-Installing the software and then opening the program results in a screen similar to the next. 
-
-\begin{figure}[H]
-	\centering
-\includegraphics[width=1\textwidth]{images/ArduinoIDE.JPG} 
-	\caption{Arduino IDE start screen}
-\end{figure}
-
-The figures 1 to 10 are all differnt buttons with different functions. We focus only on button 1, 2,  6 and 9.
-
-Putting code on the Arduino means either \\
-a). Opening one of the pre-configured packages that came with the software of the Monitoring Box and start uploading or \\
-b). Copying the code from your source to the Arduino IDE and then uploading the code. \newpage
-
-Step 1. connecting the Arduino to your computer by using the USB cable. \\
-Step 2. Opening the package containing the desired code for the Arduino. \\
-Step 3. Selecting the right board as shown in the next figure. \\
-\begin{figure}[H]
-	\centering
-\includegraphics[width=1\textwidth]{images/Select-board.JPG} 
-	\caption{Selection of the right board via Arduino IDE}
-\end{figure}
-\newpage
-Step 4. Selecting the right port as shown in the next figure, the port may differ every time you connect. Usually the IDE only shows one port, select this one. \\
-\begin{figure}[H]
-	\centering
-\includegraphics[width=1\textwidth]{images/Select-port.JPG} 
-	\caption{Selection of the right port via Arduino IDE}
-\end{figure}
-Step 5. Verifying the code by pressing button no. 1 (the check-mark). \\
-Step 5.1 Failed verifying; start troubleshooting. \\
-Step 5.2 Succeeded verifying; continue. \\
-Step 6. Uploading the code to your Arduino by pressing button no. 2 (the right-arrow). \\
-Step 6.1 Failed verifying; start troubleshooting. \\
-Step 6.2 Succeeded verifying; continue. \\
-Step 7. Close program and disconnect the Arduino from your computer. \\
 
 \chapter{Global Positioning System (GPS) sensor}
 The Global Positioning System(GPS) sensor, from now on called the GPS sensor, is named PmodGPS. The schematics for the assembly of the sensor are as follows. \\
@@ -160,7 +112,7 @@ Below is the picture of the PmodGPS: \\
 The code coming with this sensor can be downloaded with the following link: $ MonitoringBox/Sensor\_driver/main\_GPS\_SENSOR $
 
 
-Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor. 
+Downloading the code and uploading this to the Arduino Nano, see chapter 'Pushing code to an Arduino Nano', and having it assembled as the schematics show should result in a functional sensor. 
 
 
 
@@ -198,7 +150,7 @@ There is no pin name on the sensor, so you need to see the order in which the pi
 The code coming with this sensor can be downloaded with the following link: $ MonitoringBox/Sensor\_driver/main\_TEM\_AND\_HUM\_SENSOR $
 
 
-Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor. 
+Downloading the code and uploading this to the Arduino Nano, see chapter 'Pushing code to an Arduino Nano', and having it assembled as the schematics show should result in a functional sensor. 
 
 
 \chapter{Heartrate sensor}
@@ -233,7 +185,7 @@ The actual sensor looks like the following:\\
 The code coming with this sensor can be downloaded with the following link: $ MonitoringBox/Sensor\_driver/main\_HEARTRATE\_SENSOR $
 
 
-Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor. \\
+Downloading the code and uploading this to the Arduino Nano, see chapter 'Pushing code to an Arduino Nano', and having it assembled as the schematics show should result in a functional sensor. \\
 For more information about this sensor, Please visit below website.\\
 https://www.maximintegrated.com/en/design/reference-design-center/system-board/6300.html
 
@@ -260,7 +212,7 @@ The actual sensor looks like the following:\\
 The code coming with this sensor can be downloaded with the following link: $ https://github.com/pjotrscholtze/MonitoringBox/tree/develop/Sensors/CO2\_Sensor $
 
 
-Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor. 
+Downloading the code and uploading this to the Arduino Nano, see chapter 'Pushing code to an Arduino Nano', and having it assembled as the schematics show should result in a functional sensor. 
 
 \chapter{Advanced carbon dioxide (CO$_2$) sensor}
 For starters, this CO$_2$ sensor is a little bit more complex than the other CO$_2$ sensor from the previous chapter. This sensor is more accurate but also works in a different way and not only the accuracy is higher, so is the price. 
@@ -279,7 +231,7 @@ After assembling the pins the right way, note that the pins on the K30 aren't la
 \item 'pin 4' (the RXD pin) of the K30 goes to pin 12 (TXD)of the Arduino 
 \item 'pin 5' of the K30 (TXD) goes to pin 13 (RXD) of the Arduino. 
 
-Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino UNO (this works the same way as with the Arduino Nano) should result in a functional CO$_2$ sensor. 
+Downloading the code from https://github.com/pjotrscholtze/MonitoringBox and uploading the code to the Arduino UNO (this works the same way as with the Arduino Nano, see chapter 'Pushing code to an Arduino Nano') should result in a functional CO$_2$ sensor. 
 \end{itemize}
 \chapter{Raspberry Pi Camera}
 \begin{figure}[H]
@@ -314,16 +266,46 @@ The two current-carrying wires are connected to A0 and 5V, respectively, of the 
 The code coming with this sensor can be downloaded with the following link: $ MonitoringBox/Sensor\_driver/main\_GSR\_SENSOR $
 
 
-Downloading the code and uploading this to the Arduino Nano and having it assembled as the schematics show should result in a functional sensor.\\
+Downloading the code and uploading this to the Arduino Nano, see chapter 'Pushing code to an Arduino Nano', and having it assembled as the schematics show should result in a functional sensor.\\
 
 The way to use this GSR sensor is to put two fingers on two wires. Individual currents are different and will vary depending on emotional state or condition. To compare this, the result of the sensor will show the minimum, maximum and average values ​​of the current. An example of usage and the result value are shown in the following photograph.
 
-%\chapter{Development issued example sensor}
-%
-%This chapter has no content yet. The purpose of this chapter is %issued for test purposes and development purposes. 
+\chapter{Pushing code to an Arduino Nano}
+To start working with an Arduino the Arduino Integrated development environment (IDE) is needed. This is a development environment custom build by Arduino for the Arduino. The IDE can be retrieved from their site www.arduino.cc and the direct link to their software downloads is https://www.arduino.cc/en/Main/Software. Then download the right IDE for your operating system to continue. \\
 
-% \chapter{Development issued unknown sensor}
-%	
-%This chapter has no content yet. The purpose of this chapter %is issued for test purposes and development purposes. 
+Installing the software and then opening the program results in a screen similar to the next. 
+
+\begin{figure}[H]
+	\centering
+\includegraphics[width=1\textwidth]{images/ArduinoIDE.JPG} 
+	\caption{Arduino IDE start screen}
+\end{figure}
+
+Putting code on the Arduino means either \\
+a). Opening one of the pre-configured packages that came with the software of the Monitoring Box and start uploading or \\
+b). Copying the code from your source to the Arduino IDE and then uploading the code. \newpage
+
+Step 1. connecting the Arduino to your computer by using the USB cable. \\
+Step 2. Opening the package containing the desired code for the Arduino. \\
+Step 3. Selecting the right board as shown in the next figure. \\
+\begin{figure}[H]
+	\centering
+\includegraphics[width=1\textwidth]{images/Select-board.JPG} 
+	\caption{Selection of the right board via Arduino IDE}
+\end{figure}
+\newpage
+Step 4. Selecting the right port as shown in the next figure, the port may differ every time you connect. Usually the IDE only shows one port, select this one. \\
+\begin{figure}[H]
+	\centering
+\includegraphics[width=1\textwidth]{images/Select-port.JPG} 
+	\caption{Selection of the right port via Arduino IDE}
+\end{figure}
+Step 5. Verifying the code by pressing the 'verify button' (the check-mark). \\
+Step 5.1 Failed verifying; start troubleshooting. \\
+Step 5.2 Succeeded verifying; continue. \\
+Step 6. Uploading the code to your Arduino by pressing the 'upload button' (the right-arrow). \\
+Step 6.1 Failed verifying; start troubleshooting. \\
+Step 6.2 Succeeded verifying; continue. \\
+Step 7. Close program and disconnect the Arduino from your computer. \\
 
 \end{document}

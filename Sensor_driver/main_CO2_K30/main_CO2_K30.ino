@@ -36,11 +36,11 @@ void setup()
 
 void loop() 
 {
-  if (millis() % 2000) {
+  if (millis() % 2000 ==0) {
     valCO2 = getValue(response);
     sendRequest(readCO2);
-    //Serial.print("Co2 ppm = ");
-    //Serial.println(valCO2);
+//    //Serial.print("Co2 ppm = ");
+//    //Serial.println(valCO2);
   }
 
   BoxDriver::getInstance()->tick();

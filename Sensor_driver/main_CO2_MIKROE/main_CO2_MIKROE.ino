@@ -36,9 +36,9 @@ void handlerGetValue(String *command, String *data) {
 }
 
 void setup() {
+  BoxDriver::getInstance()->init("Simple CO2 Sensor", "CO2_SENSOR", 9600, registerListeners);
   delay(100);                                    // Pause of 100ms for ADC module stabilization
 
-  BoxDriver::getInstance()->init("Simple CO2 Sensor", "CO2_SENSOR", 9600, registerListeners);
   //Initial read ADC and display PPM value on LCD
   readSensor();                                  // Read sensor
   calculatePPM();                                // Calculating PPM value
